@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.claramonaco.testdislessia.MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="#FFBF18"
+        android:text="Home"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bambini4"
+        android:scaleX="0.9"
+        android:scaleY="0.9">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true">
+
+            <Button
+                android:id="@+id/btm_test_dislessia"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button_normal_orange"
+                android:onClick="test_dislessia"
+                android:text="Test lettura"
+                android:textColor="#fff" />
+
+            <Button
+                android:id="@+id/btm_esercizi"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btm_test_dislessia"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_normal_orange"
+                android:onClick="lanciaActivityEsercizi"
+
+                android:text="Esercizi"
+                android:textColor="#fff" />
+
+            <Button
+                android:id="@+id/btm_info"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btm_esercizi"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_normal_orange"
+                android:onClick="InformazioneApp"
+                android:text="Informazione"
+                android:textColor="#fff" />
+            <Button
+                android:id="@+id/btm_statistiche"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/analisi"
+                android:onClick="risultatoTest" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>

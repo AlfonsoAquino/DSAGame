@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shareInterpolator="false" >
+
+    <rotate
+        android:startOffset="0"
+        android:duration="4500"
+        android:fromDegrees="0"
+        android:toDegrees="1440" 
+        android:interpolator="@android:anim/accelerate_interpolator"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        />
+
+        <rotate
+        android:startOffset="4500"
+        android:duration="4500"
+        android:fromDegrees="1440"
+        android:toDegrees="0" 
+        android:interpolator="@android:anim/decelerate_interpolator"
+        android:pivotX="50%"
+        android:pivotY="50%"
+    />
+    
+        
+     <scale
+        android:startOffset="0"
+        android:duration="3000"
+        android:fromXScale="1"
+        android:fromYScale="1"
+        android:toXScale="0.1"
+        android:toYScale="0.1" 
+        android:pivotX="50%"
+        android:pivotY="50%"
+     />
+
+     <scale
+        android:startOffset="3000"
+        android:duration="3000"
+        android:fromXScale="1"
+        android:fromYScale="1"
+        android:toXScale="20"
+        android:toYScale="20" 
+        android:pivotX="50%"
+        android:pivotY="50%"
+     />
+     
+     <scale
+        android:startOffset="6000"
+        android:duration="3000"
+        android:fromXScale="1"
+        android:fromYScale="1"
+        android:toXScale="0.5"
+        android:toYScale="0.5" 
+        android:pivotX="50%"
+        android:pivotY="50%"
+     />
+     
+    <translate
+        android:startOffset="0"
+        android:duration="1500"
+        android:fromXDelta="0"
+        android:fromYDelta="0"
+        android:interpolator="@android:anim/linear_interpolator"
+        android:toXDelta="150"
+        android:toYDelta="150" />
+
+    <translate
+        android:startOffset="1500"
+        android:duration="3000"
+        android:fromXDelta="0"
+        android:fromYDelta="0"
+        android:interpolator="@android:anim/linear_interpolator"
+        android:toXDelta="-300"
+        android:toYDelta="-300" />
+    
+     <translate
+        android:startOffset="4500"
+        android:duration="1500"
+        android:fromXDelta="0"
+        android:fromYDelta="0"
+        android:interpolator="@android:anim/linear_interpolator"
+        android:toXDelta="150"
+        android:toYDelta="150" />
+ 
+     
+   <alpha
+        android:startOffset="0"
+        android:duration="4500"
+        android:fromAlpha="1.0"
+        android:toAlpha="0.1" 
+   />
+
+      <alpha
+        android:startOffset="4500"
+        android:duration="4500"
+        android:fromAlpha="1.0"
+        android:toAlpha="10.0" 
+   />
+   
+
+
+</set>

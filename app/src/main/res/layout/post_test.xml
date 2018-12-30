@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#223355">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:background="#FFBF18"
+        android:text="Test"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/linear_layoutuno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="105dp"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/frase_feedback"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:text="Era chiaro cosa dovevo fare durante il test? "
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:textSize="20dp"
+
+               android:layout_marginLeft="10dp"
+                android:fontFamily="@font/arial"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_due"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="200dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/Strongly_Disagree"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="25dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:onClick="risposta"
+                android:background="@drawable/strongly_desagree" />
+
+            <Button
+                android:onClick="risposta"
+                android:id="@+id/Disagree"
+                android:layout_marginRight="5dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/disagree" />
+
+            <Button
+                android:onClick="risposta"
+                android:id="@+id/Normal"
+                android:layout_marginRight="5dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/neutral" />
+
+            <Button
+                android:onClick="risposta"
+                android:id="@+id/Agree"
+                android:layout_marginRight="5dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/agree" />
+            />
+
+            <Button
+                android:onClick="risposta"
+                android:id="@+id/Strongly_Agree"
+                android:layout_marginRight="5dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/strongly_agree" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

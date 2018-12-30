@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFC2">
+
+        <TextView
+            android:id="@+id/img_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/dsa_logo" />
+
+        <TextView
+            android:id="@+id/info1"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/info"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="\nOffre 2 sezioni: Test ed Esercizi.
+            \nAttualmente per quanto riguarda la sezione test l'apllicazone offre solo la possibilità di effettuare un test per la lettura, tale test restituisce un risultato che in base all'esito consiglia, se necessaria, una visita da uno specialista\n
+            \nPer quanto riguarda la sezione esercizi sono stati implementati 2 esercizi, impara la tastiera e trova il numero massimo. Gli esercizi hanno lo scopo di allenare i bambini.
+
+            \n\n\n\n\n\n\nAutore: Clara Monaco \nVersione:1.1"
+            android:textColor="#000"
+            android:textStyle="bold" />
+        <TextView
+
+            android:id="@+id/info"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_title"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Questa applicazione ha lo scopo di sostenere i bambini delle scuole primarie, sopratutto bambini con DSA. "
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

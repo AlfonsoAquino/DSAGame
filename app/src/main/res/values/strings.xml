@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">DSA GAME</string>
+    <string name="Esercizio">Esercizio</string>
+    <string name="Tastiera">Tastiera</string>
+    <string name="Trova_MAX">Trova_MAX</string>
+    <string name="Test">Test</string>
+    <string name="Info_app">Info_app</string>
+    <string name="Statistiche_Test">Statistiche_Test</string>
+    <string name="Statistiche_trova_max">Statistiche_trova_max</string>
+    <string name="condividi">Condividi</string>
+    <string name="PreTest">PreTest</string>
+    <string name="PostTest">PostTest</string>
+
+
+
+
+
+
+    <string name="action_record">Miglior punteggio</string>
+    <string name="write_word">SCRIVI LA PAROLA</string>
+    <string name="write_number">SCRIVI IL NUMERO</string>
+    <string name="action_info">Info</string>
+    <string name="version">Versione</string>
+    <string name="powered">Sviluppata da</string>
+    <string name="myApps">Mie app</string>
+    <string name="rateIt">Recensisci</string>
+    <string name="num_words">Statistiche\nNumero di parole scritte</string>
+    <string name="exit">Vuoi uscire?</string>
+    <string name="action_language">Lingua</string>
+
+    <string name="TtsOn">Parla</string>
+    <string name="TtsOff">Non parla</string>
+    <string name="key_on">Suono tasti SI</string>
+    <string name="key_off">Suono tasti NO</string>
+    <string name="Tts_settings">Impostazioni voce</string>
+    <string name="Key_settings">Impostazioni tastiera</string>
+    <string name="Gen_settings">Impostazioni generatore</string>
+
+    <string name="only_necessary">Mostra solo i tasti necessari</string>
+    <string name="all_key">Mostra tutti i tasti</string>
+    <string name="distractors">Mostra i tasti necessari più alcuni distrattori</string>
+
+    <string name="only_words">Solo parole</string>
+    <string name="only_numbers">Solo numeri</string>
+    <string name="both">Entrambi</string>
+
+    <string name="BG" translatable="false">български</string>
+    <string name="DE" translatable="false">Deutsch</string>
+    <string name="EN" translatable="false">English</string>
+    <string name="ES" translatable="false">Español</string>
+    <string name="FR" translatable="false">Français</string>
+    <string name="IT" translatable="false">Italiano</string>
+    <string name="PL" translatable="false">Polski</string>
+    <string name="PT" translatable="false">Português</string>
+
+</resources>

@@ -1,0 +1,35 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/tts"
+        android:checkable="true"
+        android:icon="@drawable/tts_on"
+        android:orderInCategory="2"
+        android:title="@string/TtsOn"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_tts_settings"
+        android:icon="@drawable/tts_settings"
+        android:orderInCategory="4"
+        android:title="@string/Tts_settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_key_settings"
+        android:icon="@drawable/key_settings"
+        android:orderInCategory="4"
+        android:title="@string/Key_settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_gen_settings"
+        android:icon="@drawable/gen_settings"
+        android:orderInCategory="4"
+        android:title="@string/Gen_settings"
+        app:showAsAction="never" />
+
+</menu>
