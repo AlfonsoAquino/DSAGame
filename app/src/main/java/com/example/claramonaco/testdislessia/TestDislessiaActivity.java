@@ -58,6 +58,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
 
     private long startTime, totalTime;
     private int secondi, minuti, ore;
+    SQLiteHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +102,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         errori_l3 = 0;
         errori_l4 = 0;
         livelloMax = 0;
+        db = new SQLiteHandler(getApplicationContext());
 
         //livello per file
         livello = 1;
@@ -242,7 +244,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                         if(tempString.equalsIgnoreCase("maschio")||tempString.equalsIgnoreCase("femmina")){
                             genere=tempString;
                         }else if(tempString.equalsIgnoreCase("minore di 6")||tempString.equalsIgnoreCase("piu di 9") ||tempString.equalsIgnoreCase("6")||tempString.equalsIgnoreCase("7")||tempString.equalsIgnoreCase("8")||tempString.equalsIgnoreCase("9")){
-                            Log.d("----->>", "LeggiFrase: "+tempString);
+                            Log.d("----->>", "Leggieta: "+tempString);
                             eta=tempString;
                         }
 
@@ -250,9 +252,9 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                     inputStream.close();
 
                 }
-                new SendStatistics(getApplicationContext()).execute(genere,eta,""+livelloMax,""+sbagliate,""+num_salt,""+esatte,""+minuti+":"+secondi,""+errori_l1,""+errori_l2,""+errori_l3,""+errori_l4);
+                db.addStatistic(genere,eta,esatte, sbagliate, num_salt,livelloMax,minuti+":"+secondi,errori_l1,errori_l2,errori_l3,errori_l4);
+//                new SendStatistics(getApplicationContext()).execute(genere,eta,""+livelloMax,""+sbagliate,""+num_salt,""+esatte,""+minuti+":"+secondi,""+errori_l1,""+errori_l2,""+errori_l3,""+errori_l4);
 
-                Log.d("-------------->","Statistica test");
                 OutputStreamWriter osw = new OutputStreamWriter(this.openFileOutput("statistiche_test.txt", Context.MODE_APPEND));
                 osw.write("\n\n\n---Risultato Test---" +
                         "\nLivello raggiunto: " + livello +

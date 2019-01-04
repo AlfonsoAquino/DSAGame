@@ -1,19 +1,49 @@
 package com.example.claramonaco.testdislessia;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ArrayList<Statistica> statistics;
+    SQLiteHandler db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        statistics=new ArrayList<>();
+        db=new SQLiteHandler(getApplicationContext());
+        statistics=db.getStatisticsDetails();
+        if (isOnline() && statistics.size() != 0) {
+            for (Statistica a : statistics) {
+                Log.i("asdadadadad....", "-------------->" + a.toString());
+                new SendStatistics(getApplicationContext()).execute("" + a.getGenere(), "" + a.getEta(), "" + a.getLivelloRaggiunto(), "" + a.getNumSbagliate(),"" + a.getNumSaltate(),"" + a.getNumCorrette(),"" + a.getTempoImpiegato(),"" + a.getErrore1(),"" + a.getErrore2(),"" + a.getErrore3(),"" + a.getErrore4());
+
+            }
+        }
+
+    }
+
+    protected boolean isOnline() {
+
+        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        assert cm != null;
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+
     }
 
     public void lanciaActivityEsercizi(View v) {

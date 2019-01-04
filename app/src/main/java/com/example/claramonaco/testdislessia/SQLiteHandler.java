@@ -2,6 +2,7 @@ package com.example.claramonaco.testdislessia;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -60,7 +61,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     /**
      * Storing statistics info
      */
-    public void addStatistic(String genere, String eta,int numCorrette, int numSbagliate, int numSaltate, int livelloRaggiunto, int tempoImpiegato, int errore1, int errore2, int errore3, int errore4 ){
+    public void addStatistic(String genere, String eta,int numCorrette, int numSbagliate, int numSaltate, int livelloRaggiunto, String tempoImpiegato, int errore1, int errore2, int errore3, int errore4 ){
 
         SQLiteDatabase db= this.getWritableDatabase();
 
@@ -84,4 +85,40 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     }
 
     //RETURN METHOD
+    public ArrayList<Statistica> getStatisticsDetails() {
+        String selectQuery = "SELECT  * FROM " + tableName;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // Move to first row
+        cursor.moveToFirst();
+        Statistica album;
+        while (!cursor.isAfterLast()){
+
+            album=new Statistica(
+                    cursor.getString(cursor.getColumnIndex(keyGenere)),
+                    cursor.getString(cursor.getColumnIndex(keyEta)),
+                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keyEsatte))),
+                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keyErr))),
+                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keySkip))),
+                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keylivMax))),
+                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keyID))),
+                    cursor.getString(cursor.getColumnIndex(keyTempo)),
+                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keyErrLiv1))),
+                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keyErrLiv2))),
+                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keyErrLiv3))),
+                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keyErrLiv4))));
+            Log.i(TAG,"------------->"+album.toString());
+
+            cursor.moveToNext();
+            statistics.add(album);
+        }
+
+        cursor.close();
+        db.close();
+        // return user
+//        Log.d(TAG, "Fetching user from Sqlite: " + albums.size());
+
+        return statistics;
+    }
 }

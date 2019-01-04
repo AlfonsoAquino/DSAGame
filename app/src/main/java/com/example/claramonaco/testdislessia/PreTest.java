@@ -55,13 +55,17 @@ public class PreTest  extends AppCompatActivity {
                 if (checked)
                     eta_="8";
                 break;
-            case R.id.radio_novepiu:
-                if (checked)
-                    eta_="piu di 9";
-                break;
             case R.id.radio_nove:
                 if(checked)
                     eta_="9";
+                break;
+            case R.id.radio_novepiu:
+                if (checked)
+                    eta_="piu di 9";
+//                break;
+//            case R.id.radio_nove:
+//                if(checked)
+//                    eta_="9";
         }}
 
 

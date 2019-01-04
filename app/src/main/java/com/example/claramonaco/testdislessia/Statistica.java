@@ -9,7 +9,7 @@ public class Statistica {
     private int numSaltate;
     private int livelloRaggiunto;
     private int idPaziente;
-    private int tempoImpiegato;
+    private String tempoImpiegato;
     private int errore1;
     private int errore2;
     private int errore3;
@@ -18,7 +18,7 @@ public class Statistica {
     public Statistica() {
     }
 
-    public Statistica(String genere, String eta,int numCorrette, int numSbagliate, int numSaltate, int livelloRaggiunto, int idPaziente, int tempoImpiegato, int errore1, int errore2, int errore3, int errore4) {
+    public Statistica(String genere, String eta,int numCorrette, int numSbagliate, int numSaltate, int livelloRaggiunto, int idPaziente, String tempoImpiegato, int errore1, int errore2, int errore3, int errore4) {
 
         this.genere = genere;
         this.eta = eta;
@@ -32,6 +32,22 @@ public class Statistica {
         this.errore2 = errore2;
         this.errore3 = errore3;
         this.errore4 = errore4;
+    }
+
+    public String getGenere() {
+        return genere;
+    }
+
+    public void setGenere(String genere) {
+        this.genere = genere;
+    }
+
+    public String getEta() {
+        return eta;
+    }
+
+    public void setEta(String eta) {
+        this.eta = eta;
     }
 
     public int getNumCorrette() {
@@ -74,11 +90,11 @@ public class Statistica {
         this.idPaziente = idPaziente;
     }
 
-    public int getTempoImpiegato() {
+    public String getTempoImpiegato() {
         return tempoImpiegato;
     }
 
-    public void setTempoImpiegato(int tempoImpiegato) {
+    public void setTempoImpiegato(String tempoImpiegato) {
         this.tempoImpiegato = tempoImpiegato;
     }
 

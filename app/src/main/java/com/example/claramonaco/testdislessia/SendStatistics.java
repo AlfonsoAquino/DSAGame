@@ -1,6 +1,8 @@
 package com.example.claramonaco.testdislessia;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -21,6 +23,7 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
     private final String TAG="StatisticsThread";
     private String genere, eta,livelloRaggiunto, idPaziente,numCorr,numErr,numSaltate, tempo, errLiv1,errLiv2,errLiv3,errLiv4 ;
     private Context context;
+    final String PREFS_NAME="check";
 
     public SendStatistics(Context context){
         this.context=context;
@@ -62,6 +65,8 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
                         if (!error) {
 
                             Log.i(TAG, "------------>ok");
+                            SQLiteHandler db= new SQLiteHandler(context);
+                            db.onUpgrade(db.getWritableDatabase(),1,2);
                         } else {
 
                             Log.i(TAG, "------------>erroreCaricamentoStatistiche");
