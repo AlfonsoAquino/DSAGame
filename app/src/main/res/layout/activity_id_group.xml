@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal|center"
         android:onClick="confermaGroup"
-        android:text="Button"
+        android:text="avanti"
         app:layout_constraintBaseline_toBaselineOf="@+id/groupId"
         app:layout_constraintStart_toEndOf="@+id/groupId"
         android:background="@drawable/button_press_orange"/>

@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 import me.grantland.widget.AutofitTextView;
@@ -55,7 +57,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     private BufferedReader in;
     private int livelloMax;
     private TextToSpeech tts;
-
+    private String groupId, data;
     private long startTime, totalTime;
     private int secondi, minuti, ore;
     SQLiteHandler db;
@@ -103,7 +105,10 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         errori_l4 = 0;
         livelloMax = 0;
         db = new SQLiteHandler(getApplicationContext());
-
+        groupId="";
+        data="";
+        Date currentTime = Calendar.getInstance().getTime();
+        data= currentTime.toString();
         //livello per file
         livello = 1;
         //numero rispose corrette per i livelli di difficoltà
@@ -235,6 +240,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             }
             try {
                 InputStream inputStream = openFileInput("generalita.txt");
+                InputStream gi = openFileInput("groupId.txt");
                 if (inputStream != null) {
                     InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                     BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -250,9 +256,24 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
 
                     }
                     inputStream.close();
-
+                }else{
+                    genere="non definito";
+                    eta="non definita";
                 }
-                db.addStatistic(genere,eta,esatte, sbagliate, num_salt,livelloMax,minuti+":"+secondi,errori_l1,errori_l2,errori_l3,errori_l4);
+
+                if(gi!=null){
+                    InputStreamReader inputStreamReader = new InputStreamReader(gi);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    String tempString = "";
+                    StringBuilder stringBuilder = new StringBuilder();
+                    while ((tempString = bufferedReader.readLine()) != null) {
+                        groupId=tempString;
+                    }
+                    gi.close();
+                }else{
+                    groupId="non definito";
+                }
+                db.addStatistic(groupId,data,genere,eta,esatte, sbagliate, num_salt,livelloMax,minuti+":"+secondi,errori_l1,errori_l2,errori_l3,errori_l4);
 //                new SendStatistics(getApplicationContext()).execute(genere,eta,""+livelloMax,""+sbagliate,""+num_salt,""+esatte,""+minuti+":"+secondi,""+errori_l1,""+errori_l2,""+errori_l3,""+errori_l4);
 
                 OutputStreamWriter osw = new OutputStreamWriter(this.openFileOutput("statistiche_test.txt", Context.MODE_APPEND));
@@ -304,13 +325,13 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                                                     int which) {
 
                                     //moveTaskToBack(true);*/
-                                   Intent i = new Intent(getApplicationContext(), PostTest.class);
-                                    startActivity(i);
-                                   // finish();
+            Intent i = new Intent(getApplicationContext(), PostTest.class);
+            startActivity(i);
+            // finish();
 //                                    System.exit(0);
 
-                            //    }
-                         //  }).show();
+            //    }
+            //  }).show();
 
         }
 

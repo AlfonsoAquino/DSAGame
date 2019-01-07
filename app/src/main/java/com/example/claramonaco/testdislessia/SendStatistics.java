@@ -21,7 +21,7 @@ import java.util.Map;
 public class SendStatistics extends AsyncTask<String, Integer, Void> {
 
     private final String TAG="StatisticsThread";
-    private String genere, eta,livelloRaggiunto, idPaziente,numCorr,numErr,numSaltate, tempo, errLiv1,errLiv2,errLiv3,errLiv4 ;
+    private String groupId,data,genere, eta,livelloRaggiunto, idPaziente,numCorr,numErr,numSaltate, tempo, errLiv1,errLiv2,errLiv3,errLiv4 ;
     private Context context;
     final String PREFS_NAME="check";
 
@@ -39,17 +39,19 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
             for (String str: strings) {
                 Log.i(TAG, "statistics: "+str);
             }
-            genere=strings[0];
-            eta=strings[1];
-            livelloRaggiunto=strings[2];
-            numErr=strings[3];
-            numSaltate=strings[4];
-            numCorr=strings[5];
-            tempo=strings[6];
-            errLiv1=strings[7];
-            errLiv2=strings[8];
-            errLiv3=strings[9];
-            errLiv4=strings[10];
+            groupId=strings[0];
+            data=strings[1];
+            genere=strings[2];
+            eta=strings[3];
+            livelloRaggiunto=strings[4];
+            numErr=strings[5];
+            numSaltate=strings[6];
+            numCorr=strings[7];
+            tempo=strings[8];
+            errLiv1=strings[9];
+            errLiv2=strings[10];
+            errLiv3=strings[11];
+            errLiv4=strings[12];
 
             StringRequest strReq = new StringRequest(Request.Method.POST,
                     Config.STATISTICA, new Response.Listener<String>() {
@@ -87,6 +89,8 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
                 protected Map<String, String> getParams() {
                     // Posting params to login url
                     Map<String, String> params = new HashMap<String, String>();
+                    params.put("groupId",groupId);
+                    params.put("data",data);
                     params.put("genere",genere);
                     params.put("eta",eta);
                     params.put("livelloRaggiunto",livelloRaggiunto);
@@ -111,6 +115,8 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
 
     protected void onPreExecute(){
 
+        groupId="0";
+        data ="0";
         genere="0";
         eta="0";
         livelloRaggiunto="0";

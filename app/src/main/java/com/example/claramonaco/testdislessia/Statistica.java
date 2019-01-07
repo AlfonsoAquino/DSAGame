@@ -2,6 +2,8 @@ package com.example.claramonaco.testdislessia;
 
 public class Statistica {
 
+    private String groupId;
+    private String data;
     private String genere;
     private String eta;
     private int numCorrette;
@@ -18,8 +20,10 @@ public class Statistica {
     public Statistica() {
     }
 
-    public Statistica(String genere, String eta,int numCorrette, int numSbagliate, int numSaltate, int livelloRaggiunto, int idPaziente, String tempoImpiegato, int errore1, int errore2, int errore3, int errore4) {
+    public Statistica(String groupId, String data, String genere, String eta,int numCorrette, int numSbagliate, int numSaltate, int livelloRaggiunto, int idPaziente, String tempoImpiegato, int errore1, int errore2, int errore3, int errore4) {
 
+        this.groupId = groupId;
+        this.data = data;
         this.genere = genere;
         this.eta = eta;
         this.numCorrette = numCorrette;
@@ -32,6 +36,22 @@ public class Statistica {
         this.errore2 = errore2;
         this.errore3 = errore3;
         this.errore4 = errore4;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getGenere() {
@@ -133,12 +153,16 @@ public class Statistica {
     @Override
     public String toString() {
         return "Statistica{" +
-                "numCorrette=" + numCorrette +
+                "groupId='" + groupId + '\'' +
+                ", data='" + data + '\'' +
+                ", genere='" + genere + '\'' +
+                ", eta='" + eta + '\'' +
+                ", numCorrette=" + numCorrette +
                 ", numSbagliate=" + numSbagliate +
                 ", numSaltate=" + numSaltate +
                 ", livelloRaggiunto=" + livelloRaggiunto +
                 ", idPaziente=" + idPaziente +
-                ", tempoImpiegato=" + tempoImpiegato +
+                ", tempoImpiegato='" + tempoImpiegato + '\'' +
                 ", errore1=" + errore1 +
                 ", errore2=" + errore2 +
                 ", errore3=" + errore3 +

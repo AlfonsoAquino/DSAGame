@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         if (isOnline() && statistics.size() != 0) {
             for (Statistica a : statistics) {
                 Log.i("asdadadadad....", "-------------->" + a.toString());
-                new SendStatistics(getApplicationContext()).execute("" + a.getGenere(), "" + a.getEta(), "" + a.getLivelloRaggiunto(), "" + a.getNumSbagliate(),"" + a.getNumSaltate(),"" + a.getNumCorrette(),"" + a.getTempoImpiegato(),"" + a.getErrore1(),"" + a.getErrore2(),"" + a.getErrore3(),"" + a.getErrore4());
+                new SendStatistics(getApplicationContext()).execute("" + a.getGroupId(), "" + a.getData(), "" + a.getGenere(), "" + a.getEta(), "" + a.getLivelloRaggiunto(), "" + a.getNumSbagliate(),"" + a.getNumSaltate(),"" + a.getNumCorrette(),"" + a.getTempoImpiegato(),"" + a.getErrore1(),"" + a.getErrore2(),"" + a.getErrore3(),"" + a.getErrore4());
 
             }
         }
