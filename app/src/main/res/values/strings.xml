@@ -12,10 +12,6 @@
     <string name="PostTest">PostTest</string>
 
 
-
-
-
-
     <string name="action_record">Miglior punteggio</string>
     <string name="write_word">SCRIVI LA PAROLA</string>
     <string name="write_number">SCRIVI IL NUMERO</string>
@@ -52,5 +48,6 @@
     <string name="IT" translatable="false">Italiano</string>
     <string name="PL" translatable="false">Polski</string>
     <string name="PT" translatable="false">Português</string>
+
 
 </resources>

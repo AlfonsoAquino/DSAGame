@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void test_dislessia(View v) {
-        Intent i = new Intent(getApplicationContext(), PreTest.class);
+        Intent i = new Intent(getApplicationContext(), IdGroupActivity.class);
         startActivity(i);
     }
 

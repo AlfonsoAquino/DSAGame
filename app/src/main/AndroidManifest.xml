@@ -18,8 +18,6 @@
         android:name="android.hardware.touchscreen"
         android:required="false" />
 
-
-
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
@@ -36,6 +34,7 @@
             android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -65,14 +64,15 @@
             android:name=".StatisticheTestActivity"
             android:label="@string/Statistiche_Test"
             android:screenOrientation="sensorPortrait" />
-
-        <activity android:name=".PreTest"
+        <activity
+            android:name=".PreTest"
             android:label="@string/PreTest"
-            android:screenOrientation="sensorPortrait"></activity>
-        <activity android:name=".PostTest"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".PostTest"
             android:label="@string/PostTest"
-            android:screenOrientation="sensorPortrait"></activity>
-
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".IdGroupActivity"></activity>
     </application>
 
 </manifest>
