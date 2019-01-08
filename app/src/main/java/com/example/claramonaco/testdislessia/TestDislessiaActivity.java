@@ -107,8 +107,8 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         db = new SQLiteHandler(getApplicationContext());
         groupId="";
         data="";
-        Date currentTime = Calendar.getInstance().getTime();
-        data= currentTime.toString();
+//        Date currentTime = Calendar.getInstance().getTime();
+//        data= currentTime.toString();
         //livello per file
         livello = 1;
         //numero rispose corrette per i livelli di difficoltà
@@ -241,6 +241,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             try {
                 InputStream inputStream = openFileInput("generalita.txt");
                 InputStream gi = openFileInput("groupId.txt");
+                InputStream dat = openFileInput("data.txt");
                 if (inputStream != null) {
                     InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                     BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -272,6 +273,18 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                     gi.close();
                 }else{
                     groupId="non definito";
+                }
+                if(dat!=null){
+                    InputStreamReader inputStreamReader = new InputStreamReader(dat);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    String tempString = "";
+                    StringBuilder stringBuilder = new StringBuilder();
+                    while ((tempString = bufferedReader.readLine()) != null) {
+                        data=tempString;
+                    }
+                    dat.close();
+                }else{
+                    data="non definito";
                 }
                 db.addStatistic(groupId,data,genere,eta,esatte, sbagliate, num_salt,livelloMax,minuti+":"+secondi,errori_l1,errori_l2,errori_l3,errori_l4);
 //                new SendStatistics(getApplicationContext()).execute(genere,eta,""+livelloMax,""+sbagliate,""+num_salt,""+esatte,""+minuti+":"+secondi,""+errori_l1,""+errori_l2,""+errori_l3,""+errori_l4);

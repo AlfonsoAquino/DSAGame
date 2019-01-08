@@ -10,11 +10,13 @@ import android.widget.EditText;
 
 import java.io.FileNotFoundException;
 import java.io.OutputStreamWriter;
+import java.util.Calendar;
+import java.util.Date;
 
 public class IdGroupActivity extends AppCompatActivity {
 
     private  EditText groupId;
-
+    private String data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,15 +29,23 @@ public class IdGroupActivity extends AppCompatActivity {
 
         Log.d("----------->G:","GruoupId: "+groupId.getText());
 
-        if(groupId.getText()!=null){
+        if(groupId.getText().length()>=1){
             OutputStreamWriter temp = null;
+            OutputStreamWriter dat = null;
             try {
 
                 temp = new OutputStreamWriter(this.openFileOutput("groupId.txt", Context.MODE_PRIVATE));
                 temp.write(""+groupId.getText());
                 temp.flush();
                 temp.close();
-
+                dat = new OutputStreamWriter(this.openFileOutput("data.txt", Context.MODE_PRIVATE));
+                data="";
+                Date currentTime = Calendar.getInstance().getTime();
+                data= currentTime.toString();
+                dat.write(""+data);
+                dat.flush();
+                dat.close();
+                Log.d("----------------->G","data: "+data);
             } catch (Exception e) {
                 e.printStackTrace();
             }
