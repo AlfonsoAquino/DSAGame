@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         TextToSpeech.OnInitListener,
         AdapterView.OnItemSelectedListener {
 
+    private ImageView img1, img2, img3, img4;
     private FileInputStream f;
     private BufferedReader reader, readerDistrattori;
     private AutofitTextView et;
@@ -70,7 +72,10 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         et1 = (AutofitTextView) findViewById(R.id.textwrite2);
         audio = (Button) findViewById(R.id.ascolta_audio);
         audio.setOnClickListener(this);
-
+        img1= (ImageView) findViewById(R.id.chiave1);
+        img2= (ImageView) findViewById(R.id.chiave2);
+        img3= (ImageView) findViewById(R.id.chiave3);
+        img4= (ImageView) findViewById(R.id.chiave4);
         b1 = (Button) findViewById(R.id.uno_bnt);
         b2 = (Button) findViewById(R.id.due_bnt);
         b3 = (Button) findViewById(R.id.tre_bnt);
@@ -177,8 +182,6 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             //leggo la frase
             reader = new BufferedReader(
                     new InputStreamReader(getAssets().open("bisillabe_piane.txt"), "UTF-8"));
-
-
             //leggo i distrattori
             readerDistrattori = new BufferedReader(
                     new InputStreamReader(getAssets().open("bisillabe_piane_distrattori.txt"), "UTF-8"));
@@ -193,6 +196,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             reader = new BufferedReader(
                     new InputStreamReader(getAssets().open("trisillabe_piane.txt"), "UTF-8"));
 
+            img1.setImageResource(R.drawable.chiave1);
 
             //leggo i distrattori
             readerDistrattori = new BufferedReader(
@@ -207,6 +211,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             reader = new BufferedReader(
                     new InputStreamReader(getAssets().open("bisillabe_trisillabe_complesse.txt"), "UTF-8"));
 
+            img2.setImageResource(R.drawable.chiave2);
 
             //leggo i distrattori
             readerDistrattori = new BufferedReader(
@@ -221,6 +226,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             reader = new BufferedReader(
                     new InputStreamReader(getAssets().open("diagrammi_ortografici.txt"), "UTF-8"));
 
+            img3.setImageResource(R.drawable.chiave3);
 
             //leggo i distrattori
             readerDistrattori = new BufferedReader(
@@ -412,7 +418,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         if (et1.getText().toString().equals(et.getText().toString())) {
             esatte++;
             num_corrette++;
-
+            Log.d("-------------------<>", "Controlliamo: "+num_corrette);
         } else {
             sbagliate++;
             if (num_corrette == 0) {
