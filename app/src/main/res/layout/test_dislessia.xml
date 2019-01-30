@@ -55,7 +55,7 @@
                 android:id="@+id/frasi_sbagliate"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="0dp"
                 android:background="@drawable/button_normal"
                 android:padding="5dp"
                 android:text="0/21"
@@ -87,8 +87,8 @@
 
             <Button
                 android:id="@+id/ascolta_audio"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:background="@drawable/audio" />
 
             <me.grantland.widget.AutofitTextView
@@ -129,21 +129,21 @@
 
         <GridLayout
             android:id="@+id/relative_layout_due"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/linear_layoutdue"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:columnCount="3"
-            android:rowCount="3"
-            android:layout_marginTop="5dp">
+            android:rowCount="3">
 
             <Button
                 android:id="@+id/uno_bnt"
                 android:layout_width="110dp"
                 android:layout_height="70dp"
-                android:layout_marginBottom="5dp"
                 android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/button_normal_orange"
                 android:fontFamily="@font/arial"
                 android:onClick="ScriviParola"
@@ -155,8 +155,8 @@
                 android:id="@+id/due_bnt"
                 android:layout_width="110dp"
                 android:layout_height="70dp"
-                android:layout_marginBottom="5dp"
                 android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/button_normal_orange"
                 android:fontFamily="@font/arial"
                 android:onClick="ScriviParola"
@@ -181,8 +181,8 @@
                 android:id="@+id/quattro_bnt"
                 android:layout_width="110dp"
                 android:layout_height="70dp"
-                android:layout_marginBottom="5dp"
                 android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/button_normal_orange"
                 android:fontFamily="@font/arial"
                 android:onClick="ScriviParola"
@@ -194,8 +194,8 @@
                 android:id="@+id/cinque_bnt"
                 android:layout_width="110dp"
                 android:layout_height="70dp"
-                android:layout_marginBottom="5dp"
                 android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/button_normal_orange"
                 android:fontFamily="@font/arial"
                 android:onClick="ScriviParola"
@@ -219,8 +219,8 @@
                 android:id="@+id/sette_bnt"
                 android:layout_width="110dp"
                 android:layout_height="70dp"
-                android:layout_marginBottom="5dp"
                 android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/button_normal_orange"
                 android:fontFamily="@font/arial"
                 android:onClick="ScriviParola"
@@ -232,8 +232,8 @@
                 android:id="@+id/otto_bnt"
                 android:layout_width="110dp"
                 android:layout_height="70dp"
-                android:layout_marginBottom="5dp"
                 android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/button_normal_orange"
                 android:fontFamily="@font/arial"
                 android:onClick="ScriviParola"
@@ -284,19 +284,19 @@
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/Salta"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_below="@id/controlla"
             android:layout_centerHorizontal="true"
-            android:layout_margin="5dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/button_normal_orange"
             android:fontFamily="@font/arial"
             android:onClick="Salta"
             android:text="Salta"
             android:textColor="#328406"
             android:textSize="30dp"
-            android:textStyle="bold"
-            android:id="@+id/Salta"/>
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
