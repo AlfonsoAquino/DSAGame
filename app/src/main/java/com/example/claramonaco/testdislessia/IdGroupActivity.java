@@ -2,29 +2,77 @@ package com.example.claramonaco.testdislessia;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 
-import java.io.FileNotFoundException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class IdGroupActivity extends AppCompatActivity {
 
-    private  EditText groupId;
-    private String data;
+    private EditText groupId, idAlunno;
+    private String data, regione, identAlunno;
+    private LinearLayout spinnerLayout, layoutGroup, layoutAlunno;
+    private Spinner spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_id_group);
 
-        groupId= (EditText) findViewById(R.id.groupId);
+        spinnerLayout = (LinearLayout) findViewById(R.id.layoutSpinner);
+        layoutGroup = (LinearLayout) findViewById(R.id.layoutGroupId);
+        groupId = (EditText) findViewById(R.id.groupId);
+        spinner = (Spinner) findViewById(R.id.spinner);
+        idAlunno = (EditText) findViewById(R.id.idAlunno);
+        layoutAlunno = (LinearLayout) findViewById(R.id.layoutIdAlunno);
+
+        data="";
+        regione="";
+        identAlunno="";
+
+        layoutAlunno.setVisibility(View.GONE);
+        layoutGroup.setVisibility(View.GONE);
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.planets_array, R.layout.spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
     }
 
+    public void confermaRegione(View v){
+        Log.d("----------->G:","Regione: "+spinner.getSelectedItem());
+
+        if(!spinner.getSelectedItem().toString().equalsIgnoreCase("Seleziona la regione")){
+
+            regione = spinner.getSelectedItem().toString();
+            spinnerLayout.setVisibility(View.GONE);
+            layoutAlunno.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void confermaAlunno(View v){
+        Log.d("----------->G:","idAlunno: "+idAlunno.getText());
+
+        if(idAlunno.getText().length()>=1){
+
+            identAlunno = idAlunno.getText().toString();
+            layoutAlunno.setVisibility(View.GONE);
+            layoutGroup.setVisibility(View.VISIBLE);
+        }
+    }
     public void confermaGroup(View v){
 
         Log.d("----------->G:","GruoupId: "+groupId.getText());

@@ -49,5 +49,28 @@
     <string name="PL" translatable="false">Polski</string>
     <string name="PT" translatable="false">Português</string>
 
+    <string-array name="planets_array">
+        <item>Seleziona la regione</item>
+        <item>Abruzzo</item>
+        <item>Basilicata</item>
+        <item>Calabria</item>
+        <item>Campania</item>
+        <item>Emilia-Romagna</item>
+        <item>Friuli-Venezia Giulia</item>
+        <item>Lazio</item>
+        <item>Liguria</item>
+        <item>Lombardia</item>
+        <item>Marche</item>
+        <item>Molise</item>
+        <item>Piemonte</item>
+        <item>Puglia</item>
+        <item>Sardegna</item>
+        <item>Sicilia</item>
+        <item>Toscana</item>
+        <item>Trentino-Alto Adige</item>
+        <item>Umbria</item>
+        <item>Valle d Aosta</item>
+        <item>Veneto</item>
+    </string-array>
 
 </resources>
