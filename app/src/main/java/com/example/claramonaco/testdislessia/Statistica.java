@@ -3,6 +3,8 @@ package com.example.claramonaco.testdislessia;
 public class Statistica {
 
     private String groupId;
+    private String idAlunno;
+    private String regione;
     private String data;
     private String genere;
     private String eta;
@@ -20,9 +22,11 @@ public class Statistica {
     public Statistica() {
     }
 
-    public Statistica(String groupId, String data, String genere, String eta,int numCorrette, int numSbagliate, int numSaltate, int livelloRaggiunto, int idPaziente, String tempoImpiegato, int errore1, int errore2, int errore3, int errore4) {
+    public Statistica(String groupId, String idAlunno, String regione, String data, String genere, String eta,int numCorrette, int numSbagliate, int numSaltate, int livelloRaggiunto, int idPaziente, String tempoImpiegato, int errore1, int errore2, int errore3, int errore4) {
 
         this.groupId = groupId;
+        this.idAlunno = idAlunno;
+        this.regione = regione;
         this.data = data;
         this.genere = genere;
         this.eta = eta;
@@ -36,6 +40,22 @@ public class Statistica {
         this.errore2 = errore2;
         this.errore3 = errore3;
         this.errore4 = errore4;
+    }
+
+    public String getIdAlunno() {
+        return idAlunno;
+    }
+
+    public void setIdAlunno(String idAlunno) {
+        this.idAlunno = idAlunno;
+    }
+
+    public String getRegione() {
+        return regione;
+    }
+
+    public void setRegione(String regione) {
+        this.regione = regione;
     }
 
     public String getGroupId() {
@@ -154,6 +174,8 @@ public class Statistica {
     public String toString() {
         return "Statistica{" +
                 "groupId='" + groupId + '\'' +
+                ", idAlunno='" + idAlunno + '\'' +
+                ", regione='" + regione + '\'' +
                 ", data='" + data + '\'' +
                 ", genere='" + genere + '\'' +
                 ", eta='" + eta + '\'' +

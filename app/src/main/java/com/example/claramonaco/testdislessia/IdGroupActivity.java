@@ -57,7 +57,15 @@ public class IdGroupActivity extends AppCompatActivity {
 
         if(!spinner.getSelectedItem().toString().equalsIgnoreCase("Seleziona la regione")){
 
-            regione = spinner.getSelectedItem().toString();
+            OutputStreamWriter temp = null;
+            try {
+                temp = new OutputStreamWriter(this.openFileOutput("regione.txt", Context.MODE_PRIVATE));
+                temp.write(""+spinner.getSelectedItem().toString());
+                temp.flush();
+                temp.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             spinnerLayout.setVisibility(View.GONE);
             layoutAlunno.setVisibility(View.VISIBLE);
         }
@@ -67,7 +75,15 @@ public class IdGroupActivity extends AppCompatActivity {
         Log.d("----------->G:","idAlunno: "+idAlunno.getText());
 
         if(idAlunno.getText().length()>=1){
-
+            OutputStreamWriter temp = null;
+            try {
+                temp = new OutputStreamWriter(this.openFileOutput("idAlunno.txt", Context.MODE_PRIVATE));
+                temp.write(""+idAlunno.getText());
+                temp.flush();
+                temp.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             identAlunno = idAlunno.getText().toString();
             layoutAlunno.setVisibility(View.GONE);
             layoutGroup.setVisibility(View.VISIBLE);

@@ -22,6 +22,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final String tableName="statistica";
     private static final String keyID="id";
     private static final String keyGroupId="groupId";
+    private static final String keyIdAlunno="idAlunno";
+    private static final String keyRegione="regione";
     private static final String keyData="data";
     private static final String keyGenere="genere";
     private static final String keyEta="eta";
@@ -41,11 +43,12 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
         super(context, dbName, null, dbVersion);
         statistics = new ArrayList<>();
+
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createStatisticTable = "CREATE TABLE IF NOT EXISTS "+ tableName +"("+keyID+" INTEGER PRIMARY KEY,"+keyGroupId+" TEXT, "+keyData+" TEXT, " +keyGenere+" TEXT, "+keyEta+" TEXT, "+keylivMax+" TEXT, "+keyErr+" TEXT, "+keySkip+" TEXT, "+keyEsatte+" TEXT, "+keyTempo+" TEXT, "+keyErrLiv1+" TEXT, "+keyErrLiv2+" TEXT, "+keyErrLiv3+" TEXT, "+keyErrLiv4+" TEXT)";
+        String createStatisticTable = "CREATE TABLE IF NOT EXISTS "+ tableName +"("+keyID+" INTEGER PRIMARY KEY, "+keyGroupId+" TEXT, "+keyIdAlunno+" TEXT, "+keyRegione+" TEXT, "+keyData+" TEXT, " +keyGenere+" TEXT, "+keyEta+" TEXT, "+keylivMax+" TEXT, "+keyErr+" TEXT, "+keySkip+" TEXT, "+keyEsatte+" TEXT, "+keyTempo+" TEXT, "+keyErrLiv1+" TEXT, "+keyErrLiv2+" TEXT, "+keyErrLiv3+" TEXT, "+keyErrLiv4+" TEXT)";
         db.execSQL(createStatisticTable);
 
         Log.d(TAG, "database table created");
@@ -63,12 +66,14 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     /**
      * Storing statistics info
      */
-    public void addStatistic(String groupId, String data, String genere, String eta,int numCorrette, int numSbagliate, int numSaltate, int livelloRaggiunto, String tempoImpiegato, int errore1, int errore2, int errore3, int errore4 ){
+    public void addStatistic(String groupId, String idAlunno, String regione, String data, String genere, String eta,int numCorrette, int numSbagliate, int numSaltate, int livelloRaggiunto, String tempoImpiegato, int errore1, int errore2, int errore3, int errore4 ){
 
         SQLiteDatabase db= this.getWritableDatabase();
 
         ContentValues values= new ContentValues();
         values.put(keyGroupId, groupId );
+        values.put(keyIdAlunno, idAlunno );
+        values.put(keyRegione, regione );
         values.put(keyData, data);
         values.put(keyGenere, genere);
         values.put(keyEta, eta);
@@ -101,6 +106,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
             album=new Statistica(
                     cursor.getString(cursor.getColumnIndex(keyGroupId)),
+                    cursor.getString(cursor.getColumnIndex(keyIdAlunno)),
+                    cursor.getString(cursor.getColumnIndex(keyRegione)),
                     cursor.getString(cursor.getColumnIndex(keyData)),
                     cursor.getString(cursor.getColumnIndex(keyGenere)),
                     cursor.getString(cursor.getColumnIndex(keyEta)),

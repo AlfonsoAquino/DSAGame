@@ -90,7 +90,8 @@
             android:textSize="15dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:focusedByDefault="true"/>
 
         <Space
             android:layout_width="match_parent"
@@ -150,7 +151,8 @@
             android:textSize="15dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:focusedByDefault="true"/>
 
         <Space
             android:layout_width="match_parent"

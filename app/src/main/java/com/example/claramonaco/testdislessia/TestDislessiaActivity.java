@@ -54,7 +54,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     private int controlla_rip[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private boolean flag;
 
-    private String genere;
+    private String genere, idAlunno, regione;
     private String eta;
     private BufferedReader in;
     private int livelloMax;
@@ -111,6 +111,8 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         livelloMax = 0;
         db = new SQLiteHandler(getApplicationContext());
         groupId="";
+        idAlunno="";
+        regione="";
         data="";
 //        Date currentTime = Calendar.getInstance().getTime();
 //        data= currentTime.toString();
@@ -247,6 +249,8 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             try {
                 InputStream inputStream = openFileInput("generalita.txt");
                 InputStream gi = openFileInput("groupId.txt");
+                InputStream idA = openFileInput("idAlunno.txt");
+                InputStream reg = openFileInput("regione.txt");
                 InputStream dat = openFileInput("data.txt");
                 if (inputStream != null) {
                     InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -267,7 +271,30 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                     genere="non definito";
                     eta="non definita";
                 }
-
+                if(idA!=null){
+                    InputStreamReader inputStreamReader = new InputStreamReader(idA);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    String tempString = "";
+                    StringBuilder stringBuilder = new StringBuilder();
+                    while ((tempString = bufferedReader.readLine()) != null) {
+                        idAlunno=tempString;
+                    }
+                    idA.close();
+                }else{
+                    idAlunno="non definito";
+                }
+                if(reg!=null){
+                    InputStreamReader inputStreamReader = new InputStreamReader(reg);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    String tempString = "";
+                    StringBuilder stringBuilder = new StringBuilder();
+                    while ((tempString = bufferedReader.readLine()) != null) {
+                        regione=tempString;
+                    }
+                    reg.close();
+                }else{
+                    regione="non definito";
+                }
                 if(gi!=null){
                     InputStreamReader inputStreamReader = new InputStreamReader(gi);
                     BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -292,7 +319,8 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                 }else{
                     data="non definito";
                 }
-                db.addStatistic(groupId,data,genere,eta,esatte, sbagliate, num_salt,livelloMax,minuti+":"+secondi,errori_l1,errori_l2,errori_l3,errori_l4);
+//                db.onUpgrade(db.getWritableDatabase(),1,1);
+                db.addStatistic(groupId,idAlunno,regione,data,genere,eta,esatte, sbagliate, num_salt,livelloMax,minuti+":"+secondi,errori_l1,errori_l2,errori_l3,errori_l4);
 //                new SendStatistics(getApplicationContext()).execute(genere,eta,""+livelloMax,""+sbagliate,""+num_salt,""+esatte,""+minuti+":"+secondi,""+errori_l1,""+errori_l2,""+errori_l3,""+errori_l4);
 
                 OutputStreamWriter osw = new OutputStreamWriter(this.openFileOutput("statistiche_test.txt", Context.MODE_APPEND));
