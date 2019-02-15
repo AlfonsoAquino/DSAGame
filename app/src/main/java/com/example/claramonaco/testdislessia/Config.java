@@ -2,12 +2,8 @@ package com.example.claramonaco.testdislessia;
 
 public class Config {
     //JSON URL
-    public static final String DATA_URL = "https://bifurun.000webhostapp.com/login.php";
-    public static final String ALBUMS = "https://bifurun.000webhostapp.com/storie.php";
-    public static final String VIGNETTE = "https://bifurun.000webhostapp.com/vignette.php";
     public static final String STATISTICA = "https://bifurun.000webhostapp.com/statisticaDislessia.php";
-    public static final String destAlbumPrev="AlbumPreview";
-    public static final String destVignette="Vignette";
+    public static final String Gradimento = "https://bifurun.000webhostapp.com/gradimentoTest.php";
     public static final String PREFS_NAME="MyPrefsFile";
 
 

@@ -1,8 +1,10 @@
 package com.example.claramonaco.testdislessia;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -17,21 +19,39 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Statistica> statistics;
-    SQLiteHandler db;
+    private ArrayList<Gradimento> gradimento;
+    private Boolean firstTime = null;
+    private SQLiteHandler db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         statistics=new ArrayList<>();
+        gradimento=new ArrayList<>();
         db=new SQLiteHandler(getApplicationContext());
+
+        if(isFirstTime()){
+            db.onUpgrade(db.getWritableDatabase(),1,1);
+        }
+        Log.d("isFirst??????????????", "onCreate: "+isFirstTime());
         statistics=db.getStatisticsDetails();
+        gradimento=db.getGradimentoDetails();
+
         if(statistics.size()==0){
             db.onUpgrade(db.getWritableDatabase(),1,1);
         }
+
         if (isOnline() && statistics.size() != 0) {
+
             for (Statistica a : statistics) {
                 Log.i("asdadadadad....", "-------------->" + a.toString());
                 new SendStatistics(getApplicationContext()).execute("" + a.getGroupId(), "" + a.getData(), "" + a.getGenere(), "" + a.getEta(), "" + a.getLivelloRaggiunto(), "" + a.getNumSbagliate(),"" + a.getNumSaltate(),"" + a.getNumCorrette(),"" + a.getTempoImpiegato(),"" + a.getErrore1(),"" + a.getErrore2(),"" + a.getErrore3(),"" + a.getErrore4(),"" + a.getIdAlunno(),"" + a.getRegione());
+
+            }
+            for (Gradimento a : gradimento) {
+                Log.i("asdadadadad....", "-------------->" + a.toString());
+                new SendGradimento(getApplicationContext()).execute("" + a.getIdStatistica(), "" + a.getDomanda1(), "" + a.getDomanda2(), "" + a.getDomanda3(), "" + a.getDomanda4(),"" + a.getDomanda5(),"" + a.getDomanda6(),"" + a.getDomanda7(),"" + a.getDomanda8());
 
             }
         }
@@ -93,5 +113,16 @@ public class MainActivity extends AppCompatActivity {
                         }).setNegativeButton(android.R.string.no, null).show();
     }
 
-
+    private boolean isFirstTime() {
+        if (firstTime == null) {
+            SharedPreferences mPreferences = this.getSharedPreferences("first_time", Context.MODE_PRIVATE);
+            firstTime = mPreferences.getBoolean("firstTime", true);
+            if (firstTime) {
+                SharedPreferences.Editor editor = mPreferences.edit();
+                editor.putBoolean("firstTime", false);
+                editor.commit();
+            }
+        }
+        return firstTime;
+    }
 }

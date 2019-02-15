@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.android.volley.toolbox.StringRequest;
-
 import java.util.ArrayList;
 
 public class SQLiteHandler extends SQLiteOpenHelper {
@@ -20,7 +18,16 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final String dbName="statistics";
     //table data
     private static final String tableName="statistica";
+    private static final String tableGradimento="gradimento";
     private static final String keyID="id";
+    private static final String keyDomanda8 ="domanda8";
+    private static final String keyDomanda1 ="domanda1";
+    private static final String keyDomanda2 ="domanda2";
+    private static final String keyDomanda3 ="domanda3";
+    private static final String keyDomanda4 ="domanda4";
+    private static final String keyDomanda5 ="domanda5";
+    private static final String keyDomanda6 ="domanda6";
+    private static final String keyDomanda7 ="domanda7";
     private static final String keyGroupId="groupId";
     private static final String keyIdAlunno="idAlunno";
     private static final String keyRegione="regione";
@@ -38,18 +45,22 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final String keyErrLiv4="errLiv4";
 
     private ArrayList<Statistica> statistics;
+    private ArrayList<Gradimento> gradimento;
 
     public SQLiteHandler(Context context){
 
         super(context, dbName, null, dbVersion);
         statistics = new ArrayList<>();
-
+        gradimento = new ArrayList<>();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createStatisticTable = "CREATE TABLE IF NOT EXISTS "+ tableName +"("+keyID+" INTEGER PRIMARY KEY, "+keyGroupId+" TEXT, "+keyIdAlunno+" TEXT, "+keyRegione+" TEXT, "+keyData+" TEXT, " +keyGenere+" TEXT, "+keyEta+" TEXT, "+keylivMax+" TEXT, "+keyErr+" TEXT, "+keySkip+" TEXT, "+keyEsatte+" TEXT, "+keyTempo+" TEXT, "+keyErrLiv1+" TEXT, "+keyErrLiv2+" TEXT, "+keyErrLiv3+" TEXT, "+keyErrLiv4+" TEXT)";
         db.execSQL(createStatisticTable);
+
+        String createGradimentoTable = "CREATE TABLE IF NOT EXISTS "+ tableGradimento +"("+keyID+" INTEGER PRIMARY KEY, "+keyIdAlunno+" TEXT, "+ keyDomanda1 +" TEXT, "+ keyDomanda2 +" TEXT, "+ keyDomanda3 +" TEXT, " + keyDomanda4 +" TEXT, "+ keyDomanda5 +" TEXT, "+ keyDomanda6 +" TEXT, "+ keyDomanda7 +" TEXT, "+ keyDomanda8 +" TEXT)";
+        db.execSQL(createGradimentoTable);
 
         Log.d(TAG, "database table created");
     }
@@ -58,7 +69,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //drop older version of table
         db.execSQL("DROP TABLE IF EXISTS " + tableName );
-
+        onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS " + tableGradimento );
         //create new table
         onCreate(db);
     }
@@ -88,6 +100,30 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(keyErrLiv4, errore4 );
 
         db.insert(tableName, null, values);
+        db.close();
+
+        Log.d(TAG, "New statistic inserted into sqlite");
+    }
+    /**
+     * Storing gradimento info
+     */
+    public void addGradimento(String idAlunno, String dm1, String dm2, String dm3, String dm4,String dm5, String dm6, String dm7, String dm8){
+
+        SQLiteDatabase db= this.getWritableDatabase();
+
+        ContentValues values= new ContentValues();
+        values.put(keyIdAlunno, idAlunno );
+        values.put(keyDomanda1, dm1);
+        values.put(keyDomanda2, dm2);
+        values.put(keyDomanda3, dm3);
+        values.put(keyDomanda4, dm4);
+        values.put(keyDomanda5, dm5);
+        values.put(keyDomanda6, dm6);
+        values.put(keyDomanda7, dm7);
+        values.put(keyDomanda8, dm8);
+
+
+        db.insert(tableGradimento, null, values);
         db.close();
 
         Log.d(TAG, "New statistic inserted into sqlite");
@@ -133,5 +169,38 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 //        Log.d(TAG, "Fetching user from Sqlite: " + albums.size());
 
         return statistics;
+    }
+    public ArrayList<Gradimento> getGradimentoDetails() {
+        String selectQuery = "SELECT  * FROM " + tableGradimento;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // Move to first row
+        cursor.moveToFirst();
+        Gradimento album;
+        while (!cursor.isAfterLast()){
+
+            album=new Gradimento(
+                    cursor.getString(cursor.getColumnIndex(keyIdAlunno)),
+                    cursor.getString(cursor.getColumnIndex(keyDomanda1)),
+                    cursor.getString(cursor.getColumnIndex(keyDomanda2)),
+                    cursor.getString(cursor.getColumnIndex(keyDomanda3)),
+                    cursor.getString(cursor.getColumnIndex(keyDomanda4)),
+                    cursor.getString(cursor.getColumnIndex(keyDomanda5)),
+                    cursor.getString(cursor.getColumnIndex(keyDomanda6)),
+                    cursor.getString(cursor.getColumnIndex(keyDomanda7)),
+                    cursor.getString(cursor.getColumnIndex(keyDomanda8)));
+            Log.i(TAG,"------------->"+album.toString());
+
+            cursor.moveToNext();
+            gradimento.add(album);
+        }
+
+        cursor.close();
+        db.close();
+        // return user
+//        Log.d(TAG, "Fetching user from Sqlite: " + albums.size());
+
+        return gradimento;
     }
 }
