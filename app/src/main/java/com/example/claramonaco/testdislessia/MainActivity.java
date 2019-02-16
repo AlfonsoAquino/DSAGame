@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         statistics=db.getStatisticsDetails();
         gradimento=db.getGradimentoDetails();
 
-        if(statistics.size()==0){
+        if(statistics.size()==0 && gradimento.size()==0){
             db.onUpgrade(db.getWritableDatabase(),1,1);
         }
 

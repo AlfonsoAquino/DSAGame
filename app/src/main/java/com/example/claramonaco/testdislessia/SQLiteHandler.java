@@ -70,11 +70,13 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         //drop older version of table
         db.execSQL("DROP TABLE IF EXISTS " + tableName );
         onCreate(db);
-        db.execSQL("DROP TABLE IF EXISTS " + tableGradimento );
+    }
+    public void onUpgradeGradimento(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        db.execSQL("DROP TABLE IF EXISTS " + tableGradimento);
         //create new table
         onCreate(db);
     }
-
     /**
      * Storing statistics info
      */
