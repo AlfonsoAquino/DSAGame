@@ -3,12 +3,14 @@ package com.example.claramonaco.testdislessia;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -60,10 +62,11 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     private int livelloMax;
     private TextToSpeech tts;
     private String groupId, data;
-    private long startTime, totalTime;
+    private long startTime, totalTime, intermedio,fine;
     private int secondi, minuti, ore;
     SQLiteHandler db;
-
+    ImageView alertImage;
+    int rip=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,9 +94,11 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         salti = (TextView) findViewById(R.id.frasi_saltate);
         livel = (TextView) findViewById(R.id.livello_frasi);
 
+//        alertImage=(ImageView) findViewById(R.id.alertImage);
+//        alertFumetto(2);
+
 
         flag = true;
-
 
         num_prove = 0;
         j = 0;
@@ -109,6 +114,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         errori_l3 = 0;
         errori_l4 = 0;
         livelloMax = 0;
+        intermedio=0;
         db = new SQLiteHandler(getApplicationContext());
         groupId="";
         idAlunno="";
@@ -198,6 +204,9 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             reader = new BufferedReader(
                     new InputStreamReader(getAssets().open("trisillabe_piane.txt"), "UTF-8"));
 
+            if(rip==0)
+                intermedio = alertFumetto(R.drawable.prova2);
+            rip=1;
             img1.setImageResource(R.drawable.chiave1);
 
             //leggo i distrattori
@@ -209,6 +218,9 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             if(livelloMax<livello){
                 livelloMax=livello;
             }
+            if(rip==1)
+                intermedio += alertFumetto(R.drawable.prova2);
+            rip=2;
             //leggo la frase
             reader = new BufferedReader(
                     new InputStreamReader(getAssets().open("bisillabe_trisillabe_complesse.txt"), "UTF-8"));
@@ -223,6 +235,9 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             if(livelloMax<livello){
                 livelloMax=livello;
             }
+            if(rip==2)
+                intermedio += alertFumetto(R.drawable.prova2);
+            rip=3;
             //for(i=0;i<=21;i++)controlla_rip[i]=0;
             //leggo la frase
             reader = new BufferedReader(
@@ -236,7 +251,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         }
         if (num_prove == 22) {
 
-            totalTime = System.currentTimeMillis() - startTime;
+            totalTime = System.currentTimeMillis() - startTime - intermedio;
             secondi = (int) (totalTime / 1000);
             while (secondi >= 60) {
                 minuti++;
@@ -418,6 +433,26 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         salti.setText(+num_salt + "/21");
         livel.setText("" + livello);
 
+    }
+
+    public long alertFumetto(int liv){
+        final long tempoStart=System.currentTimeMillis();
+        fine =0;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogLayout = inflater.inflate(R.layout.customized_dialog,  null);
+        alertImage=(ImageView) dialogLayout.findViewById(R.id.alertImage);
+        alertImage.setImageResource(liv);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                fine = System.currentTimeMillis() - tempoStart;
+            }
+        });
+        builder.setView(dialogLayout);
+        builder.show();
+        return fine;
     }
 
     public void risultatoTest(View v) {

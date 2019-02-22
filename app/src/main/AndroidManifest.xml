@@ -72,7 +72,7 @@
             android:name=".PostTest"
             android:label="@string/PostTest"
             android:screenOrientation="sensorPortrait" />
-        <activity android:name=".IdGroupActivity"></activity>
+        <activity android:name=".IdGroupActivity" />
     </application>
 
 </manifest>

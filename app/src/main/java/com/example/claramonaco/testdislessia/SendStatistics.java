@@ -74,6 +74,7 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
                         } else {
 
                             Log.i(TAG, "------------>erroreCaricamentoStatistiche");
+                            
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

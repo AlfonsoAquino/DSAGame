@@ -78,7 +78,7 @@ public class PostTest extends AppCompatActivity {
 //            osw1.write("\nStrongly_Disagree");
 //            osw1.flush();
 //            osw1.close();
-            domande[i]="Strongly_Disagree";
+            domande[i]="Strongly Disagree";
         }
         if(b.getId()==Disagree.getId()){
             OutputStreamWriter osw = new OutputStreamWriter(this.openFileOutput("statistiche_test.txt", Context.MODE_APPEND));
@@ -125,7 +125,7 @@ public class PostTest extends AppCompatActivity {
 //            osw1.write("\nStrongly_Agree");
 //            osw1.flush();
 //            osw1.close();
-            domande[i]="Strongly_Agree";
+            domande[i]="Strongly Agree";
         }
         try {
             frase=read.readLine();
