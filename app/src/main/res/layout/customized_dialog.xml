@@ -18,7 +18,7 @@
             android:background="@android:color/black"
             android:scaleType="centerInside"
             android:id="@+id/alertImage"
-            android:src="@drawable/pagina" />
+            android:src="@drawable/alertporta" />
     </LinearLayout>
 
     <!--<LinearLayout-->

@@ -3,7 +3,6 @@ package com.example.claramonaco.testdislessia;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AlertDialog;
@@ -25,8 +24,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Random;
 
 import me.grantland.widget.AutofitTextView;
@@ -205,9 +202,9 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                     new InputStreamReader(getAssets().open("trisillabe_piane.txt"), "UTF-8"));
 
             if(rip==0)
-                intermedio = alertFumetto(R.drawable.prova2);
+                intermedio = alertFumetto(R.drawable.alertporta);
             rip=1;
-            img1.setImageResource(R.drawable.chiave1);
+
 
             //leggo i distrattori
             readerDistrattori = new BufferedReader(
@@ -219,7 +216,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                 livelloMax=livello;
             }
             if(rip==1)
-                intermedio += alertFumetto(R.drawable.prova2);
+                intermedio += alertFumetto(R.drawable.alertporta);
             rip=2;
             //leggo la frase
             reader = new BufferedReader(
@@ -236,7 +233,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                 livelloMax=livello;
             }
             if(rip==2)
-                intermedio += alertFumetto(R.drawable.prova2);
+                intermedio += alertFumetto(R.drawable.alertporta);
             rip=3;
             //for(i=0;i<=21;i++)controlla_rip[i]=0;
             //leggo la frase
@@ -448,6 +445,9 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 fine = System.currentTimeMillis() - tempoStart;
+                img2.setImageDrawable(null);
+                img3.setImageDrawable(null);
+                img4.setImageDrawable(null);
             }
         });
         builder.setView(dialogLayout);
@@ -482,6 +482,15 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             esatte++;
             num_corrette++;
             Log.d("-------------------<>", "Controlliamo: "+num_corrette);
+            if(img1.getDrawable()==null && esatte==1) {
+                img1.setImageResource(R.drawable.chiave1);
+            }else if(img1.getDrawable()!=null && img2.getDrawable()==null){
+                img2.setImageResource(R.drawable.chiave2);
+            }else if(img3.getDrawable()==null && img4.getDrawable()==null){
+                img3.setImageResource(R.drawable.chiave3);
+            }else if(img3.getDrawable()!=null && img4.getDrawable()==null){
+                img4.setImageResource(R.drawable.chiave4);
+            }
         } else {
             sbagliate++;
             if (num_corrette == 0) {
