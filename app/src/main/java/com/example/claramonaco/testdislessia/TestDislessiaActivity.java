@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -64,6 +65,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     SQLiteHandler db;
     ImageView alertImage;
     int rip=0;
+    AlertDialog mboh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +94,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         livel = (TextView) findViewById(R.id.livello_frasi);
 
 //        alertImage=(ImageView) findViewById(R.id.alertImage);
-//        alertFumetto(2);
+//        alertFumetto(R.drawable.alertporta);
 
 
         flag = true;
@@ -432,26 +434,31 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
 
     }
 
+
     public long alertFumetto(int liv){
         final long tempoStart=System.currentTimeMillis();
         fine =0;
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogLayout = inflater.inflate(R.layout.customized_dialog,  null);
         alertImage=(ImageView) dialogLayout.findViewById(R.id.alertImage);
         alertImage.setImageResource(liv);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        alertImage.setOnClickListener(new View.OnClickListener(){
+
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View view) {
                 fine = System.currentTimeMillis() - tempoStart;
+                img1.setImageDrawable(null);
                 img2.setImageDrawable(null);
                 img3.setImageDrawable(null);
                 img4.setImageDrawable(null);
+                mboh.dismiss();
             }
         });
+
         builder.setView(dialogLayout);
-        builder.show();
+        mboh=builder.show();
         return fine;
     }
 
