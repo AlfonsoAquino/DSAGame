@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by ClaraMonaco on 28/05/2018.
@@ -22,14 +25,14 @@ import java.io.OutputStreamWriter;
 public class PreTest  extends AppCompatActivity {
 
     private RadioGroup genere, eta;
-    private String genere_,eta_;
+    private String genere_,eta_,data;
     @SuppressLint("WrongViewCast")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pre_test);
 
-       genere= findViewById(R.id.genere_b);
-       eta= findViewById(R.id.eta_b);
+        genere= findViewById(R.id.genere_b);
+        eta= findViewById(R.id.eta_b);
 
 
     }
@@ -78,7 +81,7 @@ public class PreTest  extends AppCompatActivity {
             case R.id.radio_femmina:
                 if (checked)
                     genere_="femmina";
-                    break;
+                break;
             case R.id.radio_maschio:
                 if (checked)
                     genere_="maschio";
@@ -93,24 +96,33 @@ public class PreTest  extends AppCompatActivity {
     }
     public void test_dislessia(View v) throws IOException {
 
-            if(genere.isSelected()){
+        if(genere.isSelected()){
 
-            }
-        OutputStreamWriter temp = new OutputStreamWriter(this.openFileOutput("generalita.txt", Context.MODE_PRIVATE));
-        temp.write(""+genere_+
+        }
+        OutputStreamWriter dat=null;
+        OutputStreamWriter temp = new OutputStreamWriter(this.openFileOutput("infoUtente.txt", Context.MODE_APPEND));
+        temp.write("\n"+genere_+
                 "\n"+eta_);
         temp.flush();
         temp.close();
-           OutputStreamWriter osw = new OutputStreamWriter(this.openFileOutput("statistiche_test.txt", Context.MODE_APPEND));
-            osw.write("\n---Utente---\nGenere: "+genere_+
-            "\neta: "+eta_);
-            osw.flush();
-            osw.close();
+        OutputStreamWriter osw = new OutputStreamWriter(this.openFileOutput("statistiche_test.txt", Context.MODE_APPEND));
+        osw.write("\n---Utente---\nGenere: "+genere_+
+                "\neta: "+eta_);
+        osw.flush();
+        osw.close();
 
+        dat = new OutputStreamWriter(this.openFileOutput("data.txt", Context.MODE_PRIVATE));
+        data="";
+        Date currentTime = Calendar.getInstance().getTime();
+        data= currentTime.toString();
+        dat.write(""+data);
+        dat.flush();
+        dat.close();
+        Log.d("----------------->G","data: "+data);
 
-            Intent i = new Intent(getApplicationContext(), TestDislessiaActivity.class);
-            startActivity(i);
-            //commento system exit per tenere traccia dei log del sistema in console
+        Intent i = new Intent(getApplicationContext(), TestDislessiaActivity.class);
+        startActivity(i);
+        //commento system exit per tenere traccia dei log del sistema in console
 //        System.exit(0);
 
     }

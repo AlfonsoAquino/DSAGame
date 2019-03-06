@@ -56,12 +56,9 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createStatisticTable = "CREATE TABLE IF NOT EXISTS "+ tableName +"("+keyID+" INTEGER PRIMARY KEY, "+keyGroupId+" TEXT, "+keyIdAlunno+" TEXT, "+keyRegione+" TEXT, "+keyData+" TEXT, " +keyGenere+" TEXT, "+keyEta+" TEXT, "+keylivMax+" TEXT, "+keyErr+" TEXT, "+keySkip+" TEXT, "+keyEsatte+" TEXT, "+keyTempo+" TEXT, "+keyErrLiv1+" TEXT, "+keyErrLiv2+" TEXT, "+keyErrLiv3+" TEXT, "+keyErrLiv4+" TEXT)";
+        String createStatisticTable = "CREATE TABLE IF NOT EXISTS "+ tableName +"("+keyID+" INTEGER PRIMARY KEY, "+keyGroupId+" TEXT, "+keyIdAlunno+" TEXT, "+keyRegione+" TEXT, "+keyData+" TEXT, " +keyGenere+" TEXT, "+keyEta+" TEXT, "+keylivMax+" TEXT, "+keyErr+" TEXT, "+keySkip+" TEXT, "+keyEsatte+" TEXT, "+keyTempo+" TEXT, "+keyErrLiv1+" TEXT, "+keyErrLiv2+" TEXT, "+keyErrLiv3+" TEXT, "+keyErrLiv4+" TEXT, "
+                +" TEXT, "+ keyDomanda1 +" TEXT, "+ keyDomanda2 +" TEXT, "+ keyDomanda3 +" TEXT, " + keyDomanda4 +" TEXT, "+ keyDomanda5 +" TEXT, "+ keyDomanda6 +" TEXT, "+ keyDomanda7 +" TEXT, "+ keyDomanda8 +" TEXT)";
         db.execSQL(createStatisticTable);
-
-        String createGradimentoTable = "CREATE TABLE IF NOT EXISTS "+ tableGradimento +"("+keyID+" INTEGER PRIMARY KEY, "+keyIdAlunno+" TEXT, "+ keyDomanda1 +" TEXT, "+ keyDomanda2 +" TEXT, "+ keyDomanda3 +" TEXT, " + keyDomanda4 +" TEXT, "+ keyDomanda5 +" TEXT, "+ keyDomanda6 +" TEXT, "+ keyDomanda7 +" TEXT, "+ keyDomanda8 +" TEXT)";
-        db.execSQL(createGradimentoTable);
-
         Log.d(TAG, "database table created");
     }
 
@@ -71,16 +68,12 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + tableName );
         onCreate(db);
     }
-    public void onUpgradeGradimento(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        db.execSQL("DROP TABLE IF EXISTS " + tableGradimento);
-        //create new table
-        onCreate(db);
-    }
     /**
      * Storing statistics info
      */
-    public void addStatistic(String groupId, String idAlunno, String regione, String data, String genere, String eta,int numCorrette, int numSbagliate, int numSaltate, int livelloRaggiunto, String tempoImpiegato, int errore1, int errore2, int errore3, int errore4 ){
+    public void addStatistic(String groupId, String idAlunno, String regione, String data, String genere, String eta,String numCorrette, String numSbagliate, String numSaltate, String livelloRaggiunto,
+                             String tempoImpiegato, String errore1, String errore2, String errore3, String errore4, String dm1, String dm2, String dm3, String dm4, String dm5, String dm6, String dm7,String dm8){
 
         SQLiteDatabase db= this.getWritableDatabase();
 
@@ -100,21 +93,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(keyErrLiv2, errore2 );
         values.put(keyErrLiv3, errore3 );
         values.put(keyErrLiv4, errore4 );
-
-        db.insert(tableName, null, values);
-        db.close();
-
-        Log.d(TAG, "New statistic inserted into sqlite");
-    }
-    /**
-     * Storing gradimento info
-     */
-    public void addGradimento(String idAlunno, String dm1, String dm2, String dm3, String dm4,String dm5, String dm6, String dm7, String dm8){
-
-        SQLiteDatabase db= this.getWritableDatabase();
-
-        ContentValues values= new ContentValues();
-        values.put(keyIdAlunno, idAlunno );
         values.put(keyDomanda1, dm1);
         values.put(keyDomanda2, dm2);
         values.put(keyDomanda3, dm3);
@@ -125,11 +103,14 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(keyDomanda8, dm8);
 
 
-        db.insert(tableGradimento, null, values);
+        db.insert(tableName, null, values);
         db.close();
 
         Log.d(TAG, "New statistic inserted into sqlite");
     }
+    /**
+     * Storing gradimento info
+     */
 
     //RETURN METHOD
     public ArrayList<Statistica> getStatisticsDetails() {
@@ -149,16 +130,24 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                     cursor.getString(cursor.getColumnIndex(keyData)),
                     cursor.getString(cursor.getColumnIndex(keyGenere)),
                     cursor.getString(cursor.getColumnIndex(keyEta)),
-                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keyEsatte))),
-                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keyErr))),
-                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keySkip))),
-                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keylivMax))),
-                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keyID))),
+                    cursor.getString(cursor.getColumnIndex(keyEsatte)),
+                    cursor.getString(cursor.getColumnIndex(keyErr)),
+                    cursor.getString(cursor.getColumnIndex(keySkip)),
+                    cursor.getString(cursor.getColumnIndex(keylivMax)),
+                    cursor.getString(cursor.getColumnIndex(keyID)),
                     cursor.getString(cursor.getColumnIndex(keyTempo)),
-                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keyErrLiv1))),
-                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keyErrLiv2))),
-                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keyErrLiv3))),
-                    Integer.parseInt(cursor.getString(cursor.getColumnIndex(keyErrLiv4))));
+                    cursor.getString(cursor.getColumnIndex(keyErrLiv1)),
+                    cursor.getString(cursor.getColumnIndex(keyErrLiv2)),
+                    cursor.getString(cursor.getColumnIndex(keyErrLiv3)),
+                    cursor.getString(cursor.getColumnIndex(keyErrLiv4)),
+                    cursor.getString(cursor.getColumnIndex(keyDomanda1)),
+                    cursor.getString(cursor.getColumnIndex(keyDomanda2)),
+                    cursor.getString(cursor.getColumnIndex(keyDomanda3)),
+                    cursor.getString(cursor.getColumnIndex(keyDomanda4)),
+                    cursor.getString(cursor.getColumnIndex(keyDomanda5)),
+                    cursor.getString(cursor.getColumnIndex(keyDomanda6)),
+                    cursor.getString(cursor.getColumnIndex(keyDomanda7)),
+                    cursor.getString(cursor.getColumnIndex(keyDomanda8)));
             Log.i(TAG,"------------->"+album.toString());
 
             cursor.moveToNext();
@@ -171,38 +160,5 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 //        Log.d(TAG, "Fetching user from Sqlite: " + albums.size());
 
         return statistics;
-    }
-    public ArrayList<Gradimento> getGradimentoDetails() {
-        String selectQuery = "SELECT  * FROM " + tableGradimento;
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        // Move to first row
-        cursor.moveToFirst();
-        Gradimento album;
-        while (!cursor.isAfterLast()){
-
-            album=new Gradimento(
-                    cursor.getString(cursor.getColumnIndex(keyIdAlunno)),
-                    cursor.getString(cursor.getColumnIndex(keyDomanda1)),
-                    cursor.getString(cursor.getColumnIndex(keyDomanda2)),
-                    cursor.getString(cursor.getColumnIndex(keyDomanda3)),
-                    cursor.getString(cursor.getColumnIndex(keyDomanda4)),
-                    cursor.getString(cursor.getColumnIndex(keyDomanda5)),
-                    cursor.getString(cursor.getColumnIndex(keyDomanda6)),
-                    cursor.getString(cursor.getColumnIndex(keyDomanda7)),
-                    cursor.getString(cursor.getColumnIndex(keyDomanda8)));
-            Log.i(TAG,"------------->"+album.toString());
-
-            cursor.moveToNext();
-            gradimento.add(album);
-        }
-
-        cursor.close();
-        db.close();
-        // return user
-//        Log.d(TAG, "Fetching user from Sqlite: " + albums.size());
-
-        return gradimento;
     }
 }

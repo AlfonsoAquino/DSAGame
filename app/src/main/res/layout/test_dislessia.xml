@@ -305,31 +305,36 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/chiave1"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/chiave1"/>
+                android:layout_height="match_parent"/>
+
             <Space
                 android:layout_width="3dp"
                 android:layout_height="match_parent" />
 
             <ImageView
+                android:id="@+id/chiave2"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/chiave2"/>
+                android:layout_height="match_parent"/>
+
             <Space
                 android:layout_width="3dp"
                 android:layout_height="match_parent" />
+
             <ImageView
+                android:id="@+id/chiave3"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/chiave3" />
+                android:layout_height="match_parent" />
+
             <Space
                 android:layout_width="3dp"
                 android:layout_height="match_parent" />
+
             <ImageView
+                android:id="@+id/chiave4"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/chiave4"/>
+                android:layout_height="match_parent" />
 
         </LinearLayout>
     </RelativeLayout>

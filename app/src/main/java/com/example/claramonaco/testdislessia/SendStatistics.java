@@ -21,7 +21,7 @@ import java.util.Map;
 public class SendStatistics extends AsyncTask<String, Integer, Void> {
 
     private final String TAG="StatisticsThread";
-    private String groupId, idAlunno, regione, data,genere, eta,livelloRaggiunto, idPaziente,numCorr,numErr,numSaltate, tempo, errLiv1,errLiv2,errLiv3,errLiv4 ;
+    private String groupId, idAlunno, regione, data,genere, eta,livelloRaggiunto, idPaziente,numCorr,numErr,numSaltate, tempo, errLiv1,errLiv2,errLiv3,errLiv4,domanda1,domanda2,domanda3,domanda4,domanda5,domanda6,domanda7,domanda8;
     private Context context;
     final String PREFS_NAME="check";
 
@@ -54,6 +54,14 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
             errLiv4=strings[12];
             idAlunno=strings[13];
             regione=strings[14];
+            domanda1=strings[15];
+            domanda2=strings[16];
+            domanda3=strings[17];
+            domanda4=strings[18];
+            domanda5=strings[19];
+            domanda6=strings[20];
+            domanda7=strings[21];
+            domanda8=strings[22];
 
             StringRequest strReq = new StringRequest(Request.Method.POST,
                     Config.STATISTICA, new Response.Listener<String>() {
@@ -107,6 +115,14 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
                     params.put("errLiv2",errLiv2);
                     params.put("errLiv3",errLiv3);
                     params.put("errLiv4",errLiv4);
+                    params.put("domanda1",domanda1);
+                    params.put("domanda2",domanda2);
+                    params.put("domanda3",domanda3);
+                    params.put("domanda4",domanda4);
+                    params.put("domanda5",domanda5);
+                    params.put("domanda6",domanda6);
+                    params.put("domanda7",domanda7);
+                    params.put("domanda8",domanda8);
 
                     return params;
                 }
@@ -136,6 +152,14 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
         errLiv2="0";
         errLiv3="0";
         errLiv4="0";
+        domanda1="0";
+        domanda2="0";
+        domanda3="0";
+        domanda4="0";
+        domanda5="0";
+        domanda6="0";
+        domanda7="0";
+        domanda8="0";
     }
 
 }

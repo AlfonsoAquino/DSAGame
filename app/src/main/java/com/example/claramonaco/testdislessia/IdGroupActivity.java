@@ -59,7 +59,7 @@ public class IdGroupActivity extends AppCompatActivity {
 
             OutputStreamWriter temp = null;
             try {
-                temp = new OutputStreamWriter(this.openFileOutput("regione.txt", Context.MODE_PRIVATE));
+                temp = new OutputStreamWriter(this.openFileOutput("infoUtente.txt", Context.MODE_PRIVATE));
                 temp.write(""+spinner.getSelectedItem().toString());
                 temp.flush();
                 temp.close();
@@ -77,8 +77,8 @@ public class IdGroupActivity extends AppCompatActivity {
         if(idAlunno.getText().length()>=1){
             OutputStreamWriter temp = null;
             try {
-                temp = new OutputStreamWriter(this.openFileOutput("idAlunno.txt", Context.MODE_PRIVATE));
-                temp.write(""+idAlunno.getText());
+                temp = new OutputStreamWriter(this.openFileOutput("infoUtente.txt", Context.MODE_APPEND));
+                temp.write("\n"+idAlunno.getText());
                 temp.flush();
                 temp.close();
             } catch (Exception e) {
@@ -98,18 +98,11 @@ public class IdGroupActivity extends AppCompatActivity {
             OutputStreamWriter dat = null;
             try {
 
-                temp = new OutputStreamWriter(this.openFileOutput("groupId.txt", Context.MODE_PRIVATE));
-                temp.write(""+groupId.getText());
+                temp = new OutputStreamWriter(this.openFileOutput("infoUtente.txt", Context.MODE_APPEND));
+                temp.write("\n"+groupId.getText());
                 temp.flush();
                 temp.close();
-                dat = new OutputStreamWriter(this.openFileOutput("data.txt", Context.MODE_PRIVATE));
-                data="";
-                Date currentTime = Calendar.getInstance().getTime();
-                data= currentTime.toString();
-                dat.write(""+data);
-                dat.flush();
-                dat.close();
-                Log.d("----------------->G","data: "+data);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

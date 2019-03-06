@@ -61,7 +61,7 @@ public class SendGradimento extends AsyncTask<String, Integer, Void> {
 
                             Log.i(TAG, "------------>ok");
                             SQLiteHandler db= new SQLiteHandler(context);
-                            db.onUpgradeGradimento(db.getWritableDatabase(),1,2);
+//                            db.onUpgradeGradimento(db.getWritableDatabase(),1,2);
                         } else {
 
                             Log.i(TAG, "------------>erroreCaricamentoGradimento");

@@ -224,7 +224,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             reader = new BufferedReader(
                     new InputStreamReader(getAssets().open("bisillabe_trisillabe_complesse.txt"), "UTF-8"));
 
-            img2.setImageResource(R.drawable.chiave2);
+//            img2.setImageResource(R.drawable.chiave2);
 
             //leggo i distrattori
             readerDistrattori = new BufferedReader(
@@ -242,7 +242,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             reader = new BufferedReader(
                     new InputStreamReader(getAssets().open("diagrammi_ortografici.txt"), "UTF-8"));
 
-            img3.setImageResource(R.drawable.chiave3);
+//            img3.setImageResource(R.drawable.chiave3);
 
             //leggo i distrattori
             readerDistrattori = new BufferedReader(
@@ -261,82 +261,93 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                 ore++;
             }
             try {
-                InputStream inputStream = openFileInput("generalita.txt");
-                InputStream gi = openFileInput("groupId.txt");
-                InputStream idA = openFileInput("idAlunno.txt");
-                InputStream reg = openFileInput("regione.txt");
-                InputStream dat = openFileInput("data.txt");
-                if (inputStream != null) {
-                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                    String tempString = "";
-                    StringBuilder stringBuilder = new StringBuilder();
-                    while ((tempString = bufferedReader.readLine()) != null) {
-                        if(tempString.equalsIgnoreCase("maschio")||tempString.equalsIgnoreCase("femmina")){
-                            genere=tempString;
-                        }else if(tempString.equalsIgnoreCase("minore di 6")||tempString.equalsIgnoreCase("piu di 9") ||tempString.equalsIgnoreCase("6")||tempString.equalsIgnoreCase("7")||tempString.equalsIgnoreCase("8")||tempString.equalsIgnoreCase("9")){
-                            Log.d("----->>", "Leggieta: "+tempString);
-                            eta=tempString;
-                        }
-
-                    }
-                    inputStream.close();
-                }else{
-                    genere="non definito";
-                    eta="non definita";
-                }
-                if(idA!=null){
-                    InputStreamReader inputStreamReader = new InputStreamReader(idA);
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                    String tempString = "";
-                    StringBuilder stringBuilder = new StringBuilder();
-                    while ((tempString = bufferedReader.readLine()) != null) {
-                        idAlunno=tempString;
-                    }
-                    idA.close();
-                }else{
-                    idAlunno="non definito";
-                }
-                if(reg!=null){
-                    InputStreamReader inputStreamReader = new InputStreamReader(reg);
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                    String tempString = "";
-                    StringBuilder stringBuilder = new StringBuilder();
-                    while ((tempString = bufferedReader.readLine()) != null) {
-                        regione=tempString;
-                    }
-                    reg.close();
-                }else{
-                    regione="non definito";
-                }
-                if(gi!=null){
-                    InputStreamReader inputStreamReader = new InputStreamReader(gi);
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                    String tempString = "";
-                    StringBuilder stringBuilder = new StringBuilder();
-                    while ((tempString = bufferedReader.readLine()) != null) {
-                        groupId=tempString;
-                    }
-                    gi.close();
-                }else{
-                    groupId="non definito";
-                }
-                if(dat!=null){
-                    InputStreamReader inputStreamReader = new InputStreamReader(dat);
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                    String tempString = "";
-                    StringBuilder stringBuilder = new StringBuilder();
-                    while ((tempString = bufferedReader.readLine()) != null) {
-                        data=tempString;
-                    }
-                    dat.close();
-                }else{
-                    data="non definito";
-                }
+//                InputStream inputStream = openFileInput("generalita.txt");
+//                InputStream gi = openFileInput("groupId.txt");
+//                InputStream idA = openFileInput("idAlunno.txt");
+//                InputStream reg = openFileInput("regione.txt");
+//                InputStream dat = openFileInput("data.txt");
+//                if (inputStream != null) {
+//                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+//                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+//                    String tempString = "";
+//                    StringBuilder stringBuilder = new StringBuilder();
+//                    while ((tempString = bufferedReader.readLine()) != null) {
+//                        if(tempString.equalsIgnoreCase("maschio")||tempString.equalsIgnoreCase("femmina")){
+//                            genere=tempString;
+//                        }else if(tempString.equalsIgnoreCase("minore di 6")||tempString.equalsIgnoreCase("piu di 9") ||tempString.equalsIgnoreCase("6")||tempString.equalsIgnoreCase("7")||tempString.equalsIgnoreCase("8")||tempString.equalsIgnoreCase("9")){
+//                            Log.d("----->>", "Leggieta: "+tempString);
+//                            eta=tempString;
+//                        }
+//
+//                    }
+//                    inputStream.close();
+//                }else{
+//                    genere="non definito";
+//                    eta="non definita";
+//                }
+//                if(idA!=null){
+//                    InputStreamReader inputStreamReader = new InputStreamReader(idA);
+//                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+//                    String tempString = "";
+//                    StringBuilder stringBuilder = new StringBuilder();
+//                    while ((tempString = bufferedReader.readLine()) != null) {
+//                        idAlunno=tempString;
+//                    }
+//                    idA.close();
+//                }else{
+//                    idAlunno="non definito";
+//                }
+//                if(reg!=null){
+//                    InputStreamReader inputStreamReader = new InputStreamReader(reg);
+//                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+//                    String tempString = "";
+//                    StringBuilder stringBuilder = new StringBuilder();
+//                    while ((tempString = bufferedReader.readLine()) != null) {
+//                        regione=tempString;
+//                    }
+//                    reg.close();
+//                }else{
+//                    regione="non definito";
+//                }
+//                if(gi!=null){
+//                    InputStreamReader inputStreamReader = new InputStreamReader(gi);
+//                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+//                    String tempString = "";
+//                    StringBuilder stringBuilder = new StringBuilder();
+//                    while ((tempString = bufferedReader.readLine()) != null) {
+//                        groupId=tempString;
+//                    }
+//                    gi.close();
+//                }else{
+//                    groupId="non definito";
+//                }
+//                if(dat!=null){
+//                    InputStreamReader inputStreamReader = new InputStreamReader(dat);
+//                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+//                    String tempString = "";
+//                    StringBuilder stringBuilder = new StringBuilder();
+//                    while ((tempString = bufferedReader.readLine()) != null) {
+//                        data=tempString;
+//                    }
+//                    dat.close();
+//                }else{
+//                    data="non definito";
+//                }
 //                db.onUpgrade(db.getWritableDatabase(),1,1);
-                db.addStatistic(groupId,idAlunno,regione,data,genere,eta,esatte, sbagliate, num_salt,livelloMax,minuti+":"+secondi,errori_l1,errori_l2,errori_l3,errori_l4);
+//                db.addStatistic(groupId,idAlunno,regione,data,genere,eta,esatte, sbagliate, num_salt,livelloMax,minuti+":"+secondi,errori_l1,errori_l2,errori_l3,errori_l4);
 //                new SendStatistics(getApplicationContext()).execute(genere,eta,""+livelloMax,""+sbagliate,""+num_salt,""+esatte,""+minuti+":"+secondi,""+errori_l1,""+errori_l2,""+errori_l3,""+errori_l4);
+                OutputStreamWriter ris = new OutputStreamWriter(this.openFileOutput("risultati.txt", Context.MODE_PRIVATE));
+                ris.write(""+livelloMax+
+                        "\n"+sbagliate+
+                        "\n"+num_salt+
+                        "\n"+esatte+
+                        "\n"+minuti+":"+secondi+
+                        "\n"+errori_l1+
+                        "\n"+errori_l2+
+                        "\n"+errori_l3+
+                        "\n"+errori_l4);
 
+                //provare a stampare l'intero file da qui per vedere se il problema è qui o in postTest
                 OutputStreamWriter osw = new OutputStreamWriter(this.openFileOutput("statistiche_test.txt", Context.MODE_APPEND));
                 osw.write("\n\n\n---Risultato Test---" +
                         "\nLivello raggiunto: " + livello +
@@ -490,13 +501,13 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             num_corrette++;
             Log.d("-------------------<>", "Controlliamo: "+num_corrette);
             if(img1.getDrawable()==null && esatte==1) {
-                img1.setImageResource(R.drawable.chiave1);
+                img1.setImageResource(R.drawable.chiavebronzo);
             }else if(img1.getDrawable()!=null && img2.getDrawable()==null){
-                img2.setImageResource(R.drawable.chiave2);
+                img2.setImageResource(R.drawable.chiaveargento);
             }else if(img3.getDrawable()==null && img4.getDrawable()==null){
-                img3.setImageResource(R.drawable.chiave3);
+                img3.setImageResource(R.drawable.chiaveoro);
             }else if(img3.getDrawable()!=null && img4.getDrawable()==null){
-                img4.setImageResource(R.drawable.chiave4);
+                img4.setImageResource(R.drawable.chiaveverde);
             }
         } else {
             sbagliate++;
