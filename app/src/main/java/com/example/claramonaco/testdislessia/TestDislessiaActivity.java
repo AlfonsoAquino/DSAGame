@@ -54,7 +54,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     private int controlla_rip[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private boolean flag;
 
-    private String genere, idAlunno, regione;
+    private String genere, idAlunno, regione,temp;
     private String eta;
     private BufferedReader in;
     private int livelloMax;
@@ -346,8 +346,9 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                         "\n"+errori_l2+
                         "\n"+errori_l3+
                         "\n"+errori_l4);
+                ris.flush();
+                ris.close();
 
-                //provare a stampare l'intero file da qui per vedere se il problema è qui o in postTest
                 OutputStreamWriter osw = new OutputStreamWriter(this.openFileOutput("statistiche_test.txt", Context.MODE_APPEND));
                 osw.write("\n\n\n---Risultato Test---" +
                         "\nLivello raggiunto: " + livello +
@@ -365,6 +366,16 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                 osw.flush();
                 osw.close();
 
+                InputStream stat = openFileInput("risultati.txt");
+                InputStreamReader inputStreamReader = new InputStreamReader(stat);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String tempString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+                Log.d("-------->RISU", "risposta: "+bufferedReader.readLine());
+                while ((temp = bufferedReader.readLine()) != null) {
+                    Log.d("-------->RISU", "risposta: "+temp);
+                }
+                stat.close();
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
