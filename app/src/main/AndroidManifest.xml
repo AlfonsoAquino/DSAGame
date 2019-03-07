@@ -29,6 +29,7 @@
         android:roundIcon="@drawable/dsa_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".TestAscoltoActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="sensorPortrait">

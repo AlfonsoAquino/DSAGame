@@ -75,11 +75,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void test_dislessia(View v) {
         Intent i = new Intent(getApplicationContext(), IdGroupActivity.class);
+        i.putExtra("tipoTest","lettura");
         startActivity(i);
     }
 
     public void test_ascolto(View v) {
         Intent i = new Intent(getApplicationContext(), IdGroupActivity.class);
+        i.putExtra("tipoTest","ascolto");
         startActivity(i);
     }
 

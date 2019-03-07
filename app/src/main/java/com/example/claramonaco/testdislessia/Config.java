@@ -21,12 +21,12 @@ public class Config {
     /**
      * le statistiche sono reperite all'interno dei vari file attraverso l'uso di un array che viene riempito secondo questo ordine
      * struttura file infoUtente
-     * regione      0
-     * idAlunno     1
-     * groupId      2
-     * genere       3
-     * eta          4
-     * tipoTest     5
+     * tipoTest     0
+     * regione      1
+     * idAlunno     2
+     * groupId      3
+     * genere       4
+     * eta          5
      *
      * struttura file risultati
      * livelloMax   0

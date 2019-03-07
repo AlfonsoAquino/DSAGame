@@ -25,7 +25,7 @@ import java.util.Date;
 public class PreTest  extends AppCompatActivity {
 
     private RadioGroup genere, eta;
-    private String genere_,eta_,data;
+    private String genere_,eta_,data,tipoTest="";
     @SuppressLint("WrongViewCast")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +33,7 @@ public class PreTest  extends AppCompatActivity {
 
         genere= findViewById(R.id.genere_b);
         eta= findViewById(R.id.eta_b);
-
-
+        tipoTest = getIntent().getStringExtra("tipoTest");
     }
     public void onRadioButtonClickedEta(View view) {
         // Is the button now checked?
@@ -102,8 +101,7 @@ public class PreTest  extends AppCompatActivity {
         OutputStreamWriter dat=null;
         OutputStreamWriter temp = new OutputStreamWriter(this.openFileOutput("infoUtente.txt", Context.MODE_APPEND));
         temp.write("\n"+genere_+
-                "\n"+eta_+
-                "\nlettura");
+                "\n"+eta_);
         temp.flush();
         temp.close();
         OutputStreamWriter osw = new OutputStreamWriter(this.openFileOutput("statistiche_test.txt", Context.MODE_APPEND));
@@ -121,8 +119,14 @@ public class PreTest  extends AppCompatActivity {
         dat.close();
         Log.d("----------------->G","data: "+data);
 
-        Intent i = new Intent(getApplicationContext(), TestDislessiaActivity.class);
-        startActivity(i);
+        if(tipoTest.equalsIgnoreCase("lettura")) {
+            Intent i = new Intent(getApplicationContext(), TestDislessiaActivity.class);
+            startActivity(i);
+        }else if(tipoTest.equalsIgnoreCase("ascolto")){
+            //nuova activity per il test ascolto poi semplicemente passo ai post test che sono uguali e se non erro non ci sono cose che riguardano il tipo di test
+            Intent i = new Intent(getApplicationContext(), TestAscoltoActivity.class);
+            startActivity(i);
+        }
         //commento system exit per tenere traccia dei log del sistema in console
 //        System.exit(0);
 

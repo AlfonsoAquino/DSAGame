@@ -32,7 +32,7 @@ import java.util.TimerTask;
 
 import me.grantland.widget.AutofitTextView;
 
-public class TestDislessiaActivity extends AppCompatActivity implements View.OnClickListener,
+public class TestAscoltoActivity extends AppCompatActivity implements View.OnClickListener,
         SeekBar.OnSeekBarChangeListener,
         TextToSpeech.OnInitListener,
         AdapterView.OnItemSelectedListener {
@@ -76,7 +76,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_dislessia);
+        setContentView(R.layout.activity_test_ascolto);
         et = (AutofitTextView) findViewById(R.id.frase_da_copiare);
         et1 = (AutofitTextView) findViewById(R.id.textwrite2);
         audio = (Button) findViewById(R.id.ascolta_audio);
@@ -299,6 +299,17 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                         "\n\n\n\n");
                 osw.flush();
                 osw.close();
+
+                InputStream stat = openFileInput("risultati.txt");
+                InputStreamReader inputStreamReader = new InputStreamReader(stat);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String tempString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+                Log.d("-------->RISU", "risposta: "+bufferedReader.readLine());
+                while ((temp = bufferedReader.readLine()) != null) {
+                    Log.d("-------->RISU", "risposta: "+temp);
+                }
+                stat.close();
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

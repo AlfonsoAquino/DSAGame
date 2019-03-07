@@ -20,7 +20,7 @@ import java.util.List;
 public class IdGroupActivity extends AppCompatActivity {
 
     private EditText groupId, idAlunno;
-    private String data, regione, identAlunno;
+    private String data, regione, identAlunno, tipoTest="";
     private LinearLayout spinnerLayout, layoutGroup, layoutAlunno;
     private Spinner spinner;
 
@@ -28,6 +28,8 @@ public class IdGroupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_id_group);
+
+        tipoTest = getIntent().getStringExtra("tipoTest");
 
         spinnerLayout = (LinearLayout) findViewById(R.id.layoutSpinner);
         layoutGroup = (LinearLayout) findViewById(R.id.layoutGroupId);
@@ -39,6 +41,7 @@ public class IdGroupActivity extends AppCompatActivity {
         data="";
         regione="";
         identAlunno="";
+
 
 //        layoutAlunno.setVisibility(View.GONE);
         layoutGroup.setVisibility(View.GONE);
@@ -61,8 +64,9 @@ public class IdGroupActivity extends AppCompatActivity {
             try {
                 temp = new OutputStreamWriter(this.openFileOutput("infoUtente.txt", Context.MODE_PRIVATE));
                 //inserimento in posizione di un idAlunno fittizzio in modo da limitare al minimo le modifiche apportate al codice
-                temp.write(""+spinner.getSelectedItem().toString()
-                +"\n fittizio");
+                temp.write(""+tipoTest
+                        +"\n"+spinner.getSelectedItem().toString()
+                        +"\nfittizio");
                 temp.flush();
                 temp.close();
             } catch (Exception e) {
@@ -110,6 +114,7 @@ public class IdGroupActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             Intent i = new Intent(getApplicationContext(), PreTest.class);
+            i.putExtra("tipoTest",tipoTest);
             startActivity(i);
         }
     }
