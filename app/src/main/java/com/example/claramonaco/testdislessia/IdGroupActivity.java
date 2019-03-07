@@ -33,14 +33,14 @@ public class IdGroupActivity extends AppCompatActivity {
         layoutGroup = (LinearLayout) findViewById(R.id.layoutGroupId);
         groupId = (EditText) findViewById(R.id.groupId);
         spinner = (Spinner) findViewById(R.id.spinner);
-        idAlunno = (EditText) findViewById(R.id.idAlunno);
-        layoutAlunno = (LinearLayout) findViewById(R.id.layoutIdAlunno);
+//        idAlunno = (EditText) findViewById(R.id.idAlunno);
+//        layoutAlunno = (LinearLayout) findViewById(R.id.layoutIdAlunno);
 
         data="";
         regione="";
         identAlunno="";
 
-        layoutAlunno.setVisibility(View.GONE);
+//        layoutAlunno.setVisibility(View.GONE);
         layoutGroup.setVisibility(View.GONE);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -60,14 +60,17 @@ public class IdGroupActivity extends AppCompatActivity {
             OutputStreamWriter temp = null;
             try {
                 temp = new OutputStreamWriter(this.openFileOutput("infoUtente.txt", Context.MODE_PRIVATE));
-                temp.write(""+spinner.getSelectedItem().toString());
+                //inserimento in posizione di un idAlunno fittizzio in modo da limitare al minimo le modifiche apportate al codice
+                temp.write(""+spinner.getSelectedItem().toString()
+                +"\n fittizio");
                 temp.flush();
                 temp.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
             spinnerLayout.setVisibility(View.GONE);
-            layoutAlunno.setVisibility(View.VISIBLE);
+            //mettere layoutAlunno se si vuole aggiungere un idAlunno manualmente
+            layoutGroup.setVisibility(View.VISIBLE);
         }
     }
 

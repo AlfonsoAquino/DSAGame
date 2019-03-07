@@ -3,6 +3,7 @@ package com.example.claramonaco.testdislessia;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AlertDialog;
@@ -26,6 +27,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import me.grantland.widget.AutofitTextView;
 
@@ -62,10 +65,14 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     private String groupId, data;
     private long startTime, totalTime, intermedio,fine;
     private int secondi, minuti, ore;
+    private final static int DELAY =3000;
     SQLiteHandler db;
+    MediaPlayer mp;
     ImageView alertImage;
     int rip=0;
-    AlertDialog mboh;
+    int alertRip=0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +84,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         img1= (ImageView) findViewById(R.id.chiave1);
         img2= (ImageView) findViewById(R.id.chiave2);
         img3= (ImageView) findViewById(R.id.chiave3);
-        img4= (ImageView) findViewById(R.id.chiave4);
+//        img4= (ImageView) findViewById(R.id.chiave4);
         b1 = (Button) findViewById(R.id.uno_bnt);
         b2 = (Button) findViewById(R.id.due_bnt);
         b3 = (Button) findViewById(R.id.tre_bnt);
@@ -96,6 +103,9 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
 //        alertImage=(ImageView) findViewById(R.id.alertImage);
 //        alertFumetto(R.drawable.alertporta);
 
+        //riproduzione del cigolio della porta
+        mp = MediaPlayer.create(this,R.raw.woodendoor );
+        mp.setLooping(false);
 
         flag = true;
 
@@ -204,7 +214,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                     new InputStreamReader(getAssets().open("trisillabe_piane.txt"), "UTF-8"));
 
             if(rip==0)
-                intermedio = alertFumetto(R.drawable.alertporta);
+                alertFumetto(R.drawable.alertporta);
             rip=1;
 
 
@@ -218,13 +228,12 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                 livelloMax=livello;
             }
             if(rip==1)
-                intermedio += alertFumetto(R.drawable.alertporta);
+                alertFumetto(R.drawable.alertporta);
             rip=2;
             //leggo la frase
             reader = new BufferedReader(
                     new InputStreamReader(getAssets().open("bisillabe_trisillabe_complesse.txt"), "UTF-8"));
 
-//            img2.setImageResource(R.drawable.chiave2);
 
             //leggo i distrattori
             readerDistrattori = new BufferedReader(
@@ -235,14 +244,12 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                 livelloMax=livello;
             }
             if(rip==2)
-                intermedio += alertFumetto(R.drawable.alertporta);
+                alertFumetto(R.drawable.alertporta);
             rip=3;
             //for(i=0;i<=21;i++)controlla_rip[i]=0;
             //leggo la frase
             reader = new BufferedReader(
                     new InputStreamReader(getAssets().open("diagrammi_ortografici.txt"), "UTF-8"));
-
-//            img3.setImageResource(R.drawable.chiave3);
 
             //leggo i distrattori
             readerDistrattori = new BufferedReader(
@@ -250,7 +257,8 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         }
         if (num_prove == 22) {
 
-            totalTime = System.currentTimeMillis() - startTime - intermedio;
+            totalTime = System.currentTimeMillis() - startTime - (alertRip * DELAY);
+            Log.d("-------------AAAS<>", "alertVisti: "+alertRip+"------>"+alertRip*DELAY);
             secondi = (int) (totalTime / 1000);
             while (secondi >= 60) {
                 minuti++;
@@ -261,81 +269,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                 ore++;
             }
             try {
-//                InputStream inputStream = openFileInput("generalita.txt");
-//                InputStream gi = openFileInput("groupId.txt");
-//                InputStream idA = openFileInput("idAlunno.txt");
-//                InputStream reg = openFileInput("regione.txt");
-//                InputStream dat = openFileInput("data.txt");
-//                if (inputStream != null) {
-//                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-//                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//                    String tempString = "";
-//                    StringBuilder stringBuilder = new StringBuilder();
-//                    while ((tempString = bufferedReader.readLine()) != null) {
-//                        if(tempString.equalsIgnoreCase("maschio")||tempString.equalsIgnoreCase("femmina")){
-//                            genere=tempString;
-//                        }else if(tempString.equalsIgnoreCase("minore di 6")||tempString.equalsIgnoreCase("piu di 9") ||tempString.equalsIgnoreCase("6")||tempString.equalsIgnoreCase("7")||tempString.equalsIgnoreCase("8")||tempString.equalsIgnoreCase("9")){
-//                            Log.d("----->>", "Leggieta: "+tempString);
-//                            eta=tempString;
-//                        }
-//
-//                    }
-//                    inputStream.close();
-//                }else{
-//                    genere="non definito";
-//                    eta="non definita";
-//                }
-//                if(idA!=null){
-//                    InputStreamReader inputStreamReader = new InputStreamReader(idA);
-//                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//                    String tempString = "";
-//                    StringBuilder stringBuilder = new StringBuilder();
-//                    while ((tempString = bufferedReader.readLine()) != null) {
-//                        idAlunno=tempString;
-//                    }
-//                    idA.close();
-//                }else{
-//                    idAlunno="non definito";
-//                }
-//                if(reg!=null){
-//                    InputStreamReader inputStreamReader = new InputStreamReader(reg);
-//                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//                    String tempString = "";
-//                    StringBuilder stringBuilder = new StringBuilder();
-//                    while ((tempString = bufferedReader.readLine()) != null) {
-//                        regione=tempString;
-//                    }
-//                    reg.close();
-//                }else{
-//                    regione="non definito";
-//                }
-//                if(gi!=null){
-//                    InputStreamReader inputStreamReader = new InputStreamReader(gi);
-//                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//                    String tempString = "";
-//                    StringBuilder stringBuilder = new StringBuilder();
-//                    while ((tempString = bufferedReader.readLine()) != null) {
-//                        groupId=tempString;
-//                    }
-//                    gi.close();
-//                }else{
-//                    groupId="non definito";
-//                }
-//                if(dat!=null){
-//                    InputStreamReader inputStreamReader = new InputStreamReader(dat);
-//                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//                    String tempString = "";
-//                    StringBuilder stringBuilder = new StringBuilder();
-//                    while ((tempString = bufferedReader.readLine()) != null) {
-//                        data=tempString;
-//                    }
-//                    dat.close();
-//                }else{
-//                    data="non definito";
-//                }
-//                db.onUpgrade(db.getWritableDatabase(),1,1);
-//                db.addStatistic(groupId,idAlunno,regione,data,genere,eta,esatte, sbagliate, num_salt,livelloMax,minuti+":"+secondi,errori_l1,errori_l2,errori_l3,errori_l4);
-//                new SendStatistics(getApplicationContext()).execute(genere,eta,""+livelloMax,""+sbagliate,""+num_salt,""+esatte,""+minuti+":"+secondi,""+errori_l1,""+errori_l2,""+errori_l3,""+errori_l4);
+
                 OutputStreamWriter ris = new OutputStreamWriter(this.openFileOutput("risultati.txt", Context.MODE_PRIVATE));
                 ris.write(""+livelloMax+
                         "\n"+sbagliate+
@@ -457,31 +391,35 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     }
 
 
-    public long alertFumetto(int liv){
-        final long tempoStart=System.currentTimeMillis();
-        fine =0;
+    public void alertFumetto(int liv){
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        alertRip++;
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogLayout = inflater.inflate(R.layout.customized_dialog,  null);
         alertImage=(ImageView) dialogLayout.findViewById(R.id.alertImage);
         alertImage.setImageResource(liv);
-        alertImage.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                fine = System.currentTimeMillis() - tempoStart;
-                img1.setImageDrawable(null);
-                img2.setImageDrawable(null);
-                img3.setImageDrawable(null);
-                img4.setImageDrawable(null);
-                mboh.dismiss();
-            }
-        });
-
         builder.setView(dialogLayout);
-        mboh=builder.show();
-        return fine;
+        builder.setCancelable(true);
+
+        final AlertDialog closedialog= builder.create();
+
+        closedialog.show();
+        mp.start();
+        final Timer timer2 = new Timer();
+        timer2.schedule(new TimerTask() {
+            public void run() {
+                closedialog.dismiss();
+                timer2.cancel(); //this will cancel the timer of the system
+                mp.stop();
+            }
+        }, DELAY);
+        img1.setImageDrawable(null);
+        img2.setImageDrawable(null);
+        img3.setImageDrawable(null);
+
     }
 
     public void risultatoTest(View v) {
@@ -515,11 +453,12 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                 img1.setImageResource(R.drawable.chiavebronzo);
             }else if(img1.getDrawable()!=null && img2.getDrawable()==null){
                 img2.setImageResource(R.drawable.chiaveargento);
-            }else if(img3.getDrawable()==null && img4.getDrawable()==null){
+            }else if(img3.getDrawable()==null ){
                 img3.setImageResource(R.drawable.chiaveoro);
-            }else if(img3.getDrawable()!=null && img4.getDrawable()==null){
-                img4.setImageResource(R.drawable.chiaveverde);
             }
+//            else if(img3.getDrawable()!=null && img4.getDrawable()==null){
+//                img4.setImageResource(R.drawable.chiaveverde);
+//            }
         } else {
             sbagliate++;
             if (num_corrette == 0) {
