@@ -42,12 +42,23 @@
                 android:onClick="test_dislessia"
                 android:text="Test lettura"
                 android:textColor="#fff" />
+            <Button
+                android:id="@+id/btm_test_ascolto"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btm_test_dislessia"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_normal_orange"
+                android:onClick="test_ascolto"
+                android:text="Test ascolto"
+                android:textColor="#fff" />
 
             <Button
                 android:id="@+id/btm_esercizi"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/btm_test_dislessia"
+                android:layout_below="@id/btm_test_ascolto"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/button_normal_orange"

@@ -53,7 +53,7 @@ public class PostTest extends AppCompatActivity {
         idAlunno="";
         domande= new String[9];
 
-        infoUtente = new String[5];
+        infoUtente = new String[6];
         risu = new String[9];
 
         try {
@@ -168,7 +168,7 @@ public class PostTest extends AppCompatActivity {
                 data="non definito";
             }
 
-             db.addStatistic(""+infoUtente[2],""+infoUtente[1],""+infoUtente[0],""+data,""+infoUtente[3],""+infoUtente[4],
+             db.addStatistic(""+infoUtente[2],""+infoUtente[5],""+infoUtente[1],""+infoUtente[0],""+data,""+infoUtente[3],""+infoUtente[4],
                      ""+risu[3],""+risu[1],""+risu[2],""+risu[1],""+risu[4],""+risu[5],""+risu[6],
                       ""+risu[7],""+risu[8], ""+domande[1],""+domande[2],""+domande[3],""+domande[4],""+domande[5],""+domande[6],
                      ""+domande[7],""+domande[8]);

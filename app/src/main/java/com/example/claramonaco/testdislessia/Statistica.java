@@ -3,6 +3,7 @@ package com.example.claramonaco.testdislessia;
 public class Statistica {
 
     private String groupId;
+    private String tipoTest;
     private String idAlunno;
     private String regione;
     private String data;
@@ -30,8 +31,9 @@ public class Statistica {
     public Statistica() {
     }
 
-    public Statistica(String groupId, String idAlunno, String regione, String data, String genere, String eta, String numCorrette, String numSbagliate, String numSaltate, String livelloRaggiunto, String idPaziente, String tempoImpiegato, String errore1, String errore2, String errore3, String errore4, String domanda1, String domanda2, String domanda3, String domanda4, String domanda5, String domanda6, String domanda7, String domanda8) {
+    public Statistica(String groupId, String tipoTest, String idAlunno, String regione, String data, String genere, String eta, String numCorrette, String numSbagliate, String numSaltate, String livelloRaggiunto, String idPaziente, String tempoImpiegato, String errore1, String errore2, String errore3, String errore4, String domanda1, String domanda2, String domanda3, String domanda4, String domanda5, String domanda6, String domanda7, String domanda8) {
         this.groupId = groupId;
+        this.tipoTest = tipoTest;
         this.idAlunno = idAlunno;
         this.regione = regione;
         this.data = data;
@@ -63,6 +65,14 @@ public class Statistica {
 
     public void setGroupId(String groupId) {
         this.groupId = groupId;
+    }
+
+    public String getTipoTest() {
+        return tipoTest;
+    }
+
+    public void setTipoTest(String tipoTest) {
+        this.tipoTest = tipoTest;
     }
 
     public String getIdAlunno() {
@@ -253,6 +263,7 @@ public class Statistica {
     public String toString() {
         return "Statistica{" +
                 "groupId='" + groupId + '\'' +
+                ", tipoTest='" + tipoTest + '\'' +
                 ", idAlunno='" + idAlunno + '\'' +
                 ", regione='" + regione + '\'' +
                 ", data='" + data + '\'' +
@@ -278,5 +289,4 @@ public class Statistica {
                 ", domanda8='" + domanda8 + '\'' +
                 '}';
     }
-
 }

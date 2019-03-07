@@ -102,7 +102,8 @@ public class PreTest  extends AppCompatActivity {
         OutputStreamWriter dat=null;
         OutputStreamWriter temp = new OutputStreamWriter(this.openFileOutput("infoUtente.txt", Context.MODE_APPEND));
         temp.write("\n"+genere_+
-                "\n"+eta_);
+                "\n"+eta_+
+                "\nlettura");
         temp.flush();
         temp.close();
         OutputStreamWriter osw = new OutputStreamWriter(this.openFileOutput("statistiche_test.txt", Context.MODE_APPEND));

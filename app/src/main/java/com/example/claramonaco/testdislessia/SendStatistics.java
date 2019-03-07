@@ -21,7 +21,7 @@ import java.util.Map;
 public class SendStatistics extends AsyncTask<String, Integer, Void> {
 
     private final String TAG="StatisticsThread";
-    private String groupId, idAlunno, regione, data,genere, eta,livelloRaggiunto, idPaziente,numCorr,numErr,numSaltate, tempo, errLiv1,errLiv2,errLiv3,errLiv4,domanda1,domanda2,domanda3,domanda4,domanda5,domanda6,domanda7,domanda8;
+    private String groupId,tipoTest, idAlunno, regione, data,genere, eta,livelloRaggiunto, idPaziente,numCorr,numErr,numSaltate, tempo, errLiv1,errLiv2,errLiv3,errLiv4,domanda1,domanda2,domanda3,domanda4,domanda5,domanda6,domanda7,domanda8;
     private Context context;
     final String PREFS_NAME="check";
 
@@ -62,6 +62,7 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
             domanda6=strings[20];
             domanda7=strings[21];
             domanda8=strings[22];
+            tipoTest=strings[23];
 
             StringRequest strReq = new StringRequest(Request.Method.POST,
                     Config.STATISTICA, new Response.Listener<String>() {
@@ -101,6 +102,7 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
                     // Posting params to login url
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("groupId",groupId);
+                    params.put("tipoTest",tipoTest);
                     params.put("idAlunno",idAlunno);
                     params.put("regione", regione);
                     params.put("data",data);
@@ -137,6 +139,7 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
     protected void onPreExecute(){
 
         groupId="0";
+        tipoTest="0";
         idAlunno="0";
         regione="0";
         data ="0";

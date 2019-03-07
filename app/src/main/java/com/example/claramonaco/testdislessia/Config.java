@@ -26,6 +26,7 @@ public class Config {
      * groupId      2
      * genere       3
      * eta          4
+     * tipoTest     5
      *
      * struttura file risultati
      * livelloMax   0

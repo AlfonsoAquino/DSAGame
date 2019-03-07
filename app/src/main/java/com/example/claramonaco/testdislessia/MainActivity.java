@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("asdadadadad....", "-------------->" + a.toString());
                 new SendStatistics(getApplicationContext()).execute("" + a.getGroupId(), "" + a.getData(), "" + a.getGenere(), "" + a.getEta(), "" + a.getLivelloRaggiunto(), "" + a.getNumSbagliate(),"" + a.getNumSaltate(),"" + a.getNumCorrette(),"" + a.getTempoImpiegato(),
                         "" + a.getErrore1(),"" + a.getErrore2(),"" + a.getErrore3(),"" + a.getErrore4(),"" + a.getIdAlunno(),"" + a.getRegione(),""+a.getDomanda1(),
-                        ""+a.getDomanda2(),""+a.getDomanda3(),""+a.getDomanda4(),""+a.getDomanda5(),""+a.getDomanda6(),""+a.getDomanda7(),""+a.getDomanda8());
+                        ""+a.getDomanda2(),""+a.getDomanda3(),""+a.getDomanda4(),""+a.getDomanda5(),""+a.getDomanda6(),""+a.getDomanda7(),""+a.getDomanda8(),""+a.getTipoTest());
 
             }
         }
@@ -74,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void test_dislessia(View v) {
+        Intent i = new Intent(getApplicationContext(), IdGroupActivity.class);
+        startActivity(i);
+    }
+
+    public void test_ascolto(View v) {
         Intent i = new Intent(getApplicationContext(), IdGroupActivity.class);
         startActivity(i);
     }
