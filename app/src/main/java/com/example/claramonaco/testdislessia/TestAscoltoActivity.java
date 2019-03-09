@@ -71,7 +71,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
     ImageView alertImage;
     int rip=0;
     int alertRip=0;
-
+    AlertDialog closedialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -214,7 +214,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
                     new InputStreamReader(getAssets().open("trisillabe_piane.txt"), "UTF-8"));
 
             if(rip==0)
-                alertFumetto(R.drawable.alertporta);
+                alertFumetto(R.drawable.alertporta,System.currentTimeMillis());
             rip=1;
 
 
@@ -228,7 +228,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
                 livelloMax=livello;
             }
             if(rip==1)
-                alertFumetto(R.drawable.alertporta);
+                alertFumetto(R.drawable.alertporta,System.currentTimeMillis());
             rip=2;
             //leggo la frase
             reader = new BufferedReader(
@@ -244,7 +244,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
                 livelloMax=livello;
             }
             if(rip==2)
-                alertFumetto(R.drawable.alertporta);
+                alertFumetto(R.drawable.alertporta,System.currentTimeMillis());
             rip=3;
             //for(i=0;i<=21;i++)controlla_rip[i]=0;
             //leggo la frase
@@ -257,8 +257,8 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
         }
         if (num_prove == 22) {
 
-            totalTime = System.currentTimeMillis() - startTime - (alertRip * DELAY);
-            Log.d("-------------AAAS<>", "alertVisti: "+alertRip+"------>"+alertRip*DELAY);
+            totalTime = System.currentTimeMillis() - startTime - fine;
+            Log.d("-------------AAAS<>", "totaltime: "+(System.currentTimeMillis() - startTime));
             secondi = (int) (totalTime / 1000);
             while (secondi >= 60) {
                 minuti++;
@@ -391,35 +391,41 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-    public void alertFumetto(int liv){
-
+    public void alertFumetto(int liv,final long start){
+        long fi;
         alertRip++;
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogLayout = inflater.inflate(R.layout.customized_dialog,  null);
         alertImage=(ImageView) dialogLayout.findViewById(R.id.alertImage);
         alertImage.setImageResource(liv);
+        alertImage.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                fine += System.currentTimeMillis() - start;
+                Log.d("----.-.-.-.-.-.", "onClick: "+fine);
+                img1.setImageDrawable(null);
+                img2.setImageDrawable(null);
+                img3.setImageDrawable(null);
+                mp.start();
+                closedialog.dismiss();
+//                final Timer timer2 = new Timer();
+//                timer2.schedule(new TimerTask() {
+//                    public void run() {
+//                        closedialog.dismiss();
+//                        timer2.cancel(); //this will cancel the timer of the system
+//                        mp.stop();
+//                    }
+//                }, DELAY);
+
+            }
+        });
         builder.setView(dialogLayout);
         builder.setCancelable(true);
-
-        final AlertDialog closedialog= builder.create();
-
+        closedialog= builder.create();
         closedialog.show();
-        mp.start();
-        final Timer timer2 = new Timer();
-        timer2.schedule(new TimerTask() {
-            public void run() {
-                closedialog.dismiss();
-                timer2.cancel(); //this will cancel the timer of the system
-                mp.stop();
-            }
-        }, DELAY);
-        img1.setImageDrawable(null);
-        img2.setImageDrawable(null);
-        img3.setImageDrawable(null);
-
     }
 
     public void risultatoTest(View v) {
