@@ -51,10 +51,10 @@ public class PostTest extends AppCompatActivity {
         Strongly_Agree=(Button)findViewById(R.id.Strongly_Agree);
         db= new SQLiteHandler(getApplicationContext());
         idAlunno="";
-        domande= new String[9];
+        domande= new String[10];
 
-        infoUtente = new String[6];
-        risu = new String[9];
+        infoUtente = new String[10];
+        risu = new String[10];
 
         try {
             read= new BufferedReader(new InputStreamReader(getAssets().open("postest.txt"), "UTF-8"));

@@ -65,7 +65,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     private String groupId, data;
     private long startTime, totalTime, intermedio=0,fine;
     private int secondi, minuti, ore;
-    private final static int DELAY =3000;
+    private final static int DELAY =4000;
     SQLiteHandler db;
     MediaPlayer mp;
     ImageView alertImage;
@@ -301,6 +301,9 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                         "\n\n\n\n");
                 osw.flush();
                 osw.close();
+                Log.d("-------------________", "LeggiFrase: ------------------>"+totalTime);
+                alertFumetto(R.drawable.tesoro,System.currentTimeMillis());
+                Log.d("-------_____", "LeggiFrase: ------------------>"+totalTime);
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -333,8 +336,16 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                                                     int which) {
 
                                     //moveTaskToBack(true);*/
-            Intent i = new Intent(getApplicationContext(), PostTest.class);
-            startActivity(i);
+            final Timer timer2 = new Timer();
+                timer2.schedule(new TimerTask() {
+                    public void run() {
+                        timer2.cancel(); //this will cancel the timer of the system
+                        Intent i = new Intent(getApplicationContext(), PostTest.class);
+                        startActivity(i);
+                    }
+                }, DELAY);
+
+
             // finish();
 //                                    System.exit(0);
 

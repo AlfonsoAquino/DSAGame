@@ -300,16 +300,9 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
                 osw.flush();
                 osw.close();
 
-                InputStream stat = openFileInput("risultati.txt");
-                InputStreamReader inputStreamReader = new InputStreamReader(stat);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String tempString = "";
-                StringBuilder stringBuilder = new StringBuilder();
-                Log.d("-------->RISU", "risposta: "+bufferedReader.readLine());
-                while ((temp = bufferedReader.readLine()) != null) {
-                    Log.d("-------->RISU", "risposta: "+temp);
-                }
-                stat.close();
+                Log.d("-------------________", "LeggiFrase: ------------------>"+totalTime);
+                alertFumetto(R.drawable.tesoro,System.currentTimeMillis());
+                Log.d("-------_____", "LeggiFrase: ------------------>"+totalTime);
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -342,8 +335,14 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
                                                     int which) {
 
                                     //moveTaskToBack(true);*/
-            Intent i = new Intent(getApplicationContext(), PostTest.class);
-            startActivity(i);
+            final Timer timer2 = new Timer();
+            timer2.schedule(new TimerTask() {
+                public void run() {
+                    timer2.cancel(); //this will cancel the timer of the system
+                    Intent i = new Intent(getApplicationContext(), PostTest.class);
+                    startActivity(i);
+                }
+            }, DELAY);
             // finish();
 //                                    System.exit(0);
 

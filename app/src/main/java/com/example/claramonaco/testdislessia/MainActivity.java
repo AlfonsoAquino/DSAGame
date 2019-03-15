@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
-
+        db.close();
     }
 
     protected boolean isOnline() {
