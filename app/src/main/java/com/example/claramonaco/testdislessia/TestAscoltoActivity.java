@@ -300,9 +300,8 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
                 osw.flush();
                 osw.close();
 
-                Log.d("-------------________", "LeggiFrase: ------------------>"+totalTime);
-                alertFumetto(R.drawable.tesoro,System.currentTimeMillis());
-                Log.d("-------_____", "LeggiFrase: ------------------>"+totalTime);
+                alertTesoro(R.drawable.tesoro);
+
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -426,6 +425,31 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
         closedialog= builder.create();
         closedialog.show();
     }
+    public void alertTesoro(int liv){
+        long fi;
+        alertRip++;
+        mp.start();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogLayout = inflater.inflate(R.layout.customized_dialog,  null);
+        alertImage=(ImageView) dialogLayout.findViewById(R.id.alertImage);
+        alertImage.setImageResource(liv);
+
+        final Timer timer2 = new Timer();
+        timer2.schedule(new TimerTask() {
+            public void run() {
+                closedialog.dismiss();
+                timer2.cancel(); //this will cancel the timer of the system
+                mp.stop();
+            }
+        }, DELAY);
+
+        builder.setView(dialogLayout);
+        builder.setCancelable(true);
+        closedialog= builder.create();
+        closedialog.show();
+    }
+
 
     public void risultatoTest(View v) {
         Intent i = new Intent(getApplicationContext(), StatisticheTestActivity.class);
@@ -454,7 +478,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
             esatte++;
             num_corrette++;
             Log.d("-------------------<>", "Controlliamo: "+num_corrette);
-            if(img1.getDrawable()==null && esatte==1) {
+            if(img1.getDrawable()==null ) {
                 img1.setImageResource(R.drawable.chiavebronzo);
             }else if(img1.getDrawable()!=null && img2.getDrawable()==null){
                 img2.setImageResource(R.drawable.chiaveargento);

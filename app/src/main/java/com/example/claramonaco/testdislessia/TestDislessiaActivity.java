@@ -65,7 +65,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     private String groupId, data;
     private long startTime, totalTime, intermedio=0,fine;
     private int secondi, minuti, ore;
-    private final static int DELAY =4000;
+    private final static int DELAY =3000;
     SQLiteHandler db;
     MediaPlayer mp;
     ImageView alertImage;
@@ -216,7 +216,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                     new InputStreamReader(getAssets().open("trisillabe_piane.txt"), "UTF-8"));
 
             if(rip==0)
-                 alertFumetto(R.drawable.alertporta,System.currentTimeMillis());
+                alertFumetto(R.drawable.alertporta,System.currentTimeMillis());
             rip=1;
 
 
@@ -301,9 +301,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                         "\n\n\n\n");
                 osw.flush();
                 osw.close();
-                Log.d("-------------________", "LeggiFrase: ------------------>"+totalTime);
-                alertFumetto(R.drawable.tesoro,System.currentTimeMillis());
-                Log.d("-------_____", "LeggiFrase: ------------------>"+totalTime);
+                alertTesoro(R.drawable.tesoro);
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -337,13 +335,13 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
 
                                     //moveTaskToBack(true);*/
             final Timer timer2 = new Timer();
-                timer2.schedule(new TimerTask() {
-                    public void run() {
-                        timer2.cancel(); //this will cancel the timer of the system
-                        Intent i = new Intent(getApplicationContext(), PostTest.class);
-                        startActivity(i);
-                    }
-                }, DELAY);
+            timer2.schedule(new TimerTask() {
+                public void run() {
+                    timer2.cancel(); //this will cancel the timer of the system
+                    Intent i = new Intent(getApplicationContext(), PostTest.class);
+                    startActivity(i);
+                }
+            }, DELAY);
 
 
             // finish();
@@ -429,6 +427,30 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         closedialog= builder.create();
         closedialog.show();
     }
+    public void alertTesoro(int liv){
+        long fi;
+        alertRip++;
+        mp.start();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogLayout = inflater.inflate(R.layout.customized_dialog,  null);
+        alertImage=(ImageView) dialogLayout.findViewById(R.id.alertImage);
+        alertImage.setImageResource(liv);
+
+        final Timer timer2 = new Timer();
+        timer2.schedule(new TimerTask() {
+            public void run() {
+                closedialog.dismiss();
+                timer2.cancel(); //this will cancel the timer of the system
+                mp.stop();
+            }
+        }, DELAY);
+
+        builder.setView(dialogLayout);
+        builder.setCancelable(true);
+        closedialog= builder.create();
+        closedialog.show();
+    }
 
     public void risultatoTest(View v) {
         Intent i = new Intent(getApplicationContext(), StatisticheTestActivity.class);
@@ -457,7 +479,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             esatte++;
             num_corrette++;
             Log.d("-------------------<>", "Controlliamo: "+num_corrette);
-            if(img1.getDrawable()==null && esatte==1) {
+            if(img1.getDrawable()==null) {
                 img1.setImageResource(R.drawable.chiavebronzo);
             }else if(img1.getDrawable()!=null && img2.getDrawable()==null){
                 img2.setImageResource(R.drawable.chiaveargento);
