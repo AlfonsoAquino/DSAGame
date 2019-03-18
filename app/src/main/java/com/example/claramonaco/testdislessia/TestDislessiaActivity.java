@@ -103,9 +103,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
 //        alertImage=(ImageView) findViewById(R.id.alertImage);
 
 
-        //riproduzione del cigolio della porta
-        mp = MediaPlayer.create(this,R.raw.woodendoor );
-        mp.setLooping(false);
+
 //        alertFumetto(R.drawable.alertporta,System.currentTimeMillis());
 
 
@@ -394,7 +392,9 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     public void alertFumetto(int liv,final long start){
         long fi;
         alertRip++;
-
+        //riproduzione del cigolio della porta
+        mp = MediaPlayer.create(this,R.raw.woodendoor );
+        mp.setLooping(false);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogLayout = inflater.inflate(R.layout.customized_dialog,  null);
@@ -430,6 +430,9 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     public void alertTesoro(int liv){
         long fi;
         alertRip++;
+        //riproduzione del cigolio della porta
+        mp = MediaPlayer.create(this,R.raw.tesoro );
+        mp.setLooping(false);
         mp.start();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();

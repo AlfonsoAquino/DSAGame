@@ -103,9 +103,6 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
 //        alertImage=(ImageView) findViewById(R.id.alertImage);
 //        alertFumetto(R.drawable.alertporta);
 
-        //riproduzione del cigolio della porta
-        mp = MediaPlayer.create(this,R.raw.woodendoor );
-        mp.setLooping(false);
 
         flag = true;
 
@@ -392,6 +389,9 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
     public void alertFumetto(int liv,final long start){
         long fi;
         alertRip++;
+        //riproduzione del cigolio della porta
+        mp = MediaPlayer.create(this,R.raw.woodendoor );
+        mp.setLooping(false);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -428,6 +428,10 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
     public void alertTesoro(int liv){
         long fi;
         alertRip++;
+        //riproduzione del cigolio della porta
+        mp = MediaPlayer.create(this,R.raw.tesoro );
+        mp.setLooping(false);
+
         mp.start();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();

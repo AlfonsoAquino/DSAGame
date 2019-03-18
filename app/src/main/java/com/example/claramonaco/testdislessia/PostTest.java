@@ -169,10 +169,11 @@ public class PostTest extends AppCompatActivity {
             }
 
              db.addStatistic(""+infoUtente[3],""+infoUtente[0],""+infoUtente[2],""+infoUtente[1],""+data,""+infoUtente[4],""+infoUtente[5],
-                     ""+risu[3],""+risu[1],""+risu[2],""+risu[1],""+risu[4],""+risu[5],""+risu[6],
+                     ""+risu[3],""+risu[1],""+risu[2],""+risu[0],""+risu[4],""+risu[5],""+risu[6],
                       ""+risu[7],""+risu[8], ""+domande[1],""+domande[2],""+domande[3],""+domande[4],""+domande[5],""+domande[6],
                      ""+domande[7],""+domande[8]);
 //            db.addGradimento(""+ idAlunno,"","","","","","","","");
+            Log.d("eeeeeeeeeeeeeeee", "risposta: "+risu[0]);
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(i);
 
