@@ -12,16 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 public class IdGroupActivity extends AppCompatActivity {
 
-    private EditText groupId, idAlunno;
-    private String data, regione, identAlunno, tipoTest="";
-    private LinearLayout spinnerLayout, layoutGroup, layoutAlunno;
+    private EditText codicePlesso, codiceClasse, codiceRegistro;
+    private String data, regione, tipoTest="";
+    private LinearLayout spinnerLayout, layoutGroup, layoutClasse;
     private Spinner spinner;
 
     @Override
@@ -33,17 +29,18 @@ public class IdGroupActivity extends AppCompatActivity {
 
         spinnerLayout = (LinearLayout) findViewById(R.id.layoutSpinner);
         layoutGroup = (LinearLayout) findViewById(R.id.layoutGroupId);
-        groupId = (EditText) findViewById(R.id.groupId);
+        layoutClasse = (LinearLayout) findViewById(R.id.layoutCodiceClasse);
+        codicePlesso = (EditText) findViewById(R.id.codicePlesso);
         spinner = (Spinner) findViewById(R.id.spinner);
-//        idAlunno = (EditText) findViewById(R.id.idAlunno);
-//        layoutAlunno = (LinearLayout) findViewById(R.id.layoutIdAlunno);
+        codiceClasse = (EditText) findViewById(R.id.codiceClasse);
+        codiceRegistro = (EditText) findViewById(R.id.codiceRegistro);
+
 
         data="";
         regione="";
-        identAlunno="";
 
 
-//        layoutAlunno.setVisibility(View.GONE);
+        layoutClasse.setVisibility(View.GONE);
         layoutGroup.setVisibility(View.GONE);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -65,51 +62,50 @@ public class IdGroupActivity extends AppCompatActivity {
                 temp = new OutputStreamWriter(this.openFileOutput("infoUtente.txt", Context.MODE_PRIVATE));
                 //inserimento in posizione di un idAlunno fittizzio in modo da limitare al minimo le modifiche apportate al codice
                 temp.write(""+tipoTest
-                        +"\n"+spinner.getSelectedItem().toString()
-                        +"\nfittizio");
+                        +"\n"+spinner.getSelectedItem().toString());
                 temp.flush();
                 temp.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
             spinnerLayout.setVisibility(View.GONE);
-            //mettere layoutAlunno se si vuole aggiungere un idAlunno manualmente
             layoutGroup.setVisibility(View.VISIBLE);
         }
     }
 
-    public void confermaAlunno(View v){
-        Log.d("----------->G:","idAlunno: "+idAlunno.getText());
-
-        if(idAlunno.getText().length()>=1){
-            OutputStreamWriter temp = null;
-            try {
-                temp = new OutputStreamWriter(this.openFileOutput("infoUtente.txt", Context.MODE_APPEND));
-                temp.write("\n"+idAlunno.getText());
-                temp.flush();
-                temp.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            identAlunno = idAlunno.getText().toString();
-            layoutAlunno.setVisibility(View.GONE);
-            layoutGroup.setVisibility(View.VISIBLE);
-        }
-    }
     public void confermaGroup(View v){
 
-        Log.d("----------->G:","GruoupId: "+groupId.getText());
+        Log.d("----------->G:","GruoupId: "+ codicePlesso.getText());
 
-        if(groupId.getText().length()>=1){
+        if(codicePlesso.getText().length()>=1){
             OutputStreamWriter temp = null;
             OutputStreamWriter dat = null;
             try {
 
                 temp = new OutputStreamWriter(this.openFileOutput("infoUtente.txt", Context.MODE_APPEND));
-                temp.write("\n"+groupId.getText());
+                temp.write("\n"+ codicePlesso.getText());
                 temp.flush();
                 temp.close();
 
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            layoutGroup.setVisibility(View.GONE);
+            layoutClasse.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void confermaCodiceClasse(View v){
+        Log.d("----------->G:","codiceClasse: "+codiceClasse.getText()+" codice registro: "+codiceRegistro.getText());
+
+        if(codiceClasse.getText().length()>=1 && codiceRegistro.getText().length()>=1){
+            OutputStreamWriter temp = null;
+            try {
+                temp = new OutputStreamWriter(this.openFileOutput("infoUtente.txt", Context.MODE_APPEND));
+                temp.write("\n"+codiceClasse.getText()+
+                        "\n"+codiceRegistro.getText());
+                temp.flush();
+                temp.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }

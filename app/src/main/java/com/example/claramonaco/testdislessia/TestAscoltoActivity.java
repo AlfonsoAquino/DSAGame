@@ -428,7 +428,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
     public void alertTesoro(int liv){
         long fi;
         alertRip++;
-        //riproduzione del cigolio della porta
+        //riproduzione delle monete
         mp = MediaPlayer.create(this,R.raw.tesoro );
         mp.setLooping(false);
 

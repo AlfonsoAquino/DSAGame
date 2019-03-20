@@ -2,39 +2,15 @@ package com.example.claramonaco.testdislessia;
 
 public class Statistica {
 
-    private String groupId;
-    private String tipoTest;
-    private String idAlunno;
-    private String regione;
-    private String data;
-    private String genere;
-    private String eta;
-    private String numCorrette;
-    private String numSbagliate;
-    private String numSaltate;
-    private String livelloRaggiunto;
-    private String idPaziente;
-    private String tempoImpiegato;
-    private String errore1;
-    private String errore2;
-    private String errore3;
-    private String errore4;
-    private String domanda1;
-    private String domanda2;
-    private String domanda3;
-    private String domanda4;
-    private String domanda5;
-    private String domanda6;
-    private String domanda7;
-    private String domanda8;
+    private String codicePlesso, tipoTest, regione, data, genere, eta, numCorrette, numSbagliate, numSaltate, livelloRaggiunto;
+    private String tempoImpiegato, errore1, errore2, errore3, errore4, domanda1, domanda2, domanda3, domanda4, domanda5, domanda6, domanda7, domanda8, codiceClasse, codiceRegistro;
 
     public Statistica() {
     }
 
-    public Statistica(String groupId, String tipoTest, String idAlunno, String regione, String data, String genere, String eta, String numCorrette, String numSbagliate, String numSaltate, String livelloRaggiunto, String idPaziente, String tempoImpiegato, String errore1, String errore2, String errore3, String errore4, String domanda1, String domanda2, String domanda3, String domanda4, String domanda5, String domanda6, String domanda7, String domanda8) {
-        this.groupId = groupId;
+    public Statistica(String codicePlesso, String tipoTest, String regione, String data, String genere, String eta, String numCorrette, String numSbagliate, String numSaltate, String livelloRaggiunto, String tempoImpiegato, String errore1, String errore2, String errore3, String errore4, String domanda1, String domanda2, String domanda3, String domanda4, String domanda5, String domanda6, String domanda7, String domanda8, String codiceClasse, String codiceRegistro) {
+        this.codicePlesso = codicePlesso;
         this.tipoTest = tipoTest;
-        this.idAlunno = idAlunno;
         this.regione = regione;
         this.data = data;
         this.genere = genere;
@@ -43,7 +19,6 @@ public class Statistica {
         this.numSbagliate = numSbagliate;
         this.numSaltate = numSaltate;
         this.livelloRaggiunto = livelloRaggiunto;
-        this.idPaziente = idPaziente;
         this.tempoImpiegato = tempoImpiegato;
         this.errore1 = errore1;
         this.errore2 = errore2;
@@ -57,14 +32,16 @@ public class Statistica {
         this.domanda6 = domanda6;
         this.domanda7 = domanda7;
         this.domanda8 = domanda8;
+        this.codiceClasse = codiceClasse;
+        this.codiceRegistro = codiceRegistro;
     }
 
-    public String getGroupId() {
-        return groupId;
+    public String getCodicePlesso() {
+        return codicePlesso;
     }
 
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
+    public void setCodicePlesso(String codicePlesso) {
+        this.codicePlesso = codicePlesso;
     }
 
     public String getTipoTest() {
@@ -75,13 +52,6 @@ public class Statistica {
         this.tipoTest = tipoTest;
     }
 
-    public String getIdAlunno() {
-        return idAlunno;
-    }
-
-    public void setIdAlunno(String idAlunno) {
-        this.idAlunno = idAlunno;
-    }
 
     public String getRegione() {
         return regione;
@@ -147,13 +117,6 @@ public class Statistica {
         this.livelloRaggiunto = livelloRaggiunto;
     }
 
-    public String getIdPaziente() {
-        return idPaziente;
-    }
-
-    public void setIdPaziente(String idPaziente) {
-        this.idPaziente = idPaziente;
-    }
 
     public String getTempoImpiegato() {
         return tempoImpiegato;
@@ -259,12 +222,27 @@ public class Statistica {
         this.domanda8 = domanda8;
     }
 
+    public String getCodiceClasse() {
+        return codiceClasse;
+    }
+
+    public void setCodiceClasse(String codiceClasse) {
+        this.codiceClasse = codiceClasse;
+    }
+
+    public String getCodiceRegistro() {
+        return codiceRegistro;
+    }
+
+    public void setCodiceRegistro(String codiceRegistro) {
+        this.codiceRegistro = codiceRegistro;
+    }
+
     @Override
     public String toString() {
         return "Statistica{" +
-                "groupId='" + groupId + '\'' +
+                "codicePlesso='" + codicePlesso + '\'' +
                 ", tipoTest='" + tipoTest + '\'' +
-                ", idAlunno='" + idAlunno + '\'' +
                 ", regione='" + regione + '\'' +
                 ", data='" + data + '\'' +
                 ", genere='" + genere + '\'' +
@@ -273,7 +251,6 @@ public class Statistica {
                 ", numSbagliate='" + numSbagliate + '\'' +
                 ", numSaltate='" + numSaltate + '\'' +
                 ", livelloRaggiunto='" + livelloRaggiunto + '\'' +
-                ", idPaziente='" + idPaziente + '\'' +
                 ", tempoImpiegato='" + tempoImpiegato + '\'' +
                 ", errore1='" + errore1 + '\'' +
                 ", errore2='" + errore2 + '\'' +
@@ -287,6 +264,8 @@ public class Statistica {
                 ", domanda6='" + domanda6 + '\'' +
                 ", domanda7='" + domanda7 + '\'' +
                 ", domanda8='" + domanda8 + '\'' +
+                ", codiceClasse='" + codiceClasse + '\'' +
+                ", codiceRegistro='" + codiceRegistro + '\'' +
                 '}';
     }
 }

@@ -21,7 +21,8 @@ import java.util.Map;
 public class SendStatistics extends AsyncTask<String, Integer, Void> {
 
     private final String TAG="StatisticsThread";
-    private String groupId,tipoTest, idAlunno, regione, data,genere, eta,livelloRaggiunto, idPaziente,numCorr,numErr,numSaltate, tempo, errLiv1,errLiv2,errLiv3,errLiv4,domanda1,domanda2,domanda3,domanda4,domanda5,domanda6,domanda7,domanda8;
+    private String tipoTest, codicePlesso, regione, data,genere, eta,livelloRaggiunto,numCorr,numErr,numSaltate, tempo, errLiv1,errLiv2,errLiv3,errLiv4,
+            domanda1,domanda2,domanda3,domanda4,domanda5,domanda6,domanda7,domanda8, codiceClasse, codieRegistro;
     private Context context;
     final String PREFS_NAME="check";
 
@@ -39,7 +40,7 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
             for (String str: strings) {
                 Log.i(TAG, "statistics: "+str);
             }
-            groupId=strings[0];
+            codicePlesso=strings[0];
             data=strings[1];
             genere=strings[2];
             eta=strings[3];
@@ -52,17 +53,18 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
             errLiv2=strings[10];
             errLiv3=strings[11];
             errLiv4=strings[12];
-            idAlunno=strings[13];
-            regione=strings[14];
-            domanda1=strings[15];
-            domanda2=strings[16];
-            domanda3=strings[17];
-            domanda4=strings[18];
-            domanda5=strings[19];
-            domanda6=strings[20];
-            domanda7=strings[21];
-            domanda8=strings[22];
-            tipoTest=strings[23];
+            regione=strings[13];
+            domanda1=strings[14];
+            domanda2=strings[15];
+            domanda3=strings[16];
+            domanda4=strings[17];
+            domanda5=strings[18];
+            domanda6=strings[19];
+            domanda7=strings[20];
+            domanda8=strings[21];
+            tipoTest=strings[22];
+            codiceClasse=strings[23];
+            codieRegistro=strings[24];
 
             StringRequest strReq = new StringRequest(Request.Method.POST,
                     Config.STATISTICA, new Response.Listener<String>() {
@@ -101,9 +103,8 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
                 protected Map<String, String> getParams() {
                     // Posting params to login url
                     Map<String, String> params = new HashMap<String, String>();
-                    params.put("groupId",groupId);
+                    params.put("codicePlesso",codicePlesso);
                     params.put("tipoTest",tipoTest);
-                    params.put("idAlunno",idAlunno);
                     params.put("regione", regione);
                     params.put("data",data);
                     params.put("genere",genere);
@@ -125,6 +126,8 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
                     params.put("domanda6",domanda6);
                     params.put("domanda7",domanda7);
                     params.put("domanda8",domanda8);
+                    params.put("codiceClasse",codiceClasse);
+                    params.put("codiceRegistro",codieRegistro);
 
                     return params;
                 }
@@ -138,15 +141,13 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
 
     protected void onPreExecute(){
 
-        groupId="0";
         tipoTest="0";
-        idAlunno="0";
+        codicePlesso="0";
         regione="0";
         data ="0";
         genere="0";
         eta="0";
         livelloRaggiunto="0";
-        idPaziente="0";
         numCorr="0";
         numErr="0";
         numSaltate="0";
@@ -163,6 +164,8 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
         domanda6="0";
         domanda7="0";
         domanda8="0";
+        codieRegistro="0";
+        codiceClasse="0";
     }
 
 }

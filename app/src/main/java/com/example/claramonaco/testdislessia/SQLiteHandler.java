@@ -28,9 +28,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final String keyDomanda5 ="domanda5";
     private static final String keyDomanda6 ="domanda6";
     private static final String keyDomanda7 ="domanda7";
-    private static final String keyGroupId="groupId";
+    private static final String keyCodicePlesso="codicePlesso";
     private static final String keyTipoTest="tipoTest";
-    private static final String keyIdAlunno="idAlunno";
     private static final String keyRegione="regione";
     private static final String keyData="data";
     private static final String keyGenere="genere";
@@ -44,6 +43,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final String keyErrLiv2="errLiv2";
     private static final String keyErrLiv3="errLiv3";
     private static final String keyErrLiv4="errLiv4";
+    private static final String keyCodiceClasse="codiceClasse";
+    private static final String keyCodiceRegistro="codiceRegistro";
 
     private ArrayList<Statistica> statistics;
     private ArrayList<Gradimento> gradimento;
@@ -57,8 +58,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createStatisticTable = "CREATE TABLE IF NOT EXISTS "+ tableName +"("+keyID+" INTEGER PRIMARY KEY, "+keyGroupId+" TEXT, "+keyIdAlunno+" TEXT, "+keyTipoTest+" TEXT, "+keyRegione+" TEXT, "+keyData+" TEXT, " +keyGenere+" TEXT, "+keyEta+" TEXT, "+keylivMax+" TEXT, "+keyErr+" TEXT, "+keySkip+" TEXT, "+keyEsatte+" TEXT, "+keyTempo+" TEXT, "+keyErrLiv1+" TEXT, "+keyErrLiv2+" TEXT, "+keyErrLiv3+" TEXT, "+keyErrLiv4+" TEXT, "
-                +" TEXT, "+ keyDomanda1 +" TEXT, "+ keyDomanda2 +" TEXT, "+ keyDomanda3 +" TEXT, " + keyDomanda4 +" TEXT, "+ keyDomanda5 +" TEXT, "+ keyDomanda6 +" TEXT, "+ keyDomanda7 +" TEXT, "+ keyDomanda8 +" TEXT)";
+        String createStatisticTable = "CREATE TABLE IF NOT EXISTS "+ tableName +"("+keyID+" INTEGER PRIMARY KEY, "+ keyCodicePlesso +" TEXT, "+keyTipoTest+" TEXT, "+keyRegione+" TEXT, "+keyData+" TEXT, " +keyGenere+" TEXT, "+keyEta+" TEXT, "+keylivMax+" TEXT, "+keyErr+" TEXT, "+keySkip+" TEXT, "+keyEsatte+" TEXT, "+keyTempo+" TEXT, "+keyErrLiv1+" TEXT, "+keyErrLiv2+" TEXT, "+keyErrLiv3+" TEXT, "+keyErrLiv4+" TEXT, "
+                +" TEXT, "+ keyDomanda1 +" TEXT, "+ keyDomanda2 +" TEXT, "+ keyDomanda3 +" TEXT, " + keyDomanda4 +" TEXT, "+ keyDomanda5 +" TEXT, "+ keyDomanda6 +" TEXT, "+ keyDomanda7 +" TEXT, "+ keyDomanda8 +" TEXT,"+ keyCodiceClasse +" TEXT, "+keyCodiceRegistro+" TEXT)";
         db.execSQL(createStatisticTable);
         Log.d(TAG, "database table created");
     }
@@ -73,15 +74,14 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     /**
      * Storing statistics info
      */
-    public void addStatistic(String groupId, String tipoTest, String idAlunno, String regione, String data, String genere, String eta,String numCorrette, String numSbagliate, String numSaltate, String livelloRaggiunto,
-                             String tempoImpiegato, String errore1, String errore2, String errore3, String errore4, String dm1, String dm2, String dm3, String dm4, String dm5, String dm6, String dm7,String dm8){
+    public void addStatistic(String codicePlesso, String tipoTest, String regione, String data, String genere, String eta,String numCorrette, String numSbagliate, String numSaltate, String livelloRaggiunto,
+                             String tempoImpiegato, String errore1, String errore2, String errore3, String errore4, String dm1, String dm2, String dm3, String dm4, String dm5, String dm6, String dm7,String dm8, String codiceClasse, String codiceRegistro){
 
         SQLiteDatabase db= this.getWritableDatabase();
 
         ContentValues values= new ContentValues();
-        values.put(keyGroupId, groupId );
+        values.put(keyCodicePlesso, codicePlesso );
         values.put(keyTipoTest, tipoTest );
-        values.put(keyIdAlunno, idAlunno );
         values.put(keyRegione, regione );
         values.put(keyData, data);
         values.put(keyGenere, genere);
@@ -103,6 +103,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(keyDomanda6, dm6);
         values.put(keyDomanda7, dm7);
         values.put(keyDomanda8, dm8);
+        values.put(keyCodiceClasse, codiceClasse);
+        values.put(keyCodiceRegistro, codiceRegistro);
 
 
         db.insert(tableName, null, values);
@@ -126,9 +128,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         while (!cursor.isAfterLast()){
 
             album=new Statistica(
-                    cursor.getString(cursor.getColumnIndex(keyGroupId)),
+                    cursor.getString(cursor.getColumnIndex(keyCodicePlesso)),
                     cursor.getString(cursor.getColumnIndex(keyTipoTest)),
-                    cursor.getString(cursor.getColumnIndex(keyIdAlunno)),
                     cursor.getString(cursor.getColumnIndex(keyRegione)),
                     cursor.getString(cursor.getColumnIndex(keyData)),
                     cursor.getString(cursor.getColumnIndex(keyGenere)),
@@ -137,7 +138,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                     cursor.getString(cursor.getColumnIndex(keyErr)),
                     cursor.getString(cursor.getColumnIndex(keySkip)),
                     cursor.getString(cursor.getColumnIndex(keylivMax)),
-                    cursor.getString(cursor.getColumnIndex(keyID)),
                     cursor.getString(cursor.getColumnIndex(keyTempo)),
                     cursor.getString(cursor.getColumnIndex(keyErrLiv1)),
                     cursor.getString(cursor.getColumnIndex(keyErrLiv2)),
@@ -150,7 +150,9 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                     cursor.getString(cursor.getColumnIndex(keyDomanda5)),
                     cursor.getString(cursor.getColumnIndex(keyDomanda6)),
                     cursor.getString(cursor.getColumnIndex(keyDomanda7)),
-                    cursor.getString(cursor.getColumnIndex(keyDomanda8)));
+                    cursor.getString(cursor.getColumnIndex(keyDomanda8)),
+                    cursor.getString(cursor.getColumnIndex(keyCodiceClasse)),
+                    cursor.getString(cursor.getColumnIndex(keyCodiceRegistro)));
             Log.i(TAG,"------------->"+album.toString());
 
             cursor.moveToNext();

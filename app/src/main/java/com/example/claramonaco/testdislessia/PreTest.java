@@ -13,7 +13,10 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Calendar;
 import java.util.Date;
@@ -110,6 +113,18 @@ public class PreTest  extends AppCompatActivity {
         osw.flush();
         osw.close();
 
+        //stampa di verifica per l'ordine nel file InfoUtente
+        InputStream inputStream = openFileInput("infoUtente.txt");
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        String tempString = "";
+        StringBuilder stringBuilder = new StringBuilder();
+        while ((tempString = bufferedReader.readLine()) != null) {
+            Log.d("asdasdaasd------>","infoUtente: "+tempString);
+        }
+        inputStream.close();
+
+        //memorizzo la data e l'ora di svolgimento del test
         dat = new OutputStreamWriter(this.openFileOutput("data.txt", Context.MODE_PRIVATE));
         data="";
         Date currentTime = Calendar.getInstance().getTime();
