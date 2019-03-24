@@ -65,13 +65,15 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
     private String groupId, data;
     private long startTime, totalTime, intermedio,fine;
     private int secondi, minuti, ore;
-    private final static int DELAY =3000;
+    private final static int DELAY =4000;
     SQLiteHandler db;
     MediaPlayer mp;
     ImageView alertImage;
     int rip=0;
     int alertRip=0;
     AlertDialog closedialog;
+    private String fileName="";
+    private String[] infoUtente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +107,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
 
 
         flag = true;
-
+        infoUtente = new String[10];
         num_prove = 0;
         j = 0;
         parola = "";
@@ -126,14 +128,20 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
         idAlunno="";
         regione="";
         data="";
-//        Date currentTime = Calendar.getInstance().getTime();
-//        data= currentTime.toString();
+
         //livello per file
         livello = 1;
         //numero rispose corrette per i livelli di difficoltà
         num_corrette = 0;
 
         generaBottoni();
+
+        //nuovo file di destinazione errori diverso per ogni persona
+        try {
+            newFileName();
+        }catch (IOException e){
+            fileName=""+System.currentTimeMillis();
+        }
 
         esatte = 0;
         sbagliate = 0;
@@ -256,6 +264,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
 
             totalTime = System.currentTimeMillis() - startTime - fine;
             Log.d("-------------AAAS<>", "totaltime: "+(System.currentTimeMillis() - startTime));
+            Log.d("-------------AAAS<>", "totaltime-porte: "+totalTime);
             secondi = (int) (totalTime / 1000);
             while (secondi >= 60) {
                 minuti++;
@@ -336,6 +345,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
                 public void run() {
                     timer2.cancel(); //this will cancel the timer of the system
                     Intent i = new Intent(getApplicationContext(), PostTest.class);
+                    i.putExtra("fileName",fileName);
                     startActivity(i);
                 }
             }, DELAY);
@@ -509,11 +519,35 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
             osw.flush();
             osw.close();
 
+            //file individuale con errori
+            OutputStreamWriter err = new OutputStreamWriter(this.openFileOutput(fileName, Context.MODE_APPEND));
+            err.write("\n\nlivello:" + livello + " \nerror: " + et1.getText().toString() + "\nfrase: " + et.getText().toString());
+            err.flush();
+            err.close();
         }
 
         LeggiFrase();
 
 
+    }
+
+    public void newFileName() throws IOException{
+        InputStream idA = openFileInput("infoUtente.txt");
+        int p=0;
+        InputStreamReader inputStreamReader = new InputStreamReader(idA);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        String tempString = "";
+        StringBuilder stringBuilder = new StringBuilder();
+        while ((tempString = bufferedReader.readLine()) != null) {
+            infoUtente[p]=tempString;
+            p++;
+        }
+        idA.close();
+        //definisco il nome del file che conterrà gli errori commessi da ogni utente
+        //cerco di garantire univocità dei nomi unendo i codice di plesso classe e registro ad una stringa alfanumerica di 16 caratteri
+        RandomString gen = new RandomString();
+        fileName = infoUtente[2]+"_"+infoUtente[3]+"_"+infoUtente[4]+"_"+gen.nextString()+".txt";
+        Log.d("----------,,,,,,<>", "newFileName: "+fileName);
     }
 
     public void ScriviParola(View v) {

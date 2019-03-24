@@ -22,7 +22,7 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
 
     private final String TAG="StatisticsThread";
     private String tipoTest, codicePlesso, regione, data,genere, eta,livelloRaggiunto,numCorr,numErr,numSaltate, tempo, errLiv1,errLiv2,errLiv3,errLiv4,
-            domanda1,domanda2,domanda3,domanda4,domanda5,domanda6,domanda7,domanda8, codiceClasse, codieRegistro;
+            domanda1,domanda2,domanda3,domanda4,domanda5,domanda6,domanda7,domanda8, codiceClasse, codieRegistro, fileName;
     private Context context;
     final String PREFS_NAME="check";
 
@@ -65,6 +65,7 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
             tipoTest=strings[22];
             codiceClasse=strings[23];
             codieRegistro=strings[24];
+            fileName=strings[25];
 
             StringRequest strReq = new StringRequest(Request.Method.POST,
                     Config.STATISTICA, new Response.Listener<String>() {
@@ -128,6 +129,7 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
                     params.put("domanda8",domanda8);
                     params.put("codiceClasse",codiceClasse);
                     params.put("codiceRegistro",codieRegistro);
+                    params.put("fileName",fileName);
 
                     return params;
                 }
@@ -166,6 +168,7 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
         domanda8="0";
         codieRegistro="0";
         codiceClasse="0";
+        fileName="0";
     }
 
 }

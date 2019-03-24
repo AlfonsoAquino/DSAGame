@@ -26,9 +26,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ThreadLocalRandom;
 
 import me.grantland.widget.AutofitTextView;
 
@@ -37,18 +39,16 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         TextToSpeech.OnInitListener,
         AdapterView.OnItemSelectedListener {
 
-    private ImageView img1, img2, img3, img4;
-    private FileInputStream f;
+    private ImageView img1, img2, img3;
     private BufferedReader reader, readerDistrattori;
     private AutofitTextView et;
     private AutofitTextView et1;
     private TextView frasi_corrette, frasi_sbagliate, salti, livel;
     private Button audio;
     private String frase, parola, parolaBottone, paroleDistrattori;
-    private String fraseArray[];
     private char lettera;
     private Button b1, b2, b3, b4, b5, b6, b7, b8, b9;
-    private int i, j, k, esatte, sbagliate, riga, x, position, indice, num_prove, contatore, num_corrette, livello, num_salt;
+    private int i, j, k, esatte, sbagliate, riga, x, position, num_prove, contatore, num_corrette, livello, num_salt;
     private int errori_l1, errori_l2, errori_l3, errori_l4;
     private boolean fit = true;
     private Random random;
@@ -57,21 +57,20 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     private int controlla_rip[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private boolean flag;
 
-    private String genere, idAlunno, regione,temp;
-    private String eta;
-    private BufferedReader in;
     private int livelloMax;
     private TextToSpeech tts;
     private String groupId, data;
-    private long startTime, totalTime, intermedio=0,fine;
+    private long startTime, totalTime,fine;
     private int secondi, minuti, ore;
-    private final static int DELAY =3000;
+    private final static int DELAY =4000;
     SQLiteHandler db;
     MediaPlayer mp;
     ImageView alertImage;
     int rip=0;
     int alertRip=0;
     AlertDialog closedialog;
+    private String fileName="";
+    private String[] infoUtente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,12 +99,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         salti = (TextView) findViewById(R.id.frasi_saltate);
         livel = (TextView) findViewById(R.id.livello_frasi);
 
-//        alertImage=(ImageView) findViewById(R.id.alertImage);
-
-
-
-//        alertFumetto(R.drawable.alertporta,System.currentTimeMillis());
-
+        infoUtente = new String[10];
 
         flag = true;
 
@@ -125,8 +119,6 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         livelloMax = 0;
         db = new SQLiteHandler(getApplicationContext());
         groupId="";
-        idAlunno="";
-        regione="";
         data="";
         fine=0;
 //        Date currentTime = Calendar.getInstance().getTime();
@@ -138,6 +130,12 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
 
         generaBottoni();
 
+        //nuovo file di destinazione errori diverso per ogni persona
+        try {
+            newFileName();
+        }catch (IOException e){
+            fileName=""+System.currentTimeMillis();
+        }
         esatte = 0;
         sbagliate = 0;
 
@@ -337,6 +335,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                 public void run() {
                     timer2.cancel(); //this will cancel the timer of the system
                     Intent i = new Intent(getApplicationContext(), PostTest.class);
+                    i.putExtra("fileName",fileName);
                     startActivity(i);
                 }
             }, DELAY);
@@ -405,7 +404,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onClick(View view) {
                 fine += System.currentTimeMillis() - start;
-                Log.d("----.-.-.-.-.-.", "onClick: "+fine);
+                Log.d("----.-.-.-.-.-.", "alertFumetto: "+fine);
                 img1.setImageDrawable(null);
                 img2.setImageDrawable(null);
                 img3.setImageDrawable(null);
@@ -489,9 +488,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             }else if(img3.getDrawable()==null ){
                 img3.setImageResource(R.drawable.chiaveoro);
             }
-//            else if(img3.getDrawable()!=null && img4.getDrawable()==null){
-//                img4.setImageResource(R.drawable.chiaveverde);
-//            }
+
         } else {
             sbagliate++;
             if (num_corrette == 0) {
@@ -509,13 +506,35 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             osw.flush();
             osw.close();
 
+            //file individuale con errori
+            OutputStreamWriter err = new OutputStreamWriter(this.openFileOutput(fileName, Context.MODE_APPEND));
+            err.write("\n\nlivello:" + livello + " \nerror: " + et1.getText().toString() + "\nfrase: " + et.getText().toString());
+            err.flush();
+            err.close();
         }
 
         LeggiFrase();
 
 
     }
-
+    public void newFileName() throws IOException{
+        InputStream idA = openFileInput("infoUtente.txt");
+        int p=0;
+        InputStreamReader inputStreamReader = new InputStreamReader(idA);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        String tempString = "";
+        StringBuilder stringBuilder = new StringBuilder();
+        while ((tempString = bufferedReader.readLine()) != null) {
+            infoUtente[p]=tempString;
+            p++;
+        }
+        idA.close();
+        //definisco il nome del file che conterrà gli errori commessi da ogni utente
+        //cerco di garantire univocità dei nomi unendo i codice di plesso classe e registro ad una stringa alfanumerica di 16 caratteri
+        RandomString gen = new RandomString();
+        fileName = infoUtente[2]+"_"+infoUtente[3]+"_"+infoUtente[4]+"_"+gen.nextString()+".txt";
+        Log.d("----------,,,,,,<>", "newFileName: "+fileName);
+    }
     public void ScriviParola(View v) {
 
         Button b = (Button) v;

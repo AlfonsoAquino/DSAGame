@@ -2,13 +2,15 @@ package com.example.claramonaco.testdislessia;
 
 public class Statistica {
 
-    private String codicePlesso, tipoTest, regione, data, genere, eta, numCorrette, numSbagliate, numSaltate, livelloRaggiunto;
+    private String codicePlesso, tipoTest, regione, data, genere, eta, numCorrette, numSbagliate, numSaltate, livelloRaggiunto,fileName;
     private String tempoImpiegato, errore1, errore2, errore3, errore4, domanda1, domanda2, domanda3, domanda4, domanda5, domanda6, domanda7, domanda8, codiceClasse, codiceRegistro;
 
     public Statistica() {
     }
 
-    public Statistica(String codicePlesso, String tipoTest, String regione, String data, String genere, String eta, String numCorrette, String numSbagliate, String numSaltate, String livelloRaggiunto, String tempoImpiegato, String errore1, String errore2, String errore3, String errore4, String domanda1, String domanda2, String domanda3, String domanda4, String domanda5, String domanda6, String domanda7, String domanda8, String codiceClasse, String codiceRegistro) {
+    public Statistica(String codicePlesso, String tipoTest, String regione, String data, String genere, String eta, String numCorrette, String numSbagliate,
+                      String numSaltate, String livelloRaggiunto, String tempoImpiegato, String errore1, String errore2, String errore3, String errore4, String domanda1, String domanda2, String domanda3, String domanda4, String domanda5, String domanda6, String domanda7,
+                      String domanda8, String codiceClasse, String codiceRegistro, String fileName) {
         this.codicePlesso = codicePlesso;
         this.tipoTest = tipoTest;
         this.regione = regione;
@@ -34,6 +36,7 @@ public class Statistica {
         this.domanda8 = domanda8;
         this.codiceClasse = codiceClasse;
         this.codiceRegistro = codiceRegistro;
+        this.fileName = fileName;
     }
 
     public String getCodicePlesso() {
@@ -238,6 +241,14 @@ public class Statistica {
         this.codiceRegistro = codiceRegistro;
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
     @Override
     public String toString() {
         return "Statistica{" +
@@ -251,6 +262,7 @@ public class Statistica {
                 ", numSbagliate='" + numSbagliate + '\'' +
                 ", numSaltate='" + numSaltate + '\'' +
                 ", livelloRaggiunto='" + livelloRaggiunto + '\'' +
+                ", fileName='" + fileName + '\'' +
                 ", tempoImpiegato='" + tempoImpiegato + '\'' +
                 ", errore1='" + errore1 + '\'' +
                 ", errore2='" + errore2 + '\'' +

@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
                 new SendStatistics(getApplicationContext()).execute("" + a.getCodicePlesso(), "" + a.getData(), "" + a.getGenere(), "" + a.getEta(), "" + a.getLivelloRaggiunto(), "" + a.getNumSbagliate(),"" + a.getNumSaltate(),"" + a.getNumCorrette(),"" + a.getTempoImpiegato(),
                         "" + a.getErrore1(),"" + a.getErrore2(),"" + a.getErrore3(),"" + a.getErrore4(),"" + a.getRegione(),""+a.getDomanda1(),
                         ""+a.getDomanda2(),""+a.getDomanda3(),""+a.getDomanda4(),""+a.getDomanda5(),""+a.getDomanda6(),""+a.getDomanda7(),""+a.getDomanda8(),""+a.getTipoTest(),""+a.getCodiceClasse(),
-                        ""+a.getCodiceRegistro());
-
+                        ""+a.getCodiceRegistro(),""+a.getFileName());
+                new SendFile(getApplicationContext(),a.getFileName()).execute();
             }
         }
         db.close();

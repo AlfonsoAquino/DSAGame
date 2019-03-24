@@ -45,6 +45,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final String keyErrLiv4="errLiv4";
     private static final String keyCodiceClasse="codiceClasse";
     private static final String keyCodiceRegistro="codiceRegistro";
+    private static final String keyFileName="fileName";
 
     private ArrayList<Statistica> statistics;
     private ArrayList<Gradimento> gradimento;
@@ -59,7 +60,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createStatisticTable = "CREATE TABLE IF NOT EXISTS "+ tableName +"("+keyID+" INTEGER PRIMARY KEY, "+ keyCodicePlesso +" TEXT, "+keyTipoTest+" TEXT, "+keyRegione+" TEXT, "+keyData+" TEXT, " +keyGenere+" TEXT, "+keyEta+" TEXT, "+keylivMax+" TEXT, "+keyErr+" TEXT, "+keySkip+" TEXT, "+keyEsatte+" TEXT, "+keyTempo+" TEXT, "+keyErrLiv1+" TEXT, "+keyErrLiv2+" TEXT, "+keyErrLiv3+" TEXT, "+keyErrLiv4+" TEXT, "
-                +" TEXT, "+ keyDomanda1 +" TEXT, "+ keyDomanda2 +" TEXT, "+ keyDomanda3 +" TEXT, " + keyDomanda4 +" TEXT, "+ keyDomanda5 +" TEXT, "+ keyDomanda6 +" TEXT, "+ keyDomanda7 +" TEXT, "+ keyDomanda8 +" TEXT,"+ keyCodiceClasse +" TEXT, "+keyCodiceRegistro+" TEXT)";
+                +" TEXT, "+ keyDomanda1 +" TEXT, "+ keyDomanda2 +" TEXT, "+ keyDomanda3 +" TEXT, " + keyDomanda4 +" TEXT, "+ keyDomanda5 +" TEXT, "+ keyDomanda6 +" TEXT, "+ keyDomanda7 +" TEXT, "+ keyDomanda8 +" TEXT,"+ keyCodiceClasse +" TEXT, "+keyCodiceRegistro+" TEXT, "+keyFileName+" TEXT)";
         db.execSQL(createStatisticTable);
         Log.d(TAG, "database table created");
     }
@@ -75,7 +76,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
      * Storing statistics info
      */
     public void addStatistic(String codicePlesso, String tipoTest, String regione, String data, String genere, String eta,String numCorrette, String numSbagliate, String numSaltate, String livelloRaggiunto,
-                             String tempoImpiegato, String errore1, String errore2, String errore3, String errore4, String dm1, String dm2, String dm3, String dm4, String dm5, String dm6, String dm7,String dm8, String codiceClasse, String codiceRegistro){
+                             String tempoImpiegato, String errore1, String errore2, String errore3, String errore4, String dm1, String dm2, String dm3, String dm4, String dm5, String dm6, String dm7,String dm8, String codiceClasse, String codiceRegistro, String fileName){
 
         SQLiteDatabase db= this.getWritableDatabase();
 
@@ -105,6 +106,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(keyDomanda8, dm8);
         values.put(keyCodiceClasse, codiceClasse);
         values.put(keyCodiceRegistro, codiceRegistro);
+        values.put(keyFileName, fileName);
 
 
         db.insert(tableName, null, values);
@@ -152,7 +154,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                     cursor.getString(cursor.getColumnIndex(keyDomanda7)),
                     cursor.getString(cursor.getColumnIndex(keyDomanda8)),
                     cursor.getString(cursor.getColumnIndex(keyCodiceClasse)),
-                    cursor.getString(cursor.getColumnIndex(keyCodiceRegistro)));
+                    cursor.getString(cursor.getColumnIndex(keyCodiceRegistro)),
+                    cursor.getString(cursor.getColumnIndex(keyFileName)));
             Log.i(TAG,"------------->"+album.toString());
 
             cursor.moveToNext();
