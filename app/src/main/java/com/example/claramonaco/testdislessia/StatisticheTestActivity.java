@@ -27,10 +27,11 @@ public class StatisticheTestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.statistiche_test);
         tv = (TextView) findViewById(R.id.statisiche_tm);
-    Leggi();}
+        Leggi();
+    }
 
 
-        public void Leggi(){
+    public void Leggi(){
 
         try {
             InputStream inputStream = openFileInput("statistiche_test.txt");
@@ -64,7 +65,7 @@ public class StatisticheTestActivity extends AppCompatActivity {
         osw.flush();
         osw.close();
         Leggi();
-      //  System.exit(0);
+        //  System.exit(0);
         //onCreate(Bundle.EMPTY);
     }
 

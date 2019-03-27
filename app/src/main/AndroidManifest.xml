@@ -29,7 +29,8 @@
         android:roundIcon="@drawable/dsa_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TestAscoltoActivity"></activity>
+        <activity android:name=".ErrorView"></activity>
+        <activity android:name=".TestAscoltoActivity" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="sensorPortrait">
@@ -73,8 +74,9 @@
             android:name=".PostTest"
             android:label="@string/PostTest"
             android:screenOrientation="sensorPortrait" />
-        <activity android:name=".IdGroupActivity"
-            android:screenOrientation="sensorPortrait"/>
+        <activity
+            android:name=".IdGroupActivity"
+            android:screenOrientation="sensorPortrait" />
     </application>
 
 </manifest>

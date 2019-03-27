@@ -349,7 +349,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
                     startActivity(i);
                 }
             }, DELAY);
-            // finish();
+//             finish();
 //                                    System.exit(0);
 
             //    }
@@ -476,6 +476,10 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
         osw.write("\n\nlivello:" + livello + " \nsalt: " + et1.getText().toString() + "\nfrase: " + et.getText().toString());
         osw.flush();
         osw.close();
+        OutputStreamWriter err = new OutputStreamWriter(this.openFileOutput(fileName, Context.MODE_APPEND));
+        err.write("\n\nlivello:" + livello + " \nsaltata " + et1.getText().toString() + "\nfrase: " + et.getText().toString());
+        err.flush();
+        err.close();
         try {
             LeggiFrase();
         } catch (IOException e) {
@@ -499,9 +503,12 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
             }else if(img3.getDrawable()==null ){
                 img3.setImageResource(R.drawable.chiaveoro);
             }
-//            else if(img3.getDrawable()!=null && img4.getDrawable()==null){
-//                img4.setImageResource(R.drawable.chiaveverde);
-//            }
+
+            //file individuale con errori
+            OutputStreamWriter err = new OutputStreamWriter(this.openFileOutput(fileName, Context.MODE_APPEND));
+            err.write("\n\nlivello:" + livello + " \nfrase scritta: " + et1.getText().toString() + "\nfrase: " + et.getText().toString());
+            err.flush();
+            err.close();
         } else {
             sbagliate++;
             if (num_corrette == 0) {

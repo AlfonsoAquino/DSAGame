@@ -175,7 +175,8 @@ public class PostTest extends AppCompatActivity {
                      ""+domande[1],""+domande[2],""+domande[3],""+domande[4],""+domande[5],""+domande[6],""+domande[7],""+domande[8],
                      ""+infoUtente[3],""+infoUtente[4],""+fileName);
 
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            Intent i = new Intent(getApplicationContext(), ErrorView.class);
+            i.putExtra("fileName",fileName);
             startActivity(i);
 
         }else{

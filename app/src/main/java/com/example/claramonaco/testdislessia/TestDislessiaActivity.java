@@ -305,31 +305,37 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                 e.printStackTrace();
             }
 
-           /*new AlertDialog.Builder(this)
-                    .setIcon(R.drawable.test)
-                    .setTitle(
-                            Html.fromHtml("<font color='#009688'>"
-                                    + ("Test Dislessia")
-                                    + "</font>"))
-                    .setMessage(("Il test è terminato 21 quesiti" +
-                            "\n\nLivello raggiunto: " + livello +
-                            "\n\nFrasi sbagliate:  " + sbagliate +
-                            "\nFrasi saltate: " + num_salt +
-                            "\nFrasi corrette: " + esatte +
-                            " \n\nTempo impiegato: "
-                            + minuti + "m " + secondi + "s " +
-
-                            "\n\nErrori livello 1: " + errori_l1 +
-                            "\nErrori livello 2: " + errori_l2 +
-                            "\nErrori livello 3: " + errori_l3 +
-                            "\nErrori livello 4: " + errori_l4))
-                    .setPositiveButton(android.R.string.yes,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int which) {
-
-                                    //moveTaskToBack(true);*/
+//            new AlertDialog.Builder(this)
+//                    .setIcon(R.drawable.test)
+//                    .setTitle(
+//                            Html.fromHtml("<font color='#009688'>"
+//                                    + ("Test Dislessia")
+//                                    + "</font>"))
+//                    .setMessage(("Il test è terminato 21 quesiti" +
+//                            "\n\nLivello raggiunto: " + livello +
+//                            "\n\nFrasi sbagliate:  " + sbagliate +
+//                            "\nFrasi saltate: " + num_salt +
+//                            "\nFrasi corrette: " + esatte +
+//                            " \n\nTempo impiegato: "
+//                            + minuti + "m " + secondi + "s " +
+//
+//                            "\n\nErrori livello 1: " + errori_l1 +
+//                            "\nErrori livello 2: " + errori_l2 +
+//                            "\nErrori livello 3: " + errori_l3 +
+//                            "\nErrori livello 4: " + errori_l4))
+//                    .setPositiveButton(android.R.string.yes,
+//                            new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog,
+//                                                    int which) {
+//
+//                                    moveTaskToBack(true);
+//
+//                                    finish();
+//                                    System.exit(0);
+//
+//                                }
+//                            }).show();
             final Timer timer2 = new Timer();
             timer2.schedule(new TimerTask() {
                 public void run() {
@@ -339,14 +345,6 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                     startActivity(i);
                 }
             }, DELAY);
-
-
-            // finish();
-//                                    System.exit(0);
-
-            //    }
-            //  }).show();
-
         }
 
         if (num_prove % 22 == 0) {
@@ -465,6 +463,10 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         osw.write("\n\nlivello:" + livello + " \nsalt: " + et1.getText().toString() + "\nfrase: " + et.getText().toString());
         osw.flush();
         osw.close();
+        OutputStreamWriter err = new OutputStreamWriter(this.openFileOutput(fileName, Context.MODE_APPEND));
+        err.write("\n\nlivello:" + livello + " \nsaltata " + et1.getText().toString() + "\nfrase: " + et.getText().toString());
+        err.flush();
+        err.close();
         try {
             LeggiFrase();
         } catch (IOException e) {
@@ -488,6 +490,11 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             }else if(img3.getDrawable()==null ){
                 img3.setImageResource(R.drawable.chiaveoro);
             }
+            //file individuale con frasi
+            OutputStreamWriter err = new OutputStreamWriter(this.openFileOutput(fileName, Context.MODE_APPEND));
+            err.write("\n\nlivello:" + livello + " \nfrase scritta: " + et1.getText().toString() + "\nfrase: " + et.getText().toString());
+            err.flush();
+            err.close();
 
         } else {
             sbagliate++;
