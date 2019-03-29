@@ -149,7 +149,7 @@
                 android:onClick="ScriviParola"
                 android:padding="4dp"
                 android:text="piece"
-                android:textSize="15dp" />
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/due_bnt"
@@ -163,7 +163,7 @@
 
                 android:padding="4dp"
                 android:text="mi"
-                android:textSize="15dp" />
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/tre_bnt"
@@ -175,7 +175,7 @@
                 android:onClick="ScriviParola"
                 android:padding="4dp"
                 android:text="andrare"
-                android:textSize="15dp" />
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/quattro_bnt"
@@ -188,7 +188,7 @@
                 android:onClick="ScriviParola"
                 android:padding="4dp"
                 android:text="dondolandosi"
-                android:textSize="15dp" />
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/cinque_bnt"
@@ -201,7 +201,7 @@
                 android:onClick="ScriviParola"
                 android:padding="4dp"
                 android:text="a"
-                android:textSize="15dp" />
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/sei_bnt"
@@ -213,7 +213,7 @@
                 android:onClick="ScriviParola"
                 android:padding="4dp"
                 android:text="scuole "
-                android:textSize="15dp" />
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/sette_bnt"
@@ -226,7 +226,7 @@
                 android:onClick="ScriviParola"
                 android:padding="4dp"
                 android:text="piace"
-                android:textSize="15dp" />
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/otto_bnt"
@@ -239,7 +239,7 @@
                 android:onClick="ScriviParola"
                 android:padding="4dp"
                 android:text="andere"
-                android:textSize="15dp" />
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/noveee"
@@ -251,7 +251,7 @@
                 android:onClick="ScriviParola"
                 android:padding="4dp"
                 android:text="scuola"
-                android:textSize="15dp" />
+                android:textSize="20dp" />
 
         </GridLayout>
 

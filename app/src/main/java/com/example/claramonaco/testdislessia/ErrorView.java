@@ -26,15 +26,29 @@ public class ErrorView extends AppCompatActivity {
     private AlertDialog closedialog;
     private String fileName="";
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_error_view);
+        tv = (TextView) findViewById(R.id.errrrr);
+
         fileName = getIntent().getStringExtra("fileName");
-    }
-
-
-    public void errorView(View v) throws  IOException{
-        alertFumetto();
+        try {
+            InputStream inputStream = openFileInput(fileName);
+            if (inputStream != null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String tempString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((tempString = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(tempString);
+                    stringBuilder.append('\n');
+                }
+                inputStream.close();
+                tv.setText(stringBuilder.toString());
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void goHome(View v){
@@ -42,29 +56,29 @@ public class ErrorView extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void alertFumetto() throws IOException {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        View dialogLayout = inflater.inflate(R.layout.show_error, null);
-        tv = (TextView) dialogLayout.findViewById(R.id.errrrr);
-        InputStream inputStream = openFileInput(fileName);
-        if (inputStream != null) {
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String tempString = "";
-            StringBuilder stringBuilder = new StringBuilder();
-            while ((tempString = bufferedReader.readLine()) != null) {
-                stringBuilder.append(tempString);
-                stringBuilder.append('\n');
-            }
-            inputStream.close();
-            tv.setText(stringBuilder.toString());
-
-            builder.setView(dialogLayout);
-            builder.setCancelable(true);
-            closedialog = builder.create();
-            closedialog.show();
-        }
-    }
+//    public void alertFumetto() throws IOException {
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        LayoutInflater inflater = getLayoutInflater();
+//        View dialogLayout = inflater.inflate(R.layout.show_error, null);
+//        tv = (TextView) dialogLayout.findViewById(R.id.errrrr);
+//        InputStream inputStream = openFileInput(fileName);
+//        if (inputStream != null) {
+//            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+//            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+//            String tempString = "";
+//            StringBuilder stringBuilder = new StringBuilder();
+//            while ((tempString = bufferedReader.readLine()) != null) {
+//                stringBuilder.append(tempString);
+//                stringBuilder.append('\n');
+//            }
+//            inputStream.close();
+//            tv.setText(stringBuilder.toString());
+//
+//            builder.setView(dialogLayout);
+//            builder.setCancelable(true);
+//            closedialog = builder.create();
+//            closedialog.show();
+//        }
+//    }
 }

@@ -29,8 +29,13 @@
         android:roundIcon="@drawable/dsa_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ErrorView"></activity>
-        <activity android:name=".TestAscoltoActivity" />
+        <activity
+            android:name=".ErrorView"
+            android:label="ErrorView"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".TestAscoltoActivity"
+            android:label="TestAscoltoActivity"
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="sensorPortrait">
