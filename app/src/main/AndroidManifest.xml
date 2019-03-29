@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.claramonaco.testdislessia">
+    package="com.example.alfonsoaquino.test">
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -30,14 +30,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ErrorView"
+            android:name="com.example.alfonsoaquino.test.ErrorView"
             android:label="ErrorView"
             android:screenOrientation="sensorPortrait" />
-        <activity android:name=".TestAscoltoActivity"
+        <activity android:name="com.example.alfonsoaquino.test.TestAscoltoActivity"
             android:label="TestAscoltoActivity"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.alfonsoaquino.test.MainActivity"
             android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,41 +46,41 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EserciziActivity"
+            android:name="com.example.alfonsoaquino.test.EserciziActivity"
             android:label="@string/Esercizio"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name=".ImparaTastieraActivity"
+            android:name="com.example.alfonsoaquino.test.ImparaTastieraActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:label="@string/Tastiera"
             android:screenOrientation="sensorLandscape"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".TrovaMaxActivity"
+            android:name="com.example.alfonsoaquino.test.TrovaMaxActivity"
             android:label="@string/Trova_MAX"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name=".InfoAppActivity"
+            android:name="com.example.alfonsoaquino.test.InfoAppActivity"
             android:label="@string/Info_app"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name=".TestDislessiaActivity"
+            android:name="com.example.alfonsoaquino.test.TestDislessiaActivity"
             android:label="@string/Test"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name=".StatisticheTestActivity"
+            android:name="com.example.alfonsoaquino.test.StatisticheTestActivity"
             android:label="@string/Statistiche_Test"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name=".PreTest"
+            android:name="com.example.alfonsoaquino.test.PreTest"
             android:label="@string/PreTest"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name=".PostTest"
+            android:name="com.example.alfonsoaquino.test.PostTest"
             android:label="@string/PostTest"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name=".IdGroupActivity"
+            android:name="com.example.alfonsoaquino.test.IdGroupActivity"
             android:screenOrientation="sensorPortrait" />
     </application>
 

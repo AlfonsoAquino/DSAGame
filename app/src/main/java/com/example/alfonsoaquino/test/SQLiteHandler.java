@@ -1,4 +1,4 @@
-package com.example.claramonaco.testdislessia;
+package com.example.alfonsoaquino.test;
 
 import android.content.ContentValues;
 import android.content.Context;

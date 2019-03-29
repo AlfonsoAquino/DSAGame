@@ -1,4 +1,4 @@
-package com.example.claramonaco.testdislessia;
+package com.example.alfonsoaquino.test;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

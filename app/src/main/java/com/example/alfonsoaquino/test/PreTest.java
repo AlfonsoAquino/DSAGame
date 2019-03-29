@@ -1,4 +1,4 @@
-package com.example.claramonaco.testdislessia;
+package com.example.alfonsoaquino.test;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -7,11 +7,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;

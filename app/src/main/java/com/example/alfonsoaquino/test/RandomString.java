@@ -1,8 +1,7 @@
-package com.example.claramonaco.testdislessia;
+package com.example.alfonsoaquino.test;
 
 import java.security.SecureRandom;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Random;
 
 public class RandomString {

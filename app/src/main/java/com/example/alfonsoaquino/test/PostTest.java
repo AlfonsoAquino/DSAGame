@@ -1,4 +1,4 @@
-package com.example.claramonaco.testdislessia;
+package com.example.alfonsoaquino.test;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Array;
-
-import me.grantland.widget.AutofitTextView;
 
 /**
  * Created by ClaraMonaco on 28/05/2018.

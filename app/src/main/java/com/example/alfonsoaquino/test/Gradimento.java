@@ -1,4 +1,4 @@
-package com.example.claramonaco.testdislessia;
+package com.example.alfonsoaquino.test;
 
 public class Gradimento {
     private String idStatistica;

@@ -1,7 +1,6 @@
-package com.example.claramonaco.testdislessia;
+package com.example.alfonsoaquino.test;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -26,29 +24,29 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.security.SecureRandom;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.ThreadLocalRandom;
 
 import me.grantland.widget.AutofitTextView;
 
-public class TestDislessiaActivity extends AppCompatActivity implements View.OnClickListener,
+public class TestAscoltoActivity extends AppCompatActivity implements View.OnClickListener,
         SeekBar.OnSeekBarChangeListener,
         TextToSpeech.OnInitListener,
         AdapterView.OnItemSelectedListener {
 
-    private ImageView img1, img2, img3;
+    private ImageView img1, img2, img3, img4;
+    private FileInputStream f;
     private BufferedReader reader, readerDistrattori;
     private AutofitTextView et;
     private AutofitTextView et1;
     private TextView frasi_corrette, frasi_sbagliate, salti, livel;
     private Button audio;
     private String frase, parola, parolaBottone, paroleDistrattori;
+    private String fraseArray[];
     private char lettera;
     private Button b1, b2, b3, b4, b5, b6, b7, b8, b9;
-    private int i, j, k, esatte, sbagliate, riga, x, position, num_prove, contatore, num_corrette, livello, num_salt;
+    private int i, j, k, esatte, sbagliate, riga, x, position, indice, num_prove, contatore, num_corrette, livello, num_salt;
     private int errori_l1, errori_l2, errori_l3, errori_l4;
     private boolean fit = true;
     private Random random;
@@ -57,10 +55,13 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     private int controlla_rip[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private boolean flag;
 
+    private String genere, idAlunno, regione,temp;
+    private String eta;
+    private BufferedReader in;
     private int livelloMax;
     private TextToSpeech tts;
     private String groupId, data;
-    private long startTime, totalTime,fine;
+    private long startTime, totalTime, intermedio,fine;
     private int secondi, minuti, ore;
     private final static int DELAY =4000;
     SQLiteHandler db;
@@ -75,7 +76,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_dislessia);
+        setContentView(R.layout.activity_test_ascolto);
         et = (AutofitTextView) findViewById(R.id.frase_da_copiare);
         et1 = (AutofitTextView) findViewById(R.id.textwrite2);
         audio = (Button) findViewById(R.id.ascolta_audio);
@@ -99,10 +100,12 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         salti = (TextView) findViewById(R.id.frasi_saltate);
         livel = (TextView) findViewById(R.id.livello_frasi);
 
-        infoUtente = new String[10];
+//        alertImage=(ImageView) findViewById(R.id.alertImage);
+//        alertFumetto(R.drawable.alertporta);
+
 
         flag = true;
-
+        infoUtente = new String[10];
         num_prove = 0;
         j = 0;
         parola = "";
@@ -117,12 +120,13 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         errori_l3 = 0;
         errori_l4 = 0;
         livelloMax = 0;
+        intermedio=0;
         db = new SQLiteHandler(getApplicationContext());
         groupId="";
+        idAlunno="";
+        regione="";
         data="";
-        fine=0;
-//        Date currentTime = Calendar.getInstance().getTime();
-//        data= currentTime.toString();
+
         //livello per file
         livello = 1;
         //numero rispose corrette per i livelli di difficoltà
@@ -136,6 +140,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         }catch (IOException e){
             fileName=""+System.currentTimeMillis();
         }
+
         esatte = 0;
         sbagliate = 0;
 
@@ -256,7 +261,8 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         if (num_prove == 22) {
 
             totalTime = System.currentTimeMillis() - startTime - fine;
-            Log.d("-------------AAAS<>", "alertVisti: "+(System.currentTimeMillis() - startTime));
+            Log.d("-------------AAAS<>", "totaltime: "+(System.currentTimeMillis() - startTime));
+            Log.d("-------------AAAS<>", "totaltime-porte: "+totalTime);
             secondi = (int) (totalTime / 1000);
             while (secondi >= 60) {
                 minuti++;
@@ -297,7 +303,9 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                         "\n\n\n\n");
                 osw.flush();
                 osw.close();
+
                 alertTesoro(R.drawable.tesoro);
+
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -305,37 +313,31 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                 e.printStackTrace();
             }
 
-//            new AlertDialog.Builder(this)
-//                    .setIcon(R.drawable.test)
-//                    .setTitle(
-//                            Html.fromHtml("<font color='#009688'>"
-//                                    + ("Test Dislessia")
-//                                    + "</font>"))
-//                    .setMessage(("Il test è terminato 21 quesiti" +
-//                            "\n\nLivello raggiunto: " + livello +
-//                            "\n\nFrasi sbagliate:  " + sbagliate +
-//                            "\nFrasi saltate: " + num_salt +
-//                            "\nFrasi corrette: " + esatte +
-//                            " \n\nTempo impiegato: "
-//                            + minuti + "m " + secondi + "s " +
-//
-//                            "\n\nErrori livello 1: " + errori_l1 +
-//                            "\nErrori livello 2: " + errori_l2 +
-//                            "\nErrori livello 3: " + errori_l3 +
-//                            "\nErrori livello 4: " + errori_l4))
-//                    .setPositiveButton(android.R.string.yes,
-//                            new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog,
-//                                                    int which) {
-//
-//                                    moveTaskToBack(true);
-//
-//                                    finish();
-//                                    System.exit(0);
-//
-//                                }
-//                            }).show();
+           /*new AlertDialog.Builder(this)
+                    .setIcon(R.drawable.test)
+                    .setTitle(
+                            Html.fromHtml("<font color='#009688'>"
+                                    + ("Test Dislessia")
+                                    + "</font>"))
+                    .setMessage(("Il test è terminato 21 quesiti" +
+                            "\n\nLivello raggiunto: " + livello +
+                            "\n\nFrasi sbagliate:  " + sbagliate +
+                            "\nFrasi saltate: " + num_salt +
+                            "\nFrasi corrette: " + esatte +
+                            " \n\nTempo impiegato: "
+                            + minuti + "m " + secondi + "s " +
+
+                            "\n\nErrori livello 1: " + errori_l1 +
+                            "\nErrori livello 2: " + errori_l2 +
+                            "\nErrori livello 3: " + errori_l3 +
+                            "\nErrori livello 4: " + errori_l4))
+                    .setPositiveButton(android.R.string.yes,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+
+                                    //moveTaskToBack(true);*/
             final Timer timer2 = new Timer();
             timer2.schedule(new TimerTask() {
                 public void run() {
@@ -345,6 +347,12 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
                     startActivity(i);
                 }
             }, DELAY);
+//             finish();
+//                                    System.exit(0);
+
+            //    }
+            //  }).show();
+
         }
 
         if (num_prove % 22 == 0) {
@@ -392,6 +400,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         //riproduzione del cigolio della porta
         mp = MediaPlayer.create(this,R.raw.woodendoor );
         mp.setLooping(false);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogLayout = inflater.inflate(R.layout.customized_dialog,  null);
@@ -402,7 +411,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onClick(View view) {
                 fine += System.currentTimeMillis() - start;
-                Log.d("----.-.-.-.-.-.", "alertFumetto: "+fine);
+                Log.d("----.-.-.-.-.-.", "onClick: "+fine);
                 img1.setImageDrawable(null);
                 img2.setImageDrawable(null);
                 img3.setImageDrawable(null);
@@ -427,9 +436,10 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     public void alertTesoro(int liv){
         long fi;
         alertRip++;
-        //riproduzione del cigolio della porta
+        //riproduzione delle monete
         mp = MediaPlayer.create(this,R.raw.tesoro );
         mp.setLooping(false);
+
         mp.start();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -451,6 +461,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         closedialog= builder.create();
         closedialog.show();
     }
+
 
     public void risultatoTest(View v) {
         Intent i = new Intent(getApplicationContext(), StatisticheTestActivity.class);
@@ -483,19 +494,19 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
             esatte++;
             num_corrette++;
             Log.d("-------------------<>", "Controlliamo: "+num_corrette);
-            if(img1.getDrawable()==null) {
+            if(img1.getDrawable()==null ) {
                 img1.setImageResource(R.drawable.chiavebronzo);
             }else if(img1.getDrawable()!=null && img2.getDrawable()==null){
                 img2.setImageResource(R.drawable.chiaveargento);
             }else if(img3.getDrawable()==null ){
                 img3.setImageResource(R.drawable.chiaveoro);
             }
-            //file individuale con frasi
+
+            //file individuale con errori
             OutputStreamWriter err = new OutputStreamWriter(this.openFileOutput(fileName, Context.MODE_APPEND));
             err.write("\n\nlivello:" + livello + " \nfrase scritta: " + et1.getText().toString() + "\nfrase: " + et.getText().toString());
             err.flush();
             err.close();
-
         } else {
             sbagliate++;
             if (num_corrette == 0) {
@@ -524,6 +535,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
 
 
     }
+
     public void newFileName() throws IOException{
         InputStream idA = openFileInput("infoUtente.txt");
         int p=0;
@@ -542,6 +554,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         fileName = infoUtente[2]+"_"+infoUtente[3]+"_"+infoUtente[4]+"_"+gen.nextString()+".txt";
         Log.d("----------,,,,,,<>", "newFileName: "+fileName);
     }
+
     public void ScriviParola(View v) {
 
         Button b = (Button) v;

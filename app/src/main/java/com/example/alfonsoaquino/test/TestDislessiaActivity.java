@@ -1,7 +1,6 @@
-package com.example.claramonaco.testdislessia;
+package com.example.alfonsoaquino.test;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -20,7 +18,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,23 +29,21 @@ import java.util.TimerTask;
 
 import me.grantland.widget.AutofitTextView;
 
-public class TestAscoltoActivity extends AppCompatActivity implements View.OnClickListener,
+public class TestDislessiaActivity extends AppCompatActivity implements View.OnClickListener,
         SeekBar.OnSeekBarChangeListener,
         TextToSpeech.OnInitListener,
         AdapterView.OnItemSelectedListener {
 
-    private ImageView img1, img2, img3, img4;
-    private FileInputStream f;
+    private ImageView img1, img2, img3;
     private BufferedReader reader, readerDistrattori;
     private AutofitTextView et;
     private AutofitTextView et1;
     private TextView frasi_corrette, frasi_sbagliate, salti, livel;
     private Button audio;
     private String frase, parola, parolaBottone, paroleDistrattori;
-    private String fraseArray[];
     private char lettera;
     private Button b1, b2, b3, b4, b5, b6, b7, b8, b9;
-    private int i, j, k, esatte, sbagliate, riga, x, position, indice, num_prove, contatore, num_corrette, livello, num_salt;
+    private int i, j, k, esatte, sbagliate, riga, x, position, num_prove, contatore, num_corrette, livello, num_salt;
     private int errori_l1, errori_l2, errori_l3, errori_l4;
     private boolean fit = true;
     private Random random;
@@ -57,13 +52,10 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
     private int controlla_rip[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private boolean flag;
 
-    private String genere, idAlunno, regione,temp;
-    private String eta;
-    private BufferedReader in;
     private int livelloMax;
     private TextToSpeech tts;
     private String groupId, data;
-    private long startTime, totalTime, intermedio,fine;
+    private long startTime, totalTime,fine;
     private int secondi, minuti, ore;
     private final static int DELAY =4000;
     SQLiteHandler db;
@@ -78,7 +70,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_ascolto);
+        setContentView(R.layout.test_dislessia);
         et = (AutofitTextView) findViewById(R.id.frase_da_copiare);
         et1 = (AutofitTextView) findViewById(R.id.textwrite2);
         audio = (Button) findViewById(R.id.ascolta_audio);
@@ -102,12 +94,10 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
         salti = (TextView) findViewById(R.id.frasi_saltate);
         livel = (TextView) findViewById(R.id.livello_frasi);
 
-//        alertImage=(ImageView) findViewById(R.id.alertImage);
-//        alertFumetto(R.drawable.alertporta);
-
+        infoUtente = new String[10];
 
         flag = true;
-        infoUtente = new String[10];
+
         num_prove = 0;
         j = 0;
         parola = "";
@@ -122,13 +112,12 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
         errori_l3 = 0;
         errori_l4 = 0;
         livelloMax = 0;
-        intermedio=0;
         db = new SQLiteHandler(getApplicationContext());
         groupId="";
-        idAlunno="";
-        regione="";
         data="";
-
+        fine=0;
+//        Date currentTime = Calendar.getInstance().getTime();
+//        data= currentTime.toString();
         //livello per file
         livello = 1;
         //numero rispose corrette per i livelli di difficoltà
@@ -142,7 +131,6 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
         }catch (IOException e){
             fileName=""+System.currentTimeMillis();
         }
-
         esatte = 0;
         sbagliate = 0;
 
@@ -263,8 +251,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
         if (num_prove == 22) {
 
             totalTime = System.currentTimeMillis() - startTime - fine;
-            Log.d("-------------AAAS<>", "totaltime: "+(System.currentTimeMillis() - startTime));
-            Log.d("-------------AAAS<>", "totaltime-porte: "+totalTime);
+            Log.d("-------------AAAS<>", "alertVisti: "+(System.currentTimeMillis() - startTime));
             secondi = (int) (totalTime / 1000);
             while (secondi >= 60) {
                 minuti++;
@@ -305,9 +292,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
                         "\n\n\n\n");
                 osw.flush();
                 osw.close();
-
                 alertTesoro(R.drawable.tesoro);
-
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -315,31 +300,37 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
                 e.printStackTrace();
             }
 
-           /*new AlertDialog.Builder(this)
-                    .setIcon(R.drawable.test)
-                    .setTitle(
-                            Html.fromHtml("<font color='#009688'>"
-                                    + ("Test Dislessia")
-                                    + "</font>"))
-                    .setMessage(("Il test è terminato 21 quesiti" +
-                            "\n\nLivello raggiunto: " + livello +
-                            "\n\nFrasi sbagliate:  " + sbagliate +
-                            "\nFrasi saltate: " + num_salt +
-                            "\nFrasi corrette: " + esatte +
-                            " \n\nTempo impiegato: "
-                            + minuti + "m " + secondi + "s " +
-
-                            "\n\nErrori livello 1: " + errori_l1 +
-                            "\nErrori livello 2: " + errori_l2 +
-                            "\nErrori livello 3: " + errori_l3 +
-                            "\nErrori livello 4: " + errori_l4))
-                    .setPositiveButton(android.R.string.yes,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int which) {
-
-                                    //moveTaskToBack(true);*/
+//            new AlertDialog.Builder(this)
+//                    .setIcon(R.drawable.test)
+//                    .setTitle(
+//                            Html.fromHtml("<font color='#009688'>"
+//                                    + ("Test Dislessia")
+//                                    + "</font>"))
+//                    .setMessage(("Il test è terminato 21 quesiti" +
+//                            "\n\nLivello raggiunto: " + livello +
+//                            "\n\nFrasi sbagliate:  " + sbagliate +
+//                            "\nFrasi saltate: " + num_salt +
+//                            "\nFrasi corrette: " + esatte +
+//                            " \n\nTempo impiegato: "
+//                            + minuti + "m " + secondi + "s " +
+//
+//                            "\n\nErrori livello 1: " + errori_l1 +
+//                            "\nErrori livello 2: " + errori_l2 +
+//                            "\nErrori livello 3: " + errori_l3 +
+//                            "\nErrori livello 4: " + errori_l4))
+//                    .setPositiveButton(android.R.string.yes,
+//                            new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog,
+//                                                    int which) {
+//
+//                                    moveTaskToBack(true);
+//
+//                                    finish();
+//                                    System.exit(0);
+//
+//                                }
+//                            }).show();
             final Timer timer2 = new Timer();
             timer2.schedule(new TimerTask() {
                 public void run() {
@@ -349,12 +340,6 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
                     startActivity(i);
                 }
             }, DELAY);
-//             finish();
-//                                    System.exit(0);
-
-            //    }
-            //  }).show();
-
         }
 
         if (num_prove % 22 == 0) {
@@ -402,7 +387,6 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
         //riproduzione del cigolio della porta
         mp = MediaPlayer.create(this,R.raw.woodendoor );
         mp.setLooping(false);
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogLayout = inflater.inflate(R.layout.customized_dialog,  null);
@@ -413,7 +397,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onClick(View view) {
                 fine += System.currentTimeMillis() - start;
-                Log.d("----.-.-.-.-.-.", "onClick: "+fine);
+                Log.d("----.-.-.-.-.-.", "alertFumetto: "+fine);
                 img1.setImageDrawable(null);
                 img2.setImageDrawable(null);
                 img3.setImageDrawable(null);
@@ -438,10 +422,9 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
     public void alertTesoro(int liv){
         long fi;
         alertRip++;
-        //riproduzione delle monete
+        //riproduzione del cigolio della porta
         mp = MediaPlayer.create(this,R.raw.tesoro );
         mp.setLooping(false);
-
         mp.start();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -463,7 +446,6 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
         closedialog= builder.create();
         closedialog.show();
     }
-
 
     public void risultatoTest(View v) {
         Intent i = new Intent(getApplicationContext(), StatisticheTestActivity.class);
@@ -496,19 +478,19 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
             esatte++;
             num_corrette++;
             Log.d("-------------------<>", "Controlliamo: "+num_corrette);
-            if(img1.getDrawable()==null ) {
+            if(img1.getDrawable()==null) {
                 img1.setImageResource(R.drawable.chiavebronzo);
             }else if(img1.getDrawable()!=null && img2.getDrawable()==null){
                 img2.setImageResource(R.drawable.chiaveargento);
             }else if(img3.getDrawable()==null ){
                 img3.setImageResource(R.drawable.chiaveoro);
             }
-
-            //file individuale con errori
+            //file individuale con frasi
             OutputStreamWriter err = new OutputStreamWriter(this.openFileOutput(fileName, Context.MODE_APPEND));
             err.write("\n\nlivello:" + livello + " \nfrase scritta: " + et1.getText().toString() + "\nfrase: " + et.getText().toString());
             err.flush();
             err.close();
+
         } else {
             sbagliate++;
             if (num_corrette == 0) {
@@ -537,7 +519,6 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
 
 
     }
-
     public void newFileName() throws IOException{
         InputStream idA = openFileInput("infoUtente.txt");
         int p=0;
@@ -556,7 +537,6 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
         fileName = infoUtente[2]+"_"+infoUtente[3]+"_"+infoUtente[4]+"_"+gen.nextString()+".txt";
         Log.d("----------,,,,,,<>", "newFileName: "+fileName);
     }
-
     public void ScriviParola(View v) {
 
         Button b = (Button) v;
