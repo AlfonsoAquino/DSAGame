@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         TextToSpeech.OnInitListener,
         AdapterView.OnItemSelectedListener {
 
+    private ProgressBar pb;
     private ImageView img1, img2, img3;
     private BufferedReader reader, readerDistrattori;
     private AutofitTextView et;
@@ -89,6 +91,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
         b8 = (Button) findViewById(R.id.otto_bnt);
         b9 = (Button) findViewById(R.id.noveee);
 
+        pb = (ProgressBar) findViewById(R.id.simpleProgressBar);
         frasi_corrette = (TextView) findViewById(R.id.frasi_corrette);
         frasi_sbagliate = (TextView) findViewById(R.id.frasi_sbagliate);
         salti = (TextView) findViewById(R.id.frasi_saltate);
@@ -453,6 +456,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     }
 
     public void Salta(View v) throws IOException {
+        pb.incrementProgressBy(1);
         ++num_salt;
         OutputStreamWriter osw = new OutputStreamWriter(this.openFileOutput("statistiche_test.txt", Context.MODE_APPEND));
         osw.write("\n\nlivello:" + livello + " \nsalt: " + et1.getText().toString() + "\nfrase: " + et.getText().toString());
@@ -472,7 +476,7 @@ public class TestDislessiaActivity extends AppCompatActivity implements View.OnC
     }
 
     public void Controlliamo(View v) throws IOException {
-
+        pb.incrementProgressBy(1);
 
         if (et1.getText().toString().equals(et.getText().toString())) {
             esatte++;

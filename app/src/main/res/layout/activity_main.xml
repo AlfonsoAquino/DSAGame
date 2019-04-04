@@ -54,24 +54,24 @@
                 android:text="Test ascolto"
                 android:textColor="#fff" />
 
-            <Button
-                android:id="@+id/btm_esercizi"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/btm_test_ascolto"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/button_normal_orange"
-                android:onClick="lanciaActivityEsercizi"
+            <!--<Button-->
+                <!--android:id="@+id/btm_esercizi"-->
+                <!--android:layout_width="250dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@id/btm_test_ascolto"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:background="@drawable/button_normal_orange"-->
+                <!--android:onClick="lanciaActivityEsercizi"-->
 
-                android:text="Esercizi"
-                android:textColor="#fff" />
+                <!--android:text="Esercizi"-->
+                <!--android:textColor="#fff" />-->
 
             <Button
                 android:id="@+id/btm_info"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/btm_esercizi"
+                android:layout_below="@id/btm_test_ascolto"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/button_normal_orange"
