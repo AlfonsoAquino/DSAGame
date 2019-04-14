@@ -40,7 +40,7 @@ public class SendFile extends AsyncTask<File, Void, String> {
             if (sourceFile.isFile()) {
 
                 try {
-                    String upLoadServerUri = "https://bifurun.000webhostapp.com/fileUp.php";
+                    String upLoadServerUri = Config.FILEUP;
 
                     // open a URL connection to the Servlet
                     FileInputStream fileInputStream = new FileInputStream(
