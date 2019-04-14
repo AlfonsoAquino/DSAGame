@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -66,6 +67,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
     private final static int DELAY =4000;
     SQLiteHandler db;
     MediaPlayer mp;
+    ProgressBar pb;
     ImageView alertImage;
     int rip=0;
     int alertRip=0;
@@ -99,7 +101,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
         frasi_sbagliate = (TextView) findViewById(R.id.frasi_sbagliate);
         salti = (TextView) findViewById(R.id.frasi_saltate);
         livel = (TextView) findViewById(R.id.livello_frasi);
-
+        pb = (ProgressBar) findViewById(R.id.simpleProgressBar);
 //        alertImage=(ImageView) findViewById(R.id.alertImage);
 //        alertFumetto(R.drawable.alertporta);
 
@@ -469,6 +471,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void Salta(View v) throws IOException {
+        pb.incrementProgressBy(1);
         ++num_salt;
         OutputStreamWriter osw = new OutputStreamWriter(this.openFileOutput("statistiche_test.txt", Context.MODE_APPEND));
         osw.write("\n\nlivello:" + livello + " \nsalt: " + et1.getText().toString() + "\nfrase: " + et.getText().toString());
@@ -488,7 +491,7 @@ public class TestAscoltoActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void Controlliamo(View v) throws IOException {
-
+        pb.incrementProgressBy(1);
 
         if (et1.getText().toString().equals(et.getText().toString())) {
             esatte++;

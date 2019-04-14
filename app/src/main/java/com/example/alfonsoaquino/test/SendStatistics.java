@@ -72,6 +72,7 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
                     Log.d(TAG, "Register Response: " + response.toString());
 
                     try {
+
                         JSONObject jObj = new JSONObject(response);
                         boolean error = jObj.getBoolean("error");
 
@@ -85,7 +86,7 @@ public class SendStatistics extends AsyncTask<String, Integer, Void> {
                             Log.i(TAG, "------------>erroreCaricamentoStatistiche");
                             
                         }
-                    } catch (JSONException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
