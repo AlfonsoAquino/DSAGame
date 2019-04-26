@@ -151,50 +151,28 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:columnCount="3"
+            android:columnOrderPreserved="false"
             android:rowCount="3">
 
             <Button
                 android:id="@+id/uno_bnt"
                 android:layout_width="110dp"
                 android:layout_height="70dp"
+                android:layout_gravity="fill|left"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/button_normal_orange"
                 android:fontFamily="@font/arial"
                 android:onClick="ScriviParola"
                 android:padding="4dp"
-                android:text="piece"
-                android:textSize="20dp" />
+                android:text="dondolandosi"
+                android:textSize="17dp" />
 
             <Button
+                android:layout_gravity="center|fill"
                 android:id="@+id/due_bnt"
-                android:layout_width="110dp"
-                android:layout_height="70dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/button_normal_orange"
-                android:fontFamily="@font/arial"
-                android:onClick="ScriviParola"
-
-                android:padding="4dp"
-                android:text="mi"
-                android:textSize="20dp" />
-
-            <Button
-                android:id="@+id/tre_bnt"
-                android:layout_width="110dp"
-                android:layout_height="70dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/button_normal_orange"
-                android:fontFamily="@font/arial"
-                android:onClick="ScriviParola"
-                android:padding="4dp"
-                android:text="andrare"
-                android:textSize="20dp" />
-
-            <Button
-                android:id="@+id/quattro_bnt"
                 android:layout_width="110dp"
                 android:layout_height="70dp"
                 android:layout_marginRight="5dp"
@@ -204,9 +182,37 @@
                 android:onClick="ScriviParola"
                 android:padding="4dp"
                 android:text="dondolandosi"
-                android:textSize="20dp" />
+                android:textSize="17dp" />
 
             <Button
+                android:id="@+id/tre_bnt"
+                android:layout_width="110dp"
+                android:layout_height="70dp"
+                android:layout_gravity="right|fill"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/button_normal_orange"
+                android:fontFamily="@font/arial"
+                android:onClick="ScriviParola"
+                android:padding="4dp"
+                android:text="dondolandosi"
+                android:textSize="17dp" />
+
+            <Button
+                android:id="@+id/quattro_bnt"
+                android:layout_width="110dp"
+                android:layout_height="70dp"
+                android:layout_gravity="fill|left"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/button_normal_orange"
+                android:fontFamily="@font/arial"
+                android:onClick="ScriviParola"
+                android:padding="4dp"
+                android:text="dondolandosi"
+                android:textSize="17dp" />
+
+            <Button
+                android:layout_gravity="center|fill"
                 android:id="@+id/cinque_bnt"
                 android:layout_width="110dp"
                 android:layout_height="70dp"
@@ -216,10 +222,11 @@
                 android:fontFamily="@font/arial"
                 android:onClick="ScriviParola"
                 android:padding="4dp"
-                android:text="a"
-                android:textSize="20dp" />
+                android:text="dondolandosi"
+                android:textSize="17dp" />
 
             <Button
+                android:layout_gravity="right|fill"
                 android:id="@+id/sei_bnt"
                 android:layout_width="110dp"
                 android:layout_height="70dp"
@@ -229,35 +236,38 @@
                 android:onClick="ScriviParola"
                 android:padding="4dp"
                 android:text="scuole "
-                android:textSize="20dp" />
+                android:textSize="17dp" />
 
             <Button
                 android:id="@+id/sette_bnt"
                 android:layout_width="110dp"
                 android:layout_height="70dp"
+                android:layout_gravity="fill|left"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/button_normal_orange"
                 android:fontFamily="@font/arial"
                 android:onClick="ScriviParola"
                 android:padding="4dp"
-                android:text="piace"
-                android:textSize="20dp" />
+                android:text="dondolandosi"
+                android:textSize="17dp" />
 
             <Button
                 android:id="@+id/otto_bnt"
                 android:layout_width="110dp"
                 android:layout_height="70dp"
+                android:layout_gravity="center|fill"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/button_normal_orange"
                 android:fontFamily="@font/arial"
                 android:onClick="ScriviParola"
                 android:padding="4dp"
-                android:text="andere"
-                android:textSize="20dp" />
+                android:text="dondolandosi"
+                android:textSize="17dp" />
 
             <Button
+                android:layout_gravity="right|fill"
                 android:id="@+id/noveee"
                 android:layout_width="110dp"
                 android:layout_height="70dp"
@@ -266,11 +276,10 @@
                 android:fontFamily="@font/arial"
                 android:onClick="ScriviParola"
                 android:padding="4dp"
-                android:text="scuola"
-                android:textSize="20dp" />
+                android:text="dondolandosi"
+                android:textSize="17dp" />
 
         </GridLayout>
-
 
         <Button
             android:id="@+id/controlla"
