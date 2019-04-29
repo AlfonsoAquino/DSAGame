@@ -4,8 +4,8 @@ public class Config {
     //JSON URL
 //    public static final String STATISTICA = "https://bifurun.000webhostapp.com/statisticaDislessia.php";
     public static final String Gradimento = "https://bifurun.000webhostapp.com/gradimentoTest.php";
-    public static final String FILEUP = "http://192.168.1.11:8080/DSAdminConsole/AndroidFileServ";
-    public static final String STATISTICA = "http://192.168.1.11:8080/DSAdminConsole/AndroidStatServ";
+    public static final String FILEUP = "http://193.205.161.130/DSAdminConsole/AndroidFileServ";
+    public static final String STATISTICA = "http://193.205.161.130/DSAdminConsole/AndroidStatServ";
     public static final String PREFS_NAME="MyPrefsFile";
 
 
